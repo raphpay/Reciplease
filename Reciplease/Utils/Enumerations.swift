@@ -9,6 +9,13 @@ import UIKit
 
 enum Images: String {
     case emptyState = "Empty-State"
+    
+    var image: UIImage {
+        switch self {
+        case .emptyState:
+            return UIImage(named: Images.emptyState.rawValue)!
+        }
+    }
 }
 
 enum Icon: String {

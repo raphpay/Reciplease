@@ -22,8 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func createTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
-        let searchVC = createNavC(tabBarTitle: "Search", image: UIImage(named: Icon.search.rawValue)!)
-        let favoritesVC = createNavC(tabBarTitle: "Favorites",
+        let searchVC = createNavC(vc: SearchVC(),
+                                  tabBarTitle: "Search",
+                                  image: UIImage(named: Icon.search.rawValue)!)
+        let favoritesVC = createNavC(vc: FavoritesVC(),
+                                     tabBarTitle: "Favorites",
                                      image: UIImage(named: Icon.star.rawValue)!,
                                      tag: 1)
         tabBarController.viewControllers = [searchVC, favoritesVC]
@@ -31,11 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return tabBarController
     }
     
-    private func createNavC(title: String = "Reciplease",
+    private func createNavC(vc: UIViewController,
+                            title: String = "Reciplease",
                             tabBarTitle: String = "Reciplease",
                             image: UIImage = UIImage(named: Icon.star.rawValue)!,
                             tag: Int = 0) -> UINavigationController {
-        let vc = SearchVC()
         vc.title = title
         vc.tabBarItem = UITabBarItem(title: tabBarTitle,
                                            image: image,
