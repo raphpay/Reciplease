@@ -11,55 +11,25 @@ import TinyConstraints
 class SearchVC: UIViewController {
     
     let padding = CGFloat(16)
-    // TODO : Refactor color process
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     
     lazy var scrollView: UIScrollView = {
-        let view = UIScrollView(frame: .zero)
-        if #available(iOS 11.0, *) {
-            view.backgroundColor = UIColor(named: CustomColors.background.rawValue)
-        } else {
-            view.backgroundColor = UIColor(red: CustomColors.background.red,
-                                           green: CustomColors.background.green,
-                                           blue: CustomColors.background.blue,
-                                           alpha: 1)
-        }
-        view.frame = self.view.bounds
-        view.contentSize = contentViewSize
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let v = UIScrollView(frame: .zero)
+        v.backgroundColor = CustomColors.background.color
+        v.frame = self.view.bounds
+        v.contentSize = contentViewSize
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
     }()
     
     lazy var containerView: UIView = {
         let v = UIView()
-        if #available(iOS 11.0, *) {
-            view.backgroundColor = UIColor(named: CustomColors.background.rawValue)
-        } else {
-            view.backgroundColor = UIColor(red: CustomColors.background.red,
-                                           green: CustomColors.background.green,
-                                           blue: CustomColors.background.blue,
-                                           alpha: 1)
-        }
+        v.backgroundColor = CustomColors.background.color
         v.frame.size = contentViewSize
         return v
     }()
-    
-    lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Search for recipes", for: .normal)
-        button.layer.cornerRadius = 10
-        if #available(iOS 11.0, *) {
-            button.backgroundColor = UIColor(named: CustomColors.green.rawValue)
-        } else {
-            button.backgroundColor = UIColor(red: CustomColors.green.red,
-                                           green: CustomColors.green.green,
-                                           blue: CustomColors.green.blue,
-                                           alpha: 1)
-        }
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+
+    let searchButton  = BigButton(backgroundColor: CustomColors.green.color, title: "Search for recipes")
     
     lazy var topContainerView: UIView = {
         let view = UIView()
@@ -99,14 +69,7 @@ class SearchVC: UIViewController {
     
     lazy var addButton: UIButton = {
         let button = UIButton()
-        if #available(iOS 11.0, *) {
-            button.backgroundColor = UIColor(named: CustomColors.green.rawValue)
-        } else {
-            button.backgroundColor = UIColor(red: CustomColors.green.red,
-                                           green: CustomColors.green.green,
-                                           blue: CustomColors.green.blue,
-                                           alpha: 1)
-        }
+        button.backgroundColor = CustomColors.green.color
         button.setTitle("Add", for: .normal)
         button.layer.cornerRadius = 5
         return button
@@ -121,15 +84,11 @@ class SearchVC: UIViewController {
     }
     
     private func configureViewController() {
+        view.backgroundColor = CustomColors.background.color
         if #available(iOS 11.0, *) {
-            view.backgroundColor = UIColor(named: CustomColors.background.rawValue)
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         } else {
-            view.backgroundColor = UIColor(red: CustomColors.background.red,
-                                           green: CustomColors.background.green,
-                                           blue: CustomColors.background.blue,
-                                           alpha: 1)
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
     }

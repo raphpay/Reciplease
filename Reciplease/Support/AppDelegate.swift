@@ -27,14 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                      image: UIImage(named: Icon.star.rawValue)!,
                                      tag: 1)
         tabBarController.viewControllers = [searchVC, favoritesVC]
-        if #available(iOS 11.0, *) {
-            tabBarController.tabBar.tintColor = UIColor(named: CustomColors.openClassrooms.rawValue)
-        } else {
-            tabBarController.tabBar.tintColor = UIColor(red: CustomColors.background.red,
-                                                        green: CustomColors.background.green,
-                                                        blue: CustomColors.background.blue,
-                                                        alpha: 1)
-        }
+        tabBarController.tabBar.tintColor = CustomColors.openClassrooms.color
         return tabBarController
     }
     

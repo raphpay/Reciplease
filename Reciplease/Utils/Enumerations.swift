@@ -23,7 +23,7 @@ enum CustomColors: String {
     case openClassrooms = "OpenClassrooms"
     case green = "Green"
     
-    var red: CGFloat {
+    private var red: CGFloat {
         switch self {
         case .background:
             return 48
@@ -34,7 +34,7 @@ enum CustomColors: String {
         }
     }
     
-    var blue: CGFloat {
+    private var blue: CGFloat {
         switch self {
         case .background:
             return 45
@@ -45,7 +45,7 @@ enum CustomColors: String {
         }
     }
     
-    var green: CGFloat {
+    private var green: CGFloat {
         switch self {
         case .background:
             return 44
@@ -53,6 +53,38 @@ enum CustomColors: String {
             return 225
         case .green:
             return 112
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .green:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.green.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.green.red,
+                                               green: CustomColors.green.green,
+                                               blue: CustomColors.green.blue,
+                                               alpha: 1)
+            }
+        case .background:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.background.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.background.red,
+                                               green: CustomColors.background.green,
+                                               blue: CustomColors.background.blue,
+                                               alpha: 1)
+            }
+        case .openClassrooms:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.openClassrooms.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.openClassrooms.red,
+                                               green: CustomColors.openClassrooms.green,
+                                               blue: CustomColors.openClassrooms.blue,
+                                               alpha: 1)
+            }
         }
     }
 }
