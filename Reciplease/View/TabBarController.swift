@@ -8,6 +8,9 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+    
+    // MARK: - Properties
+    private var shouldShowEmptyState = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +21,7 @@ class TabBarController: UITabBarController {
         let searchVC = createNavC(vc: SearchVC(),
                                   tabBarTitle: "Search",
                                   image: UIImage(named: Icon.search.rawValue)!)
-        let favoritesVC = createNavC(vc: FavoritesVC(),
+        let favoritesVC = createNavC(vc: shouldShowEmptyState ? EmptyStateVC() : TableViewController(),
                                      title: "Recipes",
                                      tabBarTitle: "Favorites",
                                      image: UIImage(named: Icon.star.rawValue)!,

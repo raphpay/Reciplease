@@ -8,7 +8,7 @@
 import UIKit
 import TinyConstraints
 
-class FavoritesVC: UIViewController {
+class EmptyStateVC: UIViewController {
     
     let emptyStateImage = EmptyState()
 
@@ -28,5 +28,4 @@ class FavoritesVC: UIViewController {
         view.addSubview(emptyStateImage)
         emptyStateImage.edgesToSuperview()
     }
-
 }

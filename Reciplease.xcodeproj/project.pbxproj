@@ -14,11 +14,11 @@
 		8629C82426592787006669A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8629C82326592787006669A1 /* Assets.xcassets */; };
 		8629C82726592787006669A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8629C82526592787006669A1 /* LaunchScreen.storyboard */; };
 		8629C83326596D5A006669A1 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83226596D5A006669A1 /* Enumerations.swift */; };
-		8629C83626598172006669A1 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83526598172006669A1 /* FavoritesVC.swift */; };
-		8629C838265982A7006669A1 /* PositionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C837265982A7006669A1 /* PositionVC.swift */; };
+		8629C83626598172006669A1 /* EmptyStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83526598172006669A1 /* EmptyStateVC.swift */; };
 		8651C596265A8EB7008EE7FE /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C595265A8EB7008EE7FE /* EmptyState.swift */; };
 		8651C598265A9D04008EE7FE /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C597265A9D04008EE7FE /* RecipeCell.swift */; };
 		8651C5A0265A9F4C008EE7FE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C59F265A9F4C008EE7FE /* TabBarController.swift */; };
+		8651C5A2265AA1BA008EE7FE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C5A1265AA1BA008EE7FE /* TableViewController.swift */; };
 		86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7B265A7FC2004A8A03 /* Button.swift */; };
 		86EDDC7E265A82B3004A8A03 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* TitleLabel.swift */; };
 		86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */; };
@@ -35,11 +35,11 @@
 		8629C82626592787006669A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8629C82826592787006669A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8629C83226596D5A006669A1 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
-		8629C83526598172006669A1 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
-		8629C837265982A7006669A1 /* PositionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionVC.swift; sourceTree = "<group>"; };
+		8629C83526598172006669A1 /* EmptyStateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateVC.swift; sourceTree = "<group>"; };
 		8651C595265A8EB7008EE7FE /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		8651C597265A9D04008EE7FE /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		8651C59F265A9F4C008EE7FE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		8651C5A1265AA1BA008EE7FE /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		86EDDC7B265A7FC2004A8A03 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		86EDDC7D265A82B3004A8A03 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTextField.swift; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				8629C81B26592783006669A1 /* SearchVC.swift */,
-				8629C83526598172006669A1 /* FavoritesVC.swift */,
-				8629C837265982A7006669A1 /* PositionVC.swift */,
+				8629C83526598172006669A1 /* EmptyStateVC.swift */,
+				8651C5A1265AA1BA008EE7FE /* TableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -271,9 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8629C83626598172006669A1 /* FavoritesVC.swift in Sources */,
+				8629C83626598172006669A1 /* EmptyStateVC.swift in Sources */,
 				8651C5A0265A9F4C008EE7FE /* TabBarController.swift in Sources */,
-				8629C838265982A7006669A1 /* PositionVC.swift in Sources */,
+				8651C5A2265AA1BA008EE7FE /* TableViewController.swift in Sources */,
 				8629C82226592783006669A1 /* Reciplease.xcdatamodeld in Sources */,
 				8651C598265A9D04008EE7FE /* RecipeCell.swift in Sources */,
 				8629C81C26592783006669A1 /* SearchVC.swift in Sources */,
