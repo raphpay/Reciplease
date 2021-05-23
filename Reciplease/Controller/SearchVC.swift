@@ -9,7 +9,8 @@ import UIKit
 import TinyConstraints
 
 class SearchVC: UIViewController {
-    
+    // TODO: Refactor the views inside a big view: maybe use protocols ?
+    // MARK: - Views
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     
@@ -21,35 +22,59 @@ class SearchVC: UIViewController {
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
+    
     lazy var containerView: UIView = {
         let v = UIView()
         v.backgroundColor = CustomColors.background.color
         v.frame.size = contentViewSize
         return v
     }()
+    
     let searchButton  = Button(backgroundColor: CustomColors.green.color, title: "Search for recipes")
+    
     lazy var topContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()
+    
     lazy var bottomContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
     
-    let titleLabel = TitleLabel(text: "What's in your fridge ?", textColor: .black)
+    let topContainerTitle = TitleLabel(text: "What's in your fridge ?", textColor: .black, fontSize: 20)
     let ingredientsTextField = IngredientsTextField()
     let addButton = Button(backgroundColor: CustomColors.green.color, title: "Add")
+
+    let bottomContainerTitle = TitleLabel(text: "Your ingredients", alignment: .left)
+    let clearButton = Button(backgroundColor: CustomColors.gray.color, title: "Clear")
+
+    // TODO: Find how to refactor this
+    lazy var ingredientsTextView: UITextView = {
+        let textView = UITextView()
+        textView.textAlignment                  = .left
+        textView.textColor                      = .white
+        textView.font                           = UIFont.systemFont(ofSize: 20)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isEditable      = false
+        textView.isSelectable    = true
+        textView.backgroundColor = .clear
+        textView.text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
+        return textView
+    }()
     
+    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         setupViews()
     }
     
+    
+    // MARK: - Private methods
     private func configureViewController() {
         view.backgroundColor = CustomColors.background.color
         if #available(iOS 11.0, *) {
@@ -84,11 +109,11 @@ class SearchVC: UIViewController {
         topContainerView.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding))
         topContainerView.height(120)
         
-        topContainerView.addSubview(titleLabel)
+        topContainerView.addSubview(topContainerTitle)
         topContainerView.addSubview(ingredientsTextField)
         topContainerView.addSubview(addButton)
         
-        titleLabel.edgesToSuperview(excluding: .bottom, insets: .top(5))
+        topContainerTitle.edgesToSuperview(excluding: .bottom, insets: .top(5))
         
         ingredientsTextField.bottomToSuperview(offset: -30)
         ingredientsTextField.leftToSuperview(offset: 10)
@@ -100,9 +125,24 @@ class SearchVC: UIViewController {
         addButton.height(30)
         addButton.width(80)
     }
+    
     private func setupBottomContainer() {
-        bottomContainerView.topToBottom(of: topContainerView)
+        bottomContainerView.topToBottom(of: topContainerView, offset: padding)
         bottomContainerView.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding))
+        
+        bottomContainerView.addSubview(bottomContainerTitle)
+        bottomContainerView.addSubview(clearButton)
+        bottomContainerView.addSubview(ingredientsTextView)
+        
+        bottomContainerTitle.edgesToSuperview(excluding: .bottom)
+        
+        clearButton.topToSuperview()
+        clearButton.rightToSuperview(offset : -10)
+        clearButton.height(30)
+        clearButton.width(80)
+        
+        ingredientsTextView.topToBottom(of: bottomContainerTitle, offset: 5)
+        ingredientsTextView.edgesToSuperview(excluding: .top)
     }
 }
 

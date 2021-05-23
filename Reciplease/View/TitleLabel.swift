@@ -18,7 +18,7 @@ class TitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(text: String, textColor: UIColor = .white, alignment: NSTextAlignment = .center, fontSize: CGFloat = 20) {
+    init(text: String, textColor: UIColor = .white, alignment: NSTextAlignment = .center, fontSize: CGFloat = 30) {
         super.init(frame: .zero)
         self.text           = text
         self.textColor      = textColor

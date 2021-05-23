@@ -19,9 +19,10 @@ enum Icon: String {
 }
 
 enum CustomColors: String {
-    case background = "Background"
+    case background     = "Background"
     case openClassrooms = "OpenClassrooms"
-    case green = "Green"
+    case green          = "Green"
+    case gray           = "Gray"
     
     private var red: CGFloat {
         switch self {
@@ -31,6 +32,8 @@ enum CustomColors: String {
             return 106
         case .green:
             return 117
+        case .gray:
+            return 129
         }
     }
     
@@ -42,6 +45,8 @@ enum CustomColors: String {
             return 67
         case .green:
             return 158
+        case .gray:
+            return 129
         }
     }
     
@@ -53,20 +58,13 @@ enum CustomColors: String {
             return 225
         case .green:
             return 112
+        case .gray:
+            return 129
         }
     }
     
     var color: UIColor {
         switch self {
-        case .green:
-            if #available(iOS 11.0, *) {
-                return UIColor(named: CustomColors.green.rawValue)!
-            } else {
-                return UIColor(red: CustomColors.green.red,
-                                               green: CustomColors.green.green,
-                                               blue: CustomColors.green.blue,
-                                               alpha: 1)
-            }
         case .background:
             if #available(iOS 11.0, *) {
                 return UIColor(named: CustomColors.background.rawValue)!
@@ -83,6 +81,24 @@ enum CustomColors: String {
                 return UIColor(red: CustomColors.openClassrooms.red,
                                                green: CustomColors.openClassrooms.green,
                                                blue: CustomColors.openClassrooms.blue,
+                                               alpha: 1)
+            }
+        case .green:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.green.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.green.red,
+                                               green: CustomColors.green.green,
+                                               blue: CustomColors.green.blue,
+                                               alpha: 1)
+            }
+        case .gray:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.gray.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.gray.red,
+                                               green: CustomColors.gray.green,
+                                               blue: CustomColors.gray.blue,
                                                alpha: 1)
             }
         }
