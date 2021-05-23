@@ -21,61 +21,28 @@ class SearchVC: UIViewController {
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
-    
     lazy var containerView: UIView = {
         let v = UIView()
         v.backgroundColor = CustomColors.background.color
         v.frame.size = contentViewSize
         return v
     }()
-
-    let searchButton  = BigButton(backgroundColor: CustomColors.green.color, title: "Search for recipes")
-    
+    let searchButton  = Button(backgroundColor: CustomColors.green.color, title: "Search for recipes")
     lazy var topContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()
-    
     lazy var bottomContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
     
-    // TODO: To be refactored
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "What's in your fridge ?"
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    lazy var ingredientsTextField: UITextField = {
-        let textField = UITextField()
-        textField.textAlignment = .left
-        textField.placeholder = "Lemon, cheese, sausages"
-        return textField
-    }()
-    
-    lazy var textFieldLine: UIView = {
-        let line = UIView()
-        line.backgroundColor = .gray
-        return line
-    }()
-    
-    lazy var addButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = CustomColors.green.color
-        button.setTitle("Add", for: .normal)
-        button.layer.cornerRadius = 5
-        return button
-    }()
-    
-    
+    let titleLabel = TitleLabel(text: "What's in your fridge ?", textColor: .black)
+    let ingredientsTextField = IngredientsTextField()
+    let addButton = Button(backgroundColor: CustomColors.green.color, title: "Add")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +86,6 @@ class SearchVC: UIViewController {
         
         topContainerView.addSubview(titleLabel)
         topContainerView.addSubview(ingredientsTextField)
-        topContainerView.addSubview(textFieldLine)
         topContainerView.addSubview(addButton)
         
         titleLabel.edgesToSuperview(excluding: .bottom, insets: .top(5))
@@ -128,11 +94,6 @@ class SearchVC: UIViewController {
         ingredientsTextField.leftToSuperview(offset: 10)
         ingredientsTextField.rightToLeft(of: addButton, offset: -5)
         ingredientsTextField.height(25)
-        
-        textFieldLine.topToBottom(of: ingredientsTextField, offset: 2)
-        textFieldLine.height(1)
-        textFieldLine.leftToSuperview(offset: 10)
-        textFieldLine.rightToLeft(of: addButton,offset: -5)
         
         addButton.rightToSuperview(offset: -10)
         addButton.bottomToSuperview(offset: -30)

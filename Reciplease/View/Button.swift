@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BigButton: UIButton {
+class Button: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +29,7 @@ class BigButton: UIButton {
     
     
     private func configure() {
-        layer.cornerRadius      = 10
+        layer.cornerRadius      = 5
         titleLabel?.textColor   = .white
         titleLabel?.font        = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false

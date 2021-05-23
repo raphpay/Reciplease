@@ -16,7 +16,9 @@
 		8629C83326596D5A006669A1 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83226596D5A006669A1 /* Enumerations.swift */; };
 		8629C83626598172006669A1 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83526598172006669A1 /* FavoritesVC.swift */; };
 		8629C838265982A7006669A1 /* PositionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C837265982A7006669A1 /* PositionVC.swift */; };
-		86EDDC7C265A7FC2004A8A03 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7B265A7FC2004A8A03 /* BigButton.swift */; };
+		86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7B265A7FC2004A8A03 /* Button.swift */; };
+		86EDDC7E265A82B3004A8A03 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* TitleLabel.swift */; };
+		86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +33,9 @@
 		8629C83226596D5A006669A1 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		8629C83526598172006669A1 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		8629C837265982A7006669A1 /* PositionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionVC.swift; sourceTree = "<group>"; };
-		86EDDC7B265A7FC2004A8A03 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
+		86EDDC7B265A7FC2004A8A03 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		86EDDC7D265A82B3004A8A03 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTextField.swift; sourceTree = "<group>"; };
 		BD6C7576B4722DAC99554100 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 		F1A20F978440D5F602274163 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -119,7 +123,9 @@
 		8629C830265927A7006669A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				86EDDC7B265A7FC2004A8A03 /* BigButton.swift */,
+				86EDDC7B265A7FC2004A8A03 /* Button.swift */,
+				86EDDC7D265A82B3004A8A03 /* TitleLabel.swift */,
+				86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -258,7 +264,9 @@
 				8629C82226592783006669A1 /* Reciplease.xcdatamodeld in Sources */,
 				8629C81C26592783006669A1 /* SearchVC.swift in Sources */,
 				8629C83326596D5A006669A1 /* Enumerations.swift in Sources */,
-				86EDDC7C265A7FC2004A8A03 /* BigButton.swift in Sources */,
+				86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */,
+				86EDDC7E265A82B3004A8A03 /* TitleLabel.swift in Sources */,
+				86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */,
 				8629C81826592783006669A1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
