@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,7 @@
 		8629C82726592787006669A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8629C82526592787006669A1 /* LaunchScreen.storyboard */; };
 		8629C83326596D5A006669A1 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83226596D5A006669A1 /* Enumerations.swift */; };
 		8629C83626598172006669A1 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83526598172006669A1 /* FavoritesVC.swift */; };
-		8629C838265982A7006669A1 /* ScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C837265982A7006669A1 /* ScrollVC.swift */; };
+		8629C838265982A7006669A1 /* PositionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C837265982A7006669A1 /* PositionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		8629C82826592787006669A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8629C83226596D5A006669A1 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		8629C83526598172006669A1 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
-		8629C837265982A7006669A1 /* ScrollVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollVC.swift; sourceTree = "<group>"; };
+		8629C837265982A7006669A1 /* PositionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionVC.swift; sourceTree = "<group>"; };
 		BD6C7576B4722DAC99554100 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 		F1A20F978440D5F602274163 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -60,7 +60,6 @@
 				22E48F98C80BECAC1354E19C /* Pods-Reciplease.debug.xcconfig */,
 				BD6C7576B4722DAC99554100 /* Pods-Reciplease.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -110,7 +109,7 @@
 			children = (
 				8629C81B26592783006669A1 /* SearchVC.swift */,
 				8629C83526598172006669A1 /* FavoritesVC.swift */,
-				8629C837265982A7006669A1 /* ScrollVC.swift */,
+				8629C837265982A7006669A1 /* PositionVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -252,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8629C83626598172006669A1 /* FavoritesVC.swift in Sources */,
-				8629C838265982A7006669A1 /* ScrollVC.swift in Sources */,
+				8629C838265982A7006669A1 /* PositionVC.swift in Sources */,
 				8629C82226592783006669A1 /* Reciplease.xcdatamodeld in Sources */,
 				8629C81C26592783006669A1 /* SearchVC.swift in Sources */,
 				8629C83326596D5A006669A1 /* Enumerations.swift in Sources */,
