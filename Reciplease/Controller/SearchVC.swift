@@ -98,14 +98,6 @@ class SearchVC: UIViewController {
         setupContainer(containerView)
     }
     
-    private func setupScrollView() {
-        
-        
-        
-        
-        
-    }
-    
     public func setupContainer(_ container: UIView) {
         
     }
