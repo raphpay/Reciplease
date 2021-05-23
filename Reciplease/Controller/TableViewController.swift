@@ -24,6 +24,7 @@ class TableViewController: UITableViewController {
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         view.backgroundColor = CustomColors.background.color
+        tableView.backgroundColor = CustomColors.background.color
         tableView.register(RecipeCell.self, forCellReuseIdentifier: RecipeCell.reuseID)
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,6 +42,10 @@ class TableViewController: UITableViewController {
             fatalError("Cannot dequeue cell for index path: \(indexPath)")
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 152
     }
 
 }

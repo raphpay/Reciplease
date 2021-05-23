@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TitleLabel: UILabel {
+class Label: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,7 +18,10 @@ class TitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(text: String, textColor: UIColor = .white, alignment: NSTextAlignment = .center, fontSize: CGFloat = 30) {
+    init(text: String = "",
+         textColor: UIColor = .white,
+         alignment: NSTextAlignment = .left,
+         fontSize: CGFloat = 30) {
         super.init(frame: .zero)
         self.text           = text
         self.textColor      = textColor

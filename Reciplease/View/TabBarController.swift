@@ -20,11 +20,11 @@ class TabBarController: UITabBarController {
     private func createTabBarController() {
         let searchVC = createNavC(vc: SearchVC(),
                                   tabBarTitle: "Search",
-                                  image: UIImage(named: Icon.search.rawValue)!)
+                                  image: Icon.search)
         let favoritesVC = createNavC(vc: shouldShowEmptyState ? EmptyStateVC() : TableViewController(),
                                      title: "Recipes",
                                      tabBarTitle: "Favorites",
-                                     image: UIImage(named: Icon.star.rawValue)!,
+                                     image: Icon.star,
                                      tag: 1)
         viewControllers = [searchVC, favoritesVC]
         UITabBar.appearance().tintColor = CustomColors.openClassrooms.color
@@ -33,7 +33,7 @@ class TabBarController: UITabBarController {
     private func createNavC(vc: UIViewController,
                             title: String = "Reciplease",
                             tabBarTitle: String = "Reciplease",
-                            image: UIImage = UIImage(named: Icon.star.rawValue)!,
+                            image: UIImage = Icon.star,
                             tag: Int = 0) -> UINavigationController {
         vc.title = title
         vc.tabBarItem = UITabBarItem(title: tabBarTitle,

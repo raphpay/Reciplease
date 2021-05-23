@@ -45,11 +45,11 @@ class SearchVC: UIViewController {
         return view
     }()
     
-    let topContainerTitle = TitleLabel(text: "What's in your fridge ?", textColor: .black, fontSize: 20)
+    let topContainerTitle = Label(text: "What's in your fridge ?", textColor: .black, alignment: .center, fontSize: 20)
     let ingredientsTextField = IngredientsTextField()
     let addButton = Button(backgroundColor: CustomColors.green.color, title: "Add")
 
-    let bottomContainerTitle = TitleLabel(text: "Your ingredients", alignment: .left)
+    let bottomContainerTitle = Label(text: "Your ingredients", alignment: .left)
     let clearButton = Button(backgroundColor: CustomColors.gray.color, title: "Clear")
 
     // TODO: Find how to refactor this

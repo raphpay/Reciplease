@@ -7,22 +7,25 @@
 
 import UIKit
 
-enum Images: String {
-    case emptyState = "Empty-State"
+enum Images {
+    static let emptyState = UIImage(named: "Empty-State")
+    static let pizza = UIImage(named: "pizza")
+}
+
+enum Icon {
+    static let star     = UIImage(named: "icon-star")!
+    static let search   = UIImage(named: "icon-magnifyingglass")!
+    
+    case bolt, clock
     
     var image: UIImage {
         switch self {
-        case .emptyState:
-            return UIImage(named: Images.emptyState.rawValue)!
+        case .bolt:
+            return UIImage(named: "icon-bolt")!
+        case .clock:
+            return UIImage(named: "icon-deskclock")!
         }
     }
-}
-
-enum Icon: String {
-    case star = "icon-star"
-    case bolt = "icon-bolt"
-    case clock = "icon-deskclock"
-    case search = "icon-magnifyingglass"
 }
 
 enum CustomColors: String {
@@ -111,5 +114,4 @@ enum CustomColors: String {
         }
     }
 }
-
 

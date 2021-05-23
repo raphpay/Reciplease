@@ -20,7 +20,7 @@ class EmptyState: UIImageView {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        image = Images.emptyState.image
+        image = Images.emptyState
         clipsToBounds = true
         contentMode = .scaleAspectFill
     }
