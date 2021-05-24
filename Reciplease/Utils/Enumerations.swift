@@ -13,8 +13,10 @@ enum Images {
 }
 
 enum Icon {
-    static let star     = UIImage(named: "icon-star")!
-    static let search   = UIImage(named: "icon-magnifyingglass")!
+    static let star                 = UIImage(named: "icon-star")!
+    static let search               = UIImage(named: "icon-magnifyingglass")!
+    static let plus                 = UIImage(named: "plus")!
+    static let searchPlaceholder    = UIImage(named: "icon-magnifyingglas-placeholder")!
     
     case bolt, clock
     
@@ -33,6 +35,8 @@ enum CustomColors: String {
     case openClassrooms = "OpenClassrooms"
     case green          = "Green"
     case gray           = "Gray"
+    case textField      = "TextFieldBackground"
+    case placeholder    = "Placeholder"
     
     private var red: CGFloat {
         switch self {
@@ -44,6 +48,10 @@ enum CustomColors: String {
             return 117
         case .gray:
             return 129
+        case .textField:
+            return 78
+        case .placeholder:
+            return 177
         }
     }
     
@@ -57,6 +65,10 @@ enum CustomColors: String {
             return 158
         case .gray:
             return 129
+        case .textField:
+            return 78
+        case .placeholder:
+            return 176
         }
     }
     
@@ -70,6 +82,10 @@ enum CustomColors: String {
             return 112
         case .gray:
             return 129
+        case .textField:
+            return 78
+        case .placeholder:
+            return 183
         }
     }
     
@@ -109,6 +125,24 @@ enum CustomColors: String {
                 return UIColor(red: CustomColors.gray.red,
                                                green: CustomColors.gray.green,
                                                blue: CustomColors.gray.blue,
+                                               alpha: 1)
+            }
+        case .textField:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.textField.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.textField.red,
+                                               green: CustomColors.textField.green,
+                                               blue: CustomColors.textField.blue,
+                                               alpha: 1)
+            }
+        case .placeholder:
+            if #available(iOS 11.0, *) {
+                return UIColor(named: CustomColors.placeholder.rawValue)!
+            } else {
+                return UIColor(red: CustomColors.placeholder.red,
+                                               green: CustomColors.placeholder.green,
+                                               blue: CustomColors.placeholder.blue,
                                                alpha: 1)
             }
         }

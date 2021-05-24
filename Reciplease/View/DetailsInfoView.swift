@@ -9,13 +9,8 @@ import UIKit
 import TinyConstraints
 
 class DetailsInfoView: UIView {
-    let iconView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
-    }()
-    
+
+    let iconView = IconView()
     let label = Label(textColor: .white, alignment: .right, fontSize: 14)
 
 

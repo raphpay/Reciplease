@@ -34,8 +34,6 @@ class SearchVC: UIViewController {
     
     lazy var topContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 5
         return view
     }()
     
@@ -45,11 +43,16 @@ class SearchVC: UIViewController {
         return view
     }()
     
-    let topContainerTitle = Label(text: "What's in your fridge ?", textColor: .black, alignment: .center, fontSize: 20)
+    let questionLabel = Label(text: "What's in your fridge ?", textColor: CustomColors.green.color, bold: true)
     let ingredientsTextField = IngredientsTextField()
-    let addButton = Button(backgroundColor: CustomColors.green.color, title: "Add")
+//    let addButton = Button(backgroundColor: CustomColors.green.color, title: "Add")
+    let addButton: UIButton = {
+        let b = UIButton()
+        b.setImage(Icon.plus, for: .normal)
+        return b
+    }()
 
-    let bottomContainerTitle = Label(text: "Your ingredients", alignment: .left)
+    let bottomContainerTitle = Label(text: "Your ingredients", alignment: .left, bold: true)
     let clearButton = Button(backgroundColor: CustomColors.gray.color, title: "Clear")
 
     // TODO: Find how to refactor this
@@ -93,7 +96,7 @@ class SearchVC: UIViewController {
         scrollView.bottomToTop(of: searchButton, offset: -padding)
         scrollView.addSubview(containerView)
         
-        searchButton.height(75)
+        searchButton.height(60)
         searchButton.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding) + .bottom(10), usingSafeArea: true)
         setupContainer(containerView)
     }
@@ -107,23 +110,23 @@ class SearchVC: UIViewController {
     
     private func setupTopContainer() {
         topContainerView.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding))
-        topContainerView.height(120)
+        topContainerView.height(80)
         
-        topContainerView.addSubview(topContainerTitle)
+        topContainerView.addSubview(questionLabel)
         topContainerView.addSubview(ingredientsTextField)
         topContainerView.addSubview(addButton)
         
-        topContainerTitle.edgesToSuperview(excluding: .bottom, insets: .top(5))
+        questionLabel.edgesToSuperview(excluding: .bottom, insets: .top(5))
         
-        ingredientsTextField.bottomToSuperview(offset: -30)
-        ingredientsTextField.leftToSuperview(offset: 10)
+        ingredientsTextField.topToBottom(of: questionLabel, offset: 10)
+        ingredientsTextField.leftToSuperview()
         ingredientsTextField.rightToLeft(of: addButton, offset: -5)
-        ingredientsTextField.height(25)
+        ingredientsTextField.height(35)
         
-        addButton.rightToSuperview(offset: -10)
-        addButton.bottomToSuperview(offset: -30)
-        addButton.height(30)
-        addButton.width(80)
+        addButton.centerY(to: ingredientsTextField)
+        addButton.rightToSuperview()
+        addButton.height(44)
+        addButton.width(44)
     }
     
     private func setupBottomContainer() {

@@ -9,12 +9,7 @@ import UIKit
 
 class IngredientsTextField: UITextField {
     
-    let bottomLine: UIView = {
-        let v = UIView()
-        v.backgroundColor = .gray
-        v.translatesAutoresizingMaskIntoConstraints = false
-        return v
-    }()
+    let searchIcon = IconView(image: Icon.searchPlaceholder)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,20 +23,32 @@ class IngredientsTextField: UITextField {
     
     
     private func configure() {
-        addSubview(bottomLine)
-        
-        bottomLine.topToBottom(of: self, offset: 2)
-        bottomLine.height(1)
-        bottomLine.leftToSuperview()
-        bottomLine.rightToSuperview()
         translatesAutoresizingMaskIntoConstraints = false
         
         adjustsFontSizeToFitWidth   = true
         minimumFontSize             = 12
         
-//        autocorrectionType          = .no
+        layer.cornerRadius          = 5
+        backgroundColor             = CustomColors.textField.color
         returnKeyType               = .continue
-        placeholder                 = "Lemon, cheese, sausages..."
+        textColor                   = .white
+        attributedPlaceholder       = NSAttributedString(string: "Lemon, cheese, sausages...",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: CustomColors.placeholder.color])
+        
+        addSubview(searchIcon)
+        searchIcon.centerYToSuperview()
+        searchIcon.leftToSuperview(offset: 10)
+        searchIcon.width(18)
+        searchIcon.height(18)
     }
+    
 
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 0))
+    }
+    
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 0))
+    }
 }

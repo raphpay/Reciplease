@@ -21,12 +21,14 @@ class Label: UILabel {
     init(text: String = "",
          textColor: UIColor = .white,
          alignment: NSTextAlignment = .left,
-         fontSize: CGFloat = 30) {
+         fontSize: CGFloat = 25,
+         bold: Bool = false) {
         super.init(frame: .zero)
         self.text           = text
         self.textColor      = textColor
         self.textAlignment  = alignment
-        self.font           = UIFont.systemFont(ofSize: fontSize, weight: .medium)
+        self.font           = UIFont.systemFont(ofSize: fontSize,
+                                                weight: bold ? .bold : .medium)
         configure()
     }
     
