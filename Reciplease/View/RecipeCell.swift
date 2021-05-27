@@ -29,14 +29,6 @@ class RecipeCell: UITableViewCell {
         return imageView
     }()
     
-//    let shadowView: UIView = {
-//        let v = UIView()
-//        v.backgroundColor = .black
-//        v.layer.opacity = 0.5
-//        return v
-//    }()
-    
-    
     let cellTitle = Label(text: "Pizza", fontSize: 20, bold: true)
     let cellDescription = Label(text: "Mozzarella, Basilic, Tomato", fontSize: 16)
     
