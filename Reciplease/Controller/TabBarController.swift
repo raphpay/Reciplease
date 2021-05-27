@@ -22,7 +22,7 @@ class TabBarController: UITabBarController {
     
     // MARK: - Private methods
     private func createTabBarController() {
-        let searchVC = createNavC(vc: SearchVC(),
+        let searchVC = createNavC(vc: RecipeDetailsVC(),
                                   tabBarTitle: "Search",
                                   image: Icon.search)
         let favoritesVC = createNavC(vc: shouldShowEmptyState ? EmptyStateVC() : TableViewController(),
