@@ -10,34 +10,35 @@ import TinyConstraints
 
 class RecipeCell: UITableViewCell {
     
-    static let reuseID = "RecipeCell"
+    static let reuseID  = "RecipeCell"
+    let containerHeight = CGFloat(200)
+    let padding         = CGFloat(5)
     
     let containerView: UIView = {
         let v = UIView()
-        v.backgroundColor = CustomColors.background.color
-        v.layer.cornerRadius = 5
+        v.backgroundColor = .clear
         return v
     }()
     
-    let backgroundImage: UIImageView = {
+    let recipeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 5
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = Images.pizza
         return imageView
     }()
     
-    let shadowView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .black
-        v.layer.opacity = 0.5
-        return v
-    }()
+//    let shadowView: UIView = {
+//        let v = UIView()
+//        v.backgroundColor = .black
+//        v.layer.opacity = 0.5
+//        return v
+//    }()
     
-    let cellTitle = Label(text: "Hello World", fontSize: 20)
-    let cellDescription = Label(text: "Description", fontSize: 16)
+    
+    let cellTitle = Label(text: "Pizza", fontSize: 20, bold: true)
+    let cellDescription = Label(text: "Mozzarella, Basilic, Tomato", fontSize: 16)
     
     let infoView = InfoView(calories: 200, time: 50)
     
@@ -60,35 +61,22 @@ class RecipeCell: UITableViewCell {
     private func configureContainerView() {
         addSubview(containerView)
         
-        containerView.addSubview(backgroundImage)
-        containerView.addSubview(shadowView)
+        containerView.edgesToSuperview(excluding: .bottom, insets: .left(16) + .right(16))
+        containerView.height(containerHeight)
+        
+        containerView.addSubview(recipeImage)
         containerView.addSubview(cellTitle)
         containerView.addSubview(cellDescription)
+        recipeImage.addSubview(infoView)
         
-        containerView.topToSuperview(offset: 15)
-        containerView.bottomToSuperview(offset: -15)
-        containerView.leftToSuperview(offset: 16)
-        containerView.rightToSuperview(offset: -16)
+        recipeImage.edgesToSuperview(excluding: .bottom)
+        recipeImage.height(containerHeight - 40)
         
-        backgroundImage.edgesToSuperview()
+        cellTitle.topToBottom(of: recipeImage, offset: padding)
+        cellDescription.topToBottom(of: cellTitle)
         
-        shadowView.edgesToSuperview(excluding: .top)
-        shadowView.height(50)
-        
-        cellDescription.edgesToSuperview(excluding: .top, insets: .left(5) + .right(5))
-        cellTitle.bottomToTop(of: cellDescription)
-        cellTitle.leftToSuperview(offset: 5)
-        cellTitle.rightToSuperview(offset: -5)
-        
-        configureInfoView()
-    }
-    
-    // TODO: Refactor with info from recipe
-    private func configureInfoView() {
-        containerView.addSubview(infoView)
-        
-        infoView.topToSuperview(offset: 5)
-        infoView.rightToSuperview(offset: -5)
+        infoView.bottomToSuperview(offset: -padding)
+        infoView.leftToSuperview(offset: padding)
         infoView.height(60)
         infoView.width(95)
     }
@@ -97,4 +85,6 @@ class RecipeCell: UITableViewCell {
     func set() {
         
     }
+    
+    
 }

@@ -10,7 +10,7 @@ import UIKit
 class TabBarController: UITabBarController {
     
     // MARK: - Properties
-    private var shouldShowEmptyState = true
+    private var shouldShowEmptyState = false
     
     
     // MARK: - Override methods
