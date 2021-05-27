@@ -10,7 +10,7 @@ import TinyConstraints
 
 class EmptyStateVC: UIViewController {
     
-    let emptyStateImage = EmptyState()
+    let emptyStateImage = BackgroundImage()
 
     override func viewDidLoad() {
         super.viewDidLoad()

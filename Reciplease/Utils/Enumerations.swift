@@ -37,7 +37,7 @@ enum CustomColors: String {
     case gray           = "Gray"
     case textField      = "TextFieldBackground"
     case placeholder    = "Placeholder"
-    
+
     private var red: CGFloat {
         switch self {
         case .background:
@@ -54,7 +54,7 @@ enum CustomColors: String {
             return 177
         }
     }
-    
+
     private var blue: CGFloat {
         switch self {
         case .background:
@@ -71,7 +71,7 @@ enum CustomColors: String {
             return 176
         }
     }
-    
+
     private var green: CGFloat {
         switch self {
         case .background:
@@ -88,7 +88,7 @@ enum CustomColors: String {
             return 183
         }
     }
-    
+
     var color: UIColor {
         switch self {
         case .background:
@@ -147,7 +147,5 @@ enum CustomColors: String {
             }
         }
     }
-    
-    
 }
 

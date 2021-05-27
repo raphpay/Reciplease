@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import TinyConstraints
 
-class EmptyState: UIImageView {
+class BackgroundImage: UIImageView {
+    
+    let screenHeight = UIScreen.main.bounds.height
+    let screenWidth = UIScreen.main.bounds.width
 
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)

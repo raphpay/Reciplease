@@ -31,7 +31,7 @@ class TabBarController: UITabBarController {
                                      image: Icon.star,
                                      tag: 1)
         viewControllers = [searchVC, favoritesVC]
-        UITabBar.appearance().tintColor = CustomColors.openClassrooms.color
+        UITabBar.appearance().tintColor = UIColor(named: "Green")
         
     }
     
