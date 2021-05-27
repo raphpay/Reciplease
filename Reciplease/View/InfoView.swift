@@ -22,6 +22,8 @@ class InfoView: UIView {
     let timeView = DetailsInfoView(icon: .clock, text: "min")
     
     let padding = CGFloat(6)
+    let height  = CGFloat(60)
+    let width   = CGFloat(95)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +55,9 @@ class InfoView: UIView {
         caloriesView.edgesToSuperview(excluding: .bottom, insets: TinyEdgeInsets(top: padding, left: padding, bottom: 0, right: padding))
         
         timeView.edgesToSuperview(excluding: .top, insets: TinyEdgeInsets(top: 0, left: padding, bottom: padding, right: padding))
+        
+        containerView.height(height)
+        containerView.width(width)
     }
 
 }

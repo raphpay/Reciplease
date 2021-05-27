@@ -69,8 +69,6 @@ class RecipeCell: UITableViewCell {
         
         infoView.bottomToSuperview(offset: -padding)
         infoView.leftToSuperview(offset: padding)
-        infoView.height(60)
-        infoView.width(95)
     }
     
     // TODO: Configure with a recipe object

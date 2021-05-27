@@ -17,6 +17,17 @@ class RecipeDetailsImageView: UIView {
         imageView.image = Images.pizza
         return imageView
     }()
+    
+    let recipeTitle = Label(text: "Pizza", alignment: .center, fontSize: 30)
+    
+    let shadowView: UIView = {
+        let v = UIView()
+        v.backgroundColor   = .black
+        v.layer.opacity     = 0.5
+        return v
+    }()
+    
+    let infoView = InfoView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,8 +40,19 @@ class RecipeDetailsImageView: UIView {
     
     private func configure() {
         addSubview(recipeImage)
+        addSubview(shadowView)
+        addSubview(recipeTitle)
+        addSubview(infoView)
         
         recipeImage.edgesToSuperview()
+        
+        shadowView.edgesToSuperview(excluding: .top)
+        shadowView.height(50)
+        
+        recipeTitle.edgesToSuperview(excluding: .top, insets: .bottom(10))
+        
+        infoView.topToSuperview(offset: 10)
+        infoView.rightToSuperview(offset: -10)
     }
     
 }
