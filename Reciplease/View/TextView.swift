@@ -9,6 +9,8 @@ import UIKit
 
 class TextView: UITextView {
     
+    var textFont = UIFont.systemFont(ofSize: 30)
+    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         configure()
@@ -20,10 +22,9 @@ class TextView: UITextView {
     
     init(alignment: NSTextAlignment = .left, fontSize: CGFloat = 30) {
         super.init(frame: .zero, textContainer: .none)
-        self.contentInsetAdjustmentBehavior = .automatic
-        self.textAlignment                  = alignment
-        self.textColor                      = .white
-        self.font                           = UIFont.systemFont(ofSize: fontSize)
+        contentInsetAdjustmentBehavior = .automatic
+        textAlignment                  = alignment
+        font                           = UIFont.systemFont(ofSize: fontSize)
         configure()
     }
     
@@ -32,6 +33,8 @@ class TextView: UITextView {
         isEditable      = false
         isSelectable    = true
         backgroundColor = .clear
+        textColor       = .white
+//        font            = textFont
         text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
     }
 }

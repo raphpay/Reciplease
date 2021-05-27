@@ -92,7 +92,7 @@ class SearchVC: UIViewController {
         view.addSubview(scrollView)
         view.addSubview(searchButton)
         
-        scrollView.edgesToSuperview(excluding: .bottom, isActive: true, usingSafeArea: true)
+        scrollView.edgesToSuperview(excluding: .bottom, usingSafeArea: true)
         scrollView.bottomToTop(of: searchButton, offset: -padding)
         scrollView.addSubview(containerView)
         
