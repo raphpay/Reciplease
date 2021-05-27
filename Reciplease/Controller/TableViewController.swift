@@ -55,7 +55,9 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailsVC = UINavigationController(rootViewController: RecipeDetailsVC())
+        let destinationVC = RecipeDetailsVC()
+        destinationVC.recipe = recipes[indexPath.row]
+        let detailsVC = UINavigationController(rootViewController: destinationVC)
         self.present(detailsVC, animated: true)
     }
 }

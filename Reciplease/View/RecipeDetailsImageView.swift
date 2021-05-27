@@ -18,7 +18,7 @@ class RecipeDetailsImageView: UIView {
         return imageView
     }()
     
-    let recipeTitle = Label(text: "Pizza", alignment: .center, fontSize: 30)
+    let recipeTitle = Label(text: "", alignment: .center, fontSize: 30)
     
     let shadowView: UIView = {
         let v = UIView()
@@ -36,6 +36,12 @@ class RecipeDetailsImageView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(recipe: String) {
+        super.init(frame: .zero)
+        recipeTitle.text = recipe
+        configure()
     }
     
     private func configure() {

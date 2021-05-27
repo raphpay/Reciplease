@@ -14,9 +14,10 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
+    var recipe                  = ""
     
     // MARK: - Views
-    let recipeImage = RecipeDetailsImageView()
+    lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
     
     lazy var scrollView: UIScrollView = {
         let v = UIScrollView(frame: .zero)
