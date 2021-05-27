@@ -32,7 +32,6 @@ class SearchVC: UIViewController {
         return v
     }()
     
-    
     let searchButton  = Button(backgroundColor: CustomColors.green.color, title: "Search for recipes")
     
     lazy var topContainerView: UIView = {
@@ -56,20 +55,6 @@ class SearchVC: UIViewController {
 
     let bottomContainerTitle = Label(text: "Your ingredients", alignment: .left, bold: true)
     let clearButton = Button(backgroundColor: CustomColors.gray.color, title: "Clear")
-
-    // TODO: Find how to refactor this
-//    lazy var ingredientsTextView: UITextView = {
-//        let textView = UITextView()
-//        textView.textAlignment                  = .left
-//        textView.textColor                      = .white
-//        textView.font                           = UIFont.systemFont(ofSize: 20)
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        textView.isEditable      = false
-//        textView.isSelectable    = true
-//        textView.backgroundColor = .clear
-//        textView.text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
-//        return textView
-//    }()
     let ingredientsTextView = TextView()
     
     // MARK: - Actions
@@ -77,6 +62,11 @@ class SearchVC: UIViewController {
         let tableVC = TableViewController()
         tableVC.recipes = Recipe.mockRecipes
         navigationController?.pushViewController(tableVC, animated: true)
+    }
+    
+    @objc func addIngredient() {
+        guard let text = ingredientsTextField.text else { return }
+        addIngredientToTextView(text: text)
     }
     
     // MARK: - Override Methods
@@ -142,6 +132,8 @@ class SearchVC: UIViewController {
         addButton.rightToSuperview()
         addButton.height(44)
         addButton.width(44)
+        
+        addButton.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
     }
     
     private func setupBottomContainer() {

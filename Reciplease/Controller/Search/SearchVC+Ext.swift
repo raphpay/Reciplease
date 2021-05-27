@@ -14,6 +14,11 @@ extension SearchVC: UITextFieldDelegate {
     }
     
     
+    func addIngredientToTextView(text: String) {
+        ingredientsTextView.text = "\n\(text)"
+        ingredientsTextField.text = ""
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -27,8 +32,7 @@ extension SearchVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else { return false }
-        ingredientsTextView.text += "\n\(text)"
-        textField.text = ""
+        addIngredientToTextView(text: text)
         return true
     }
 }
