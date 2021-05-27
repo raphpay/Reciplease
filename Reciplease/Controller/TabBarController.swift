@@ -10,7 +10,7 @@ import UIKit
 class TabBarController: UITabBarController {
     
     // MARK: - Properties
-    private var shouldShowEmptyState = true
+    private var shouldShowEmptyState = false
     
     
     // MARK: - Override methods
@@ -22,10 +22,10 @@ class TabBarController: UITabBarController {
     
     // MARK: - Private methods
     private func createTabBarController() {
-        let searchVC = createNavC(vc: RecipeDetailsVC(),
+        let searchVC = createNavC(vc: SearchVC(),
                                   tabBarTitle: "Search",
                                   image: Icon.search)
-        let favoritesVC = createNavC(vc: shouldShowEmptyState ? EmptyStateVC() : TableViewController(),
+        let favoritesVC = createNavC(vc: FavoritesVC(),
                                      title: "Recipes",
                                      tabBarTitle: "Favorites",
                                      image: Icon.star,

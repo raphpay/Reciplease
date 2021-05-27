@@ -41,13 +41,10 @@ class RecipeDetailsVC: UIViewController {
     // MARK: - Actions
     @objc func addToFavorites() {
         print("addToFavorites")
-        self.navigationController?.pushViewController(SearchVC(), animated: true) // A changer !
     }
     
     @objc func switchButtonTapped() {
-        showDirections ?
-            switchButton.setTitle("Get ingredients", for: .normal) :
-            switchButton.setTitle("Get directions", for: .normal)
+        navigationController?.pushViewController(DirectionVC(), animated: true)
     }
 
     // MARK: - Override methods
@@ -58,6 +55,7 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Private methods
     private func configureViewController() {
+        title = "Reciplease"
         view.backgroundColor = CustomColors.background.color
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Icon.star, style: .done, target: self, action: #selector(addToFavorites))
@@ -81,6 +79,7 @@ class RecipeDetailsVC: UIViewController {
                                       insets: .left(padding) + .right(padding) + .bottom(padding),
                                       usingSafeArea: true)
         switchButton.height(60)
+        switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
     }
     
     private func setupContainerView() {

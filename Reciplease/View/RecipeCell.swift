@@ -72,8 +72,8 @@ class RecipeCell: UITableViewCell {
     }
     
     // TODO: Configure with a recipe object
-    func set() {
-        
+    func set(title: String) {
+        cellTitle.text = title
     }
     
     

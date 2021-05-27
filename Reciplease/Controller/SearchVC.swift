@@ -10,10 +10,12 @@ import TinyConstraints
 
 class SearchVC: UIViewController {
     // TODO: Refactor the views inside a big view: maybe use protocols ?
-    // MARK: - Views
+    // MARK: - Properties
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+    let mockRecipes = ["Carry", "Burger", "Frites", "Dessert"]
     
+    // MARK: - Views
     lazy var scrollView: UIScrollView = {
         let v = UIScrollView(frame: .zero)
         v.backgroundColor = CustomColors.background.color
@@ -22,13 +24,14 @@ class SearchVC: UIViewController {
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
-    
+
     lazy var containerView: UIView = {
         let v = UIView()
         v.backgroundColor = CustomColors.background.color
         v.frame.size = contentViewSize
         return v
     }()
+    
     
     let searchButton  = Button(backgroundColor: CustomColors.green.color, title: "Search for recipes")
     
@@ -45,7 +48,6 @@ class SearchVC: UIViewController {
     
     let questionLabel = Label(text: "What's in your fridge ?", textColor: CustomColors.green.color, bold: true)
     let ingredientsTextField = IngredientsTextField()
-//    let addButton = Button(backgroundColor: CustomColors.green.color, title: "Add")
     let addButton: UIButton = {
         let b = UIButton()
         b.setImage(Icon.plus, for: .normal)
@@ -68,6 +70,13 @@ class SearchVC: UIViewController {
         textView.text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
         return textView
     }()
+    
+    // MARK: - Actions
+    @objc func searchRecipes() {
+        let tableVC = TableViewController()
+        tableVC.recipes = mockRecipes
+        navigationController?.pushViewController(tableVC, animated: true)
+    }
     
     // MARK: - Override Methods
     override func viewDidLoad() {
@@ -100,6 +109,8 @@ class SearchVC: UIViewController {
         
         searchButton.height(60)
         searchButton.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding) + .bottom(10), usingSafeArea: true)
+        searchButton.addTarget(self, action: #selector(searchRecipes), for: .touchUpInside)
+        
         setupContainer(containerView)
     }
     
@@ -108,7 +119,7 @@ class SearchVC: UIViewController {
         container.addSubview(bottomContainerView)
         setupTopContainer()
         setupBottomContainer()
-    }
+    } 
     
     private func setupTopContainer() {
         topContainerView.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding))

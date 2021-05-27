@@ -9,7 +9,8 @@ import UIKit
 
 class TextView: UITextView {
     
-    var textFont = UIFont.systemFont(ofSize: 30)
+    var fontSize = CGFloat(20)
+    var alignment = NSTextAlignment.left
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -20,11 +21,11 @@ class TextView: UITextView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(alignment: NSTextAlignment = .left, fontSize: CGFloat = 30) {
+    init(alignment: NSTextAlignment = .left, fontSize: CGFloat = 20) {
         super.init(frame: .zero, textContainer: .none)
-        contentInsetAdjustmentBehavior = .automatic
-        textAlignment                  = alignment
-        font                           = UIFont.systemFont(ofSize: fontSize)
+        contentInsetAdjustmentBehavior  = .automatic
+        self.alignment                  = alignment
+        self.fontSize                   = fontSize
         configure()
     }
     
@@ -34,7 +35,8 @@ class TextView: UITextView {
         isSelectable    = true
         backgroundColor = .clear
         textColor       = .white
-//        font            = textFont
+        textAlignment   = alignment
+        font            = UIFont.systemFont(ofSize: fontSize)
         text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
     }
 }
