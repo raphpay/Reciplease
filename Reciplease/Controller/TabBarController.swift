@@ -10,13 +10,17 @@ import UIKit
 class TabBarController: UITabBarController {
     
     // MARK: - Properties
-    private var shouldShowEmptyState = false
-
+    private var shouldShowEmptyState = true
+    
+    
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabBarController()
     }
     
+    
+    // MARK: - Private methods
     private func createTabBarController() {
         let searchVC = createNavC(vc: SearchVC(),
                                   tabBarTitle: "Search",
@@ -29,6 +33,7 @@ class TabBarController: UITabBarController {
         viewControllers = [searchVC, favoritesVC]
         UITabBar.appearance().tintColor = CustomColors.openClassrooms.color
     }
+    
     
     private func createNavC(vc: UIViewController,
                             title: String = "Reciplease",

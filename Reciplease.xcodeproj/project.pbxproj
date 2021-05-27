@@ -127,6 +127,7 @@
 		8629C82F2659279C006669A1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8651C59F265A9F4C008EE7FE /* TabBarController.swift */,
 				8629C81B26592783006669A1 /* SearchVC.swift */,
 				8629C83526598172006669A1 /* EmptyStateVC.swift */,
 				8651C5A1265AA1BA008EE7FE /* TableViewController.swift */,
@@ -143,7 +144,6 @@
 				86EDDC85265A8A89004A8A03 /* TextView.swift */,
 				8651C595265A8EB7008EE7FE /* EmptyState.swift */,
 				8651C597265A9D04008EE7FE /* RecipeCell.swift */,
-				8651C59F265A9F4C008EE7FE /* TabBarController.swift */,
 				8651C5A3265ABF6E008EE7FE /* InfoView.swift */,
 				8651C5A5265ABF9D008EE7FE /* DetailsInfoView.swift */,
 				868E534A265BA99E000C9402 /* Icon.swift */,
