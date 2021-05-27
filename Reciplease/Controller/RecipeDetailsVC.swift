@@ -41,6 +41,7 @@ class RecipeDetailsVC: UIViewController {
     // MARK: - Actions
     @objc func addToFavorites() {
         print("addToFavorites")
+        self.navigationController?.pushViewController(SearchVC(), animated: true) // A changer !
     }
     
     @objc func switchButtonTapped() {

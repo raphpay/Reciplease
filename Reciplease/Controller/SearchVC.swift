@@ -74,6 +74,8 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         configureViewController()
         setupViews()
+        view.backgroundColor = UIColor(named: "Background")
+        // TODO: Change colors in here
     }
     
     

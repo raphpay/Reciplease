@@ -10,7 +10,7 @@ import UIKit
 class TabBarController: UITabBarController {
     
     // MARK: - Properties
-    private var shouldShowEmptyState = false
+    private var shouldShowEmptyState = true
     
     
     // MARK: - Override methods
@@ -32,6 +32,7 @@ class TabBarController: UITabBarController {
                                      tag: 1)
         viewControllers = [searchVC, favoritesVC]
         UITabBar.appearance().tintColor = CustomColors.openClassrooms.color
+        
     }
     
     
