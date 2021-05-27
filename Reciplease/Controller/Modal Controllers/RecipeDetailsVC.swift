@@ -21,7 +21,7 @@ class RecipeDetailsVC: UIViewController {
     
     lazy var scrollView: UIScrollView = {
         let v = UIScrollView(frame: .zero)
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.frame = self.view.bounds
         v.contentSize = contentViewSize
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -30,14 +30,14 @@ class RecipeDetailsVC: UIViewController {
     
     lazy var containerView: UIView = {
         let v = UIView()
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.frame.size = contentViewSize
         return v
     }()
     
     let informationTitle    = Label(text: "Ingredients", fontSize: 22, bold: true)
     let informationTextView = TextView(fontSize: 16)
-    let switchButton        = Button(backgroundColor: CustomColors.green.color, title: "Get directions")
+    let switchButton        = Button(backgroundColor: CustomColor.green, title: "Get directions")
     
     // MARK: - Actions
     @objc func addToFavorites() {
@@ -58,10 +58,10 @@ class RecipeDetailsVC: UIViewController {
     // MARK: - Private methods
     private func setUpViewController() {
         title = "Reciplease"
-        view.backgroundColor = CustomColors.background.color
+        view.backgroundColor = CustomColor.background
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Icon.star, style: .done, target: self, action: #selector(addToFavorites))
-        navigationItem.rightBarButtonItem?.tintColor = CustomColors.background.color
+        navigationItem.rightBarButtonItem?.tintColor = CustomColor.background
         
         view.addSubview(recipeImage)
         view.addSubview(scrollView)

@@ -19,7 +19,7 @@ class InfoView: UIView {
     let containerView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.layer.cornerRadius = 5
         return v
     }()

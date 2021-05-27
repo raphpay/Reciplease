@@ -29,11 +29,11 @@ class IngredientsTextField: UITextField {
         minimumFontSize             = 12
         
         layer.cornerRadius          = 5
-        backgroundColor             = CustomColors.textField.color
+        backgroundColor             = CustomColor.textfield
         returnKeyType               = .done
         textColor                   = .white
         attributedPlaceholder       = NSAttributedString(string: "Lemon, cheese, sausages...",
-                                                         attributes: [NSAttributedString.Key.foregroundColor: CustomColors.placeholder.color])
+                                                         attributes: [NSAttributedString.Key.foregroundColor: CustomColor.placeholder])
         
         addSubview(searchIcon)
         searchIcon.centerYToSuperview()

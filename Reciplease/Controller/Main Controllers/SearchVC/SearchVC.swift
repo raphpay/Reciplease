@@ -18,7 +18,7 @@ class SearchVC: UIViewController {
     // MARK: - Views
     lazy var scrollView: UIScrollView = {
         let v = UIScrollView(frame: .zero)
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.frame = self.view.bounds
         v.contentSize = contentViewSize
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -27,12 +27,12 @@ class SearchVC: UIViewController {
 
     lazy var containerView: UIView = {
         let v = UIView()
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.frame.size = contentViewSize
         return v
     }()
     
-    let searchButton  = Button(backgroundColor: CustomColors.green.color, title: "Search for recipes")
+    let searchButton  = Button(backgroundColor: CustomColor.green, title: "Search for recipes")
     
     lazy var topContainerView: UIView = {
         let view = UIView()
@@ -45,7 +45,7 @@ class SearchVC: UIViewController {
         return view
     }()
     
-    let questionLabel = Label(text: "What's in your fridge ?", textColor: CustomColors.green.color, bold: true)
+    let questionLabel = Label(text: "What's in your fridge ?", textColor: CustomColor.green, bold: true)
     let ingredientsTextField = IngredientsTextField()
     let addButton: UIButton = {
         let b = UIButton()
@@ -54,7 +54,7 @@ class SearchVC: UIViewController {
     }()
 
     let bottomContainerTitle = Label(text: "Your ingredients", alignment: .left, bold: true)
-    let clearButton = Button(backgroundColor: CustomColors.gray.color, title: "Clear")
+    let clearButton = Button(backgroundColor: CustomColor.gray, title: "Clear")
     let ingredientsTextView = TextView()
     
     // MARK: - Actions
@@ -87,13 +87,10 @@ class SearchVC: UIViewController {
     
     // MARK: - Private methods
     private func configureViewController() {
-        view.backgroundColor = CustomColors.background.color
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        }
+        view.backgroundColor = CustomColor.background
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     private func setupViews() {

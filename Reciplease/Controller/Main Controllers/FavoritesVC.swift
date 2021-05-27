@@ -23,13 +23,10 @@ class FavoritesVC: UIViewController {
     
     // MARK: - Private Methods
     private func configureViewController() {
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        }
-        view.backgroundColor = CustomColors.background.color
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        view.backgroundColor = CustomColor.background
     }
     
     private func addChildVC(vc: UIViewController) {

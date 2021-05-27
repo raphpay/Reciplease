@@ -46,7 +46,7 @@ class RecipeCell: UITableViewCell {
     
     // TODO: Refactor the banner process
     private func setupViews() {
-        backgroundColor = CustomColors.background.color
+        backgroundColor = CustomColor.background
         configureContainerView()
     }
     

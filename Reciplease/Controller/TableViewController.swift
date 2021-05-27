@@ -26,9 +26,14 @@ class TableViewController: UITableViewController {
         } else {
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
-        view.backgroundColor = CustomColors.background.color
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        view.backgroundColor = CustomColor.background
+        
         title = "Recipes"
-        tableView.backgroundColor = CustomColors.background.color
+        
+        tableView.backgroundColor = CustomColor.background
         tableView.register(RecipeCell.self, forCellReuseIdentifier: RecipeCell.reuseID)
         tableView.delegate = self
         tableView.dataSource = self

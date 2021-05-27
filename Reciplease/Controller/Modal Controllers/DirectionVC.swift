@@ -16,7 +16,7 @@ class DirectionVC: UIViewController {
     // MARK: - Views
     lazy var scrollView: UIScrollView = {
         let v = UIScrollView(frame: .zero)
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.frame = self.view.bounds
         v.contentSize = contentViewSize
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +25,7 @@ class DirectionVC: UIViewController {
 
     lazy var containerView: UIView = {
         let v = UIView()
-        v.backgroundColor = CustomColors.background.color
+        v.backgroundColor = CustomColor.background
         v.frame.size = contentViewSize
         return v
     }()
