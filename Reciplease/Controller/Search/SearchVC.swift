@@ -60,7 +60,7 @@ class SearchVC: UIViewController {
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
-        tableVC.recipes = Recipe.mockRecipes
+        tableVC.recipes = Recipe.secondMockRecipes
         navigationController?.pushViewController(tableVC, animated: true)
     }
     
@@ -69,12 +69,17 @@ class SearchVC: UIViewController {
         addIngredientToTextView(text: text)
     }
     
+    @objc func clearIngredients() {
+        ingredientsTextView.text = ""
+    }
+    
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         configureTextField()
         setupViews()
+        connectButtons()
         view.backgroundColor = UIColor(named: "Background")
         // TODO: Change colors in here
     }
@@ -101,7 +106,6 @@ class SearchVC: UIViewController {
         
         searchButton.height(60)
         searchButton.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding) + .bottom(10), usingSafeArea: true)
-        searchButton.addTarget(self, action: #selector(searchRecipes), for: .touchUpInside)
         
         setupContainer(containerView)
     }
@@ -132,8 +136,6 @@ class SearchVC: UIViewController {
         addButton.rightToSuperview()
         addButton.height(44)
         addButton.width(44)
-        
-        addButton.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
     }
     
     private func setupBottomContainer() {
@@ -153,6 +155,12 @@ class SearchVC: UIViewController {
         
         ingredientsTextView.topToBottom(of: bottomContainerTitle, offset: 5)
         ingredientsTextView.edgesToSuperview(excluding: .top)
+    }
+    
+    private func connectButtons() {
+        searchButton.addTarget(self, action: #selector(searchRecipes), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearIngredients), for: .touchUpInside)
     }
 }
 
