@@ -12,14 +12,12 @@ class FavoritesVC: UIViewController {
     private var shouldShowEmptyState = false
     let tableVC = TableViewController()
     let emptyVC = EmptyStateVC()
-    
-    let mockRecipes = ["Pizza", "Pasta", "Salad"]
 
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        tableVC.recipes = mockRecipes
+        tableVC.recipes = Recipe.mockRecipes
         addChildVC(vc: tableVC)
     }
     

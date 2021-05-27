@@ -58,23 +58,24 @@ class SearchVC: UIViewController {
     let clearButton = Button(backgroundColor: CustomColors.gray.color, title: "Clear")
 
     // TODO: Find how to refactor this
-    lazy var ingredientsTextView: UITextView = {
-        let textView = UITextView()
-        textView.textAlignment                  = .left
-        textView.textColor                      = .white
-        textView.font                           = UIFont.systemFont(ofSize: 20)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isEditable      = false
-        textView.isSelectable    = true
-        textView.backgroundColor = .clear
-        textView.text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
-        return textView
-    }()
+//    lazy var ingredientsTextView: UITextView = {
+//        let textView = UITextView()
+//        textView.textAlignment                  = .left
+//        textView.textColor                      = .white
+//        textView.font                           = UIFont.systemFont(ofSize: 20)
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        textView.isEditable      = false
+//        textView.isSelectable    = true
+//        textView.backgroundColor = .clear
+//        textView.text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
+//        return textView
+//    }()
+    let ingredientsTextView = TextView()
     
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
-        tableVC.recipes = mockRecipes
+        tableVC.recipes = Recipe.mockRecipes
         navigationController?.pushViewController(tableVC, animated: true)
     }
     
@@ -82,6 +83,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        configureTextField()
         setupViews()
         view.backgroundColor = UIColor(named: "Background")
         // TODO: Change colors in here
@@ -119,7 +121,7 @@ class SearchVC: UIViewController {
         container.addSubview(bottomContainerView)
         setupTopContainer()
         setupBottomContainer()
-    } 
+    }
     
     private func setupTopContainer() {
         topContainerView.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding))

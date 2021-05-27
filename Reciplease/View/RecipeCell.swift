@@ -32,7 +32,7 @@ class RecipeCell: UITableViewCell {
     let cellTitle = Label(text: "Pizza", fontSize: 20, bold: true)
     let cellDescription = Label(text: "Mozzarella, Basilic, Tomato", fontSize: 16)
     
-    let infoView = InfoView(calories: 200, time: 50)
+    let infoView = InfoView()
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -72,8 +72,10 @@ class RecipeCell: UITableViewCell {
     }
     
     // TODO: Configure with a recipe object
-    func set(title: String) {
-        cellTitle.text = title
+    func set(recipe: Recipe) {
+        cellTitle.text          = recipe.name
+        cellDescription.text    = recipe.ingredients[0] // TODO: Find how to put all elements on multiple lines
+        infoView.set(recipe: recipe)
     }
     
     

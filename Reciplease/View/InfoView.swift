@@ -9,6 +9,12 @@ import UIKit
 import TinyConstraints
 
 class InfoView: UIView {
+    
+    // MARK: - Properties
+    var calories: Int = 0
+    var cookTime: Int = 0
+    
+    // MARK: - Views
 
     let containerView: UIView = {
         let v = UIView()
@@ -39,8 +45,8 @@ class InfoView: UIView {
     // TODO: To be checked with API
     init(calories: Int, time: Int) {
         super.init(frame: .zero)
-        caloriesView.label.text = "\(calories)kCal"
-        timeView.label.text = "\(time)min"
+        self.calories = calories
+        self.cookTime = time
         configure()
     }
     
@@ -58,6 +64,15 @@ class InfoView: UIView {
         
         containerView.height(height)
         containerView.width(width)
+        
+        caloriesView.label.text = "\(calories)kCal"
+        timeView.label.text = "\(cookTime)min"
     }
 
+    func set(recipe: Recipe) {
+        self.calories = recipe.calories
+        self.cookTime = recipe.cookTime
+        caloriesView.label.text = "\(recipe.calories)kCal"
+        timeView.label.text = "\(recipe.cookTime)min"
+    }
 }

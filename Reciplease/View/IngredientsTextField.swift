@@ -30,7 +30,7 @@ class IngredientsTextField: UITextField {
         
         layer.cornerRadius          = 5
         backgroundColor             = CustomColors.textField.color
-        returnKeyType               = .continue
+        returnKeyType               = .done
         textColor                   = .white
         attributedPlaceholder       = NSAttributedString(string: "Lemon, cheese, sausages...",
                                                          attributes: [NSAttributedString.Key.foregroundColor: CustomColors.placeholder.color])

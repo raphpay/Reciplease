@@ -38,9 +38,10 @@ class RecipeDetailsImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(recipe: String) {
+    init(recipe: Recipe) {
         super.init(frame: .zero)
-        recipeTitle.text = recipe
+        recipeTitle.text = recipe.name
+        infoView.set(recipe: recipe)
         configure()
     }
     

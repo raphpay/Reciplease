@@ -37,6 +37,5 @@ class TextView: UITextView {
         textColor       = .white
         textAlignment   = alignment
         font            = UIFont.systemFont(ofSize: fontSize)
-        text = "- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n- Apple\n"
     }
 }

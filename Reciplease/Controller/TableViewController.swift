@@ -10,7 +10,7 @@ import UIKit
 class TableViewController: UITableViewController {
     
     // MARK: - Properties
-    var recipes: [String] = []
+    var recipes: [Recipe] = []
     
     // MARK: - Override Methods
     override func viewDidLoad() {
@@ -45,8 +45,8 @@ class TableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecipeCell.reuseID, for: indexPath) as? RecipeCell else {
             fatalError("Cannot dequeue cell for index path: \(indexPath)")
         }
-        let title = recipes[indexPath.row]
-        cell.set(title: title)
+        let recipe = recipes[indexPath.row]
+        cell.set(recipe: recipe)
         return cell
     }
     

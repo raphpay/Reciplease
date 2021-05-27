@@ -14,7 +14,7 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
-    var recipe                  = ""
+    var recipe                  = Recipe.fakeRecipe
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
@@ -51,11 +51,12 @@ class RecipeDetailsVC: UIViewController {
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViewController()
+        setUpViewController()
+        setTextView()
     }
     
     // MARK: - Private methods
-    private func configureViewController() {
+    private func setUpViewController() {
         title = "Reciplease"
         view.backgroundColor = CustomColors.background.color
         
@@ -90,5 +91,9 @@ class RecipeDetailsVC: UIViewController {
         informationTitle.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding))
         informationTextView.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding))
         informationTextView.topToBottom(of: informationTitle)
+    }
+    
+    private func setTextView() {
+        informationTextView.text = recipe.ingredients[0]
     }
 }
