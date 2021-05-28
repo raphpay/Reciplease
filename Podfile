@@ -7,5 +7,6 @@ target 'Reciplease' do
 
   # Pods for Reciplease
 pod "TinyConstraints"
+pod 'Alamofire', '~> 5.2'
 
 end

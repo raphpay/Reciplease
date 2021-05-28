@@ -82,6 +82,7 @@ class SearchVC: UIViewController {
         connectButtons()
         view.backgroundColor = UIColor(named: "Background")
         // TODO: Change colors in here
+        RecipeService.shared.getRecipe()
     }
     
     
