@@ -40,7 +40,7 @@ class RecipeDetailsImageView: UIView {
     
     init(recipe: Recipe) {
         super.init(frame: .zero)
-        recipeTitle.text = recipe.name
+        recipeTitle.text = recipe.label
         infoView.set(recipe: recipe)
         configure()
     }

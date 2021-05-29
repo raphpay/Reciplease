@@ -70,9 +70,11 @@ class InfoView: UIView {
     }
 
     func set(recipe: Recipe) {
-        self.calories = recipe.calories
-        self.cookTime = recipe.cookTime
-        caloriesView.label.text = "\(recipe.calories)kCal"
-        timeView.label.text = "\(recipe.cookTime)min"
+        let intCalories = Int(recipe.calories)
+        let intTime = Int(recipe.totalTime)
+        self.calories = intCalories
+        self.cookTime = intTime
+        caloriesView.label.text = "\(intCalories)kCal"
+        timeView.label.text = "\(intTime)min"
     }
 }

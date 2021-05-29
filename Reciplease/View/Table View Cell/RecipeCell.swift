@@ -73,8 +73,8 @@ class RecipeCell: UITableViewCell {
     
     // TODO: Configure with a recipe object
     func set(recipe: Recipe) {
-        cellTitle.text          = recipe.name
-        cellDescription.text    = recipe.ingredients[0] // TODO: Find how to put all elements on multiple lines
+        cellTitle.text          = recipe.label
+        cellDescription.text    = recipe.ingredients[0].text // TODO: Find how to put all elements on multiple lines
         infoView.set(recipe: recipe)
     }
     

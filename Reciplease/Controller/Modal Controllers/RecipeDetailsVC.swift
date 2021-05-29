@@ -14,7 +14,7 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
-    var recipe                  = NewRecipe.fakeRecipe
+    var recipe                  = Recipe.fakeRecipe
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
@@ -94,6 +94,6 @@ class RecipeDetailsVC: UIViewController {
     }
     
     private func setTextView() {
-        informationTextView.text = recipe.ingredients[0]
+        informationTextView.text = recipe.ingredients[0].text
     }
 }

@@ -61,9 +61,9 @@ class SearchVC: UIViewController {
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
-        tableVC.recipes = NewRecipe.secondMockRecipes
-        navigationController?.pushViewController(tableVC, animated: true)
+        tableVC.recipes = Recipe.mockRecipes
         RecipeService.shared.getRecipe(containing: ingredientsInFridge)
+        navigationController?.pushViewController(tableVC, animated: true)
     }
     
     @objc func addIngredient() {
@@ -73,6 +73,7 @@ class SearchVC: UIViewController {
     
     @objc func clearIngredients() {
         ingredientsTextView.text = ""
+        ingredientsInFridge.removeAll()
     }
     
     // MARK: - Override Methods
