@@ -19,6 +19,8 @@ class RecipeService {
     private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
     private let maxRecipes      = 2
     
+    var favorites: [Recipe]     = []
+    
     
     // MARK: - Public Methods
     func getRecipe(containing knownIngredients: [String], completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool) -> Void)) {
@@ -27,7 +29,6 @@ class RecipeService {
         for ingredient in knownIngredients {
             ingredientString += "\(ingredient),"
         }
-        print(ingredientString)
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
         AF.request(completeURL).validate().responseDecodable(of: RecipeHits.self) { response in
             var array: [Recipe] = []
@@ -47,6 +48,7 @@ class RecipeService {
             }
             for hit in value.hits {
                 let recipe = hit.recipe
+                print(recipe.cuisineType[0])
                 array.append(recipe)
             }
             
@@ -54,5 +56,8 @@ class RecipeService {
                 completion(array, true)
             }
         }
+    }
+    func addToFavorite(recipe: Recipe) {
+        favorites.append(recipe)
     }
 }

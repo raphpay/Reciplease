@@ -64,6 +64,7 @@ class TableViewController: UITableViewController {
         let destinationVC = RecipeDetailsVC()
         destinationVC.recipe = recipes[indexPath.row]
         let detailsVC = UINavigationController(rootViewController: destinationVC)
+        tableView.deselectRow(at: indexPath, animated: true)
         self.present(detailsVC, animated: true)
     }
 }

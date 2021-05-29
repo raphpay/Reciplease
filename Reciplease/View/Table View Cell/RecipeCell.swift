@@ -71,10 +71,10 @@ class RecipeCell: UITableViewCell {
         infoView.leftToSuperview(offset: padding)
     }
     
-    // TODO: Configure with a recipe object
+    
     func set(recipe: Recipe) {
         cellTitle.text          = recipe.label
-        cellDescription.text    = recipe.ingredients[0].text // TODO: Find how to put all elements on multiple lines
+        cellDescription.text    = recipe.cuisineType[0].capitalized
         infoView.set(recipe: recipe)
     }
     
