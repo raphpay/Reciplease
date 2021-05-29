@@ -41,7 +41,7 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func addToFavorites() {
-        print("addToFavorites")
+        RecipeService.shared.addToFavorite(recipe: recipe)
     }
     
     @objc func switchButtonTapped() {

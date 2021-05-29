@@ -9,10 +9,6 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    // MARK: - Properties
-    private var shouldShowEmptyState = false
-    
-    
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +28,6 @@ class TabBarController: UITabBarController {
                                      tag: 1)
         viewControllers = [searchVC, favoritesVC]
         UITabBar.appearance().tintColor = UIColor(named: "Green")
-        
     }
     
     

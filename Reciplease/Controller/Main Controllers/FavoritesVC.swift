@@ -10,22 +10,33 @@ import UIKit
 class FavoritesVC: UIViewController {
     
     private var shouldShowEmptyState = false
-    let tableVC = TableViewController()
-    let emptyVC = EmptyStateVC()
+    let tableVC     = TableViewController()
+    let emptyVC     = EmptyStateVC()
 
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        tableVC.recipes = Recipe.mockRecipes
-        addChildVC(vc: tableVC)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let favorites = RecipeService.shared.favorites
+        if favorites.isEmpty {
+            shouldShowEmptyState = true
+            addChildVC(vc: emptyVC)
+        } else {
+            shouldShowEmptyState = false
+            tableVC.recipes = favorites
+            addChildVC(vc: tableVC)
+        }
+//        print("viewWillAppear \(favorites)")
     }
     
     // MARK: - Private Methods
     private func configureViewController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
         view.backgroundColor = CustomColor.background
     }
     

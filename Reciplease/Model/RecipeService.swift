@@ -48,7 +48,6 @@ class RecipeService {
             }
             for hit in value.hits {
                 let recipe = hit.recipe
-                print(recipe.cuisineType[0])
                 array.append(recipe)
             }
             
@@ -58,6 +57,10 @@ class RecipeService {
         }
     }
     func addToFavorite(recipe: Recipe) {
+        // TODO: Save to Core Data
         favorites.append(recipe)
+        for recipe in favorites {
+            print(recipe.label)
+        }
     }
 }
