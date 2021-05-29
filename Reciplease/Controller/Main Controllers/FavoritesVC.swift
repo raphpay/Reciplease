@@ -17,7 +17,7 @@ class FavoritesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        tableVC.recipes = Recipe.mockRecipes
+        tableVC.recipes = NewRecipe.mockRecipes
         addChildVC(vc: tableVC)
     }
     

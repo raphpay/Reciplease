@@ -12,6 +12,21 @@ struct Recipe {
     let ingredients: [String]
     let cookTime: Int
     let calories: Int
+}
+
+struct RecipeHits: Decodable {
+    let hits: [RecipeInformations]
+}
+
+struct RecipeInformations: Decodable {
+    let recipe: NewRecipe
+}
+
+struct NewRecipe: Decodable {
+    let label: String
+    let ingredients: [Ingredient]
+    let calories: Double
+    let totalTime: Double
     
     static let fakeRecipe = Recipe(name: "Pizza", ingredients: ["Mozzarella, Pepperoni, Cheese"], cookTime: 10, calories: 3000)
     
@@ -32,6 +47,9 @@ struct Recipe {
         Recipe(name: "Pasta", ingredients: ["Steak, Tomato, Cheese"], cookTime: 30, calories: 2000),
         Recipe(name: "Salad", ingredients: ["Salad, Tomato, Corn"], cookTime: 10, calories: 1500),
     ]
+}
 
+struct Ingredient: Decodable {
+    let text: String
 }
 

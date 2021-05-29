@@ -14,7 +14,7 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
-    var recipe                  = Recipe.fakeRecipe
+    var recipe                  = NewRecipe.fakeRecipe
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)

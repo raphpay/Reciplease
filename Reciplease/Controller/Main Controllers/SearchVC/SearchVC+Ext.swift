@@ -17,6 +17,8 @@ extension SearchVC: UITextFieldDelegate {
     func addIngredientToTextView(text: String) {
         ingredientsTextView.text = "\n\(text)"
         ingredientsTextField.text = ""
+        ingredientsInFridge.append(text)
+        print(ingredientsInFridge)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

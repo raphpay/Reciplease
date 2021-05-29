@@ -14,6 +14,7 @@ class SearchVC: UIViewController {
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     let mockRecipes = ["Carry", "Burger", "Frites", "Dessert"]
+    var ingredientsInFridge: [String] = []
     
     // MARK: - Views
     lazy var scrollView: UIScrollView = {
@@ -60,8 +61,9 @@ class SearchVC: UIViewController {
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
-        tableVC.recipes = Recipe.secondMockRecipes
+        tableVC.recipes = NewRecipe.secondMockRecipes
         navigationController?.pushViewController(tableVC, animated: true)
+        RecipeService.shared.getRecipe(containing: ingredientsInFridge)
     }
     
     @objc func addIngredient() {
@@ -81,8 +83,6 @@ class SearchVC: UIViewController {
         setupViews()
         connectButtons()
         view.backgroundColor = UIColor(named: "Background")
-        // TODO: Change colors in here
-        RecipeService.shared.getRecipe()
     }
     
     

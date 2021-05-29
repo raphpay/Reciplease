@@ -21,21 +21,33 @@ class RecipeService {
     
     
     // MARK: - Public Methods
-    func getRecipe() {
+    func getRecipe(containing knownIngredients: [String]) {
         // TODO : See if there is a way to construct the url with Alamofire
-        let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=chicken"
-        AF.request(completeURL).validate().responseJSON { response in
-            guard let JSON = response.value else {
-                print("no JSON")
+        var ingredientString = ""
+        for ingredient in knownIngredients {
+            ingredientString += "\(ingredient),"
+        }
+        print(ingredientString)
+        let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
+        AF.request(completeURL).validate().responseDecodable(of: RecipeHits.self) { response in
+            
+            guard response.error == nil else {
+                print("error : \(response.error!)")
+                return }
+            guard let value = response.value else {
+                print("no value")
                 return
             }
-            print(JSON)
+            for hit in value.hits {
+                let recipe = hit.recipe
+                print("Meal: \(recipe.label)")
+//                print("Ingredients")
+                for ingredient in recipe.ingredients {
+//                    print(ingredient.text)
+                }
+//                print("Calories: \(recipe.calories)")
+//                print("Total time: \(recipe.totalTime)")
+            }
         }
     }
 }
-
-//Alamofire.request("https://jsonplaceholder.typicode.com/todos/")
-//  .responseData { response in
-//    let decoder = JSONDecoder()
-//    let todo: Result<Todo> = decoder.decodeResponse(from: response)
-//}
