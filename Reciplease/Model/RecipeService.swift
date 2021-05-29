@@ -21,7 +21,7 @@ class RecipeService {
     
     
     // MARK: - Public Methods
-    func getRecipe(containing knownIngredients: [String]) {
+    func getRecipe(containing knownIngredients: [String], completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool) -> Void)) {
         // TODO : See if there is a way to construct the url with Alamofire
         var ingredientString = ""
         for ingredient in knownIngredients {
@@ -30,23 +30,28 @@ class RecipeService {
         print(ingredientString)
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
         AF.request(completeURL).validate().responseDecodable(of: RecipeHits.self) { response in
-            
+            var array: [Recipe] = []
             guard response.error == nil else {
                 print("error : \(response.error!)")
-                return }
+                DispatchQueue.main.async {
+                    completion(nil, false)
+                }
+                return
+            }
             guard let value = response.value else {
                 print("no value")
+                DispatchQueue.main.async {
+                    completion(nil, false)
+                }
                 return
             }
             for hit in value.hits {
                 let recipe = hit.recipe
-                print("Meal: \(recipe.label)")
-//                print("Ingredients")
-                for ingredient in recipe.ingredients {
-//                    print(ingredient.text)
-                }
-//                print("Calories: \(recipe.calories)")
-//                print("Total time: \(recipe.totalTime)")
+                array.append(recipe)
+            }
+            
+            DispatchQueue.main.async {
+                completion(array, true)
             }
         }
     }

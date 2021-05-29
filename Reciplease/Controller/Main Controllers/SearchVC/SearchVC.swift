@@ -61,9 +61,12 @@ class SearchVC: UIViewController {
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
-        tableVC.recipes = Recipe.mockRecipes
-        RecipeService.shared.getRecipe(containing: ingredientsInFridge)
-        navigationController?.pushViewController(tableVC, animated: true)
+        RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
+            guard success,
+                  let recipes = _recipes else { return }
+            tableVC.recipes = recipes
+            self.navigationController?.pushViewController(tableVC, animated: true)
+        }
     }
     
     @objc func addIngredient() {
