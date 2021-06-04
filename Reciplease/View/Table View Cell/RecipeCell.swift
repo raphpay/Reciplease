@@ -74,7 +74,7 @@ class RecipeCell: UITableViewCell {
     
     func set(recipe: Recipe) {
         cellTitle.text          = recipe.label
-//        cellDescription.text    = recipe.cuisineType[0].capitalized
+        cellDescription.text    = recipe.cuisineType[0].capitalized
         infoView.set(recipe: recipe)
     }
     
