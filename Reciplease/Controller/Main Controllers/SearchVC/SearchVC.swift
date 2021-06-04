@@ -61,8 +61,13 @@ class SearchVC: UIViewController {
     @objc func searchRecipes() {
         let tableVC = TableViewController()
         searchButton.isEnabled = false
+        showLoadingView()
         RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
             self.searchButton.isEnabled = true
+            print("in call \(_recipes)")
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+            }
             guard success,
                   let recipes = _recipes else {
                 print("error in callback")

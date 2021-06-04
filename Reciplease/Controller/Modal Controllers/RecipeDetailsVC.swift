@@ -39,6 +39,7 @@ class RecipeDetailsVC: UIViewController {
     let informationTextView = TextView(fontSize: 16)
     let switchButton        = Button(backgroundColor: CustomColor.green, title: "Get directions")
     
+    
     // MARK: - Actions
     @objc func addToFavorites() {
         RecipeService.shared.addToFavorite(recipe: recipe)
@@ -47,6 +48,7 @@ class RecipeDetailsVC: UIViewController {
     @objc func switchButtonTapped() {
         navigationController?.pushViewController(DirectionVC(), animated: true)
     }
+    
 
     // MARK: - Override methods
     override func viewDidLoad() {
@@ -54,6 +56,7 @@ class RecipeDetailsVC: UIViewController {
         setUpViewController()
         setTextView()
     }
+    
     
     // MARK: - Private methods
     private func setUpViewController() {
@@ -84,6 +87,7 @@ class RecipeDetailsVC: UIViewController {
         switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
     }
     
+    
     private func setupContainerView() {
         containerView.addSubview(informationTitle)
         containerView.addSubview(informationTextView)
@@ -92,6 +96,7 @@ class RecipeDetailsVC: UIViewController {
         informationTextView.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding))
         informationTextView.topToBottom(of: informationTitle)
     }
+    
     
     private func setTextView() {
         for ingredient in recipe.ingredients {
