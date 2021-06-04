@@ -64,7 +64,6 @@ class SearchVC: UIViewController {
         showLoadingView()
         RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
             self.searchButton.isEnabled = true
-            print("in call \(_recipes)")
             DispatchQueue.main.async {
                 self.dismissLoadingView()
             }
