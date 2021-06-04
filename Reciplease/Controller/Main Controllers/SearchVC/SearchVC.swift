@@ -60,7 +60,9 @@ class SearchVC: UIViewController {
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
+        searchButton.isEnabled = false
         RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
+            self.searchButton.isEnabled = true
             guard success,
                   let recipes = _recipes else {
                 print("error in callback")
