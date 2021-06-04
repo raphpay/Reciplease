@@ -30,7 +30,7 @@ class FavoritesVC: UIViewController {
             tableVC.recipes = favorites
             addChildVC(vc: tableVC)
         }
-//        print("viewWillAppear \(favorites)")
+        print("viewWillAppear \(favorites)")
     }
     
     // MARK: - Private Methods

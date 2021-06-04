@@ -13,7 +13,6 @@ class SearchVC: UIViewController {
     // MARK: - Properties
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-    let mockRecipes = ["Carry", "Burger", "Frites", "Dessert"]
     var ingredientsInFridge: [String] = []
     
     // MARK: - Views
@@ -63,7 +62,10 @@ class SearchVC: UIViewController {
         let tableVC = TableViewController()
         RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
             guard success,
-                  let recipes = _recipes else { return }
+                  let recipes = _recipes else {
+                print("error in callback")
+                return
+            }
             tableVC.recipes = recipes
             self.navigationController?.pushViewController(tableVC, animated: true)
         }

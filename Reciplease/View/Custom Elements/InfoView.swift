@@ -71,7 +71,7 @@ class InfoView: UIView {
 
     func set(recipe: Recipe) {
         let intCalories = Int(recipe.calories)
-        let intTime = Int(recipe.totalTime)
+        let intTime = Int(recipe.cookTime)
         self.calories = intCalories
         self.cookTime = intTime
         caloriesView.label.text = "\(intCalories)kCal"

@@ -25,42 +25,67 @@ class RecipeService {
     // MARK: - Public Methods
     func getRecipe(containing knownIngredients: [String], completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool) -> Void)) {
         // TODO : See if there is a way to construct the url with Alamofire
+        // TODO: Add error parameter in completion
         var ingredientString = ""
         for ingredient in knownIngredients {
             ingredientString += "\(ingredient),"
         }
+        guard !ingredientString.isEmpty else {
+            completion(nil, false)
+            return
+        }
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
-        AF.request(completeURL).validate().responseDecodable(of: RecipeHits.self) { response in
-            var array: [Recipe] = []
-            guard response.error == nil else {
-                print("error : \(response.error!)")
-                DispatchQueue.main.async {
-                    completion(nil, false)
-                }
+        
+        AF.request(completeURL).responseData { response in
+            guard let data = response.data else {
+                completion(nil, false)
                 return
             }
-            guard let value = response.value else {
-                print("no value")
-                DispatchQueue.main.async {
-                    completion(nil, false)
-                }
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
+                completion(nil, false)
                 return
-            }
-            for hit in value.hits {
-                let recipe = hit.recipe
-                array.append(recipe)
             }
             
-            DispatchQueue.main.async {
-                completion(array, true)
+            if let hits = json["hits"] as? [AnyObject] {
+                var totalRecipes: [Recipe] = []
+                
+                for hit in hits {
+                    if let recipe = hit["recipe"] as? [String: Any],
+                       let label = recipe["label"] as? String,
+                       let calories = recipe["calories"] as? Double,
+                       let totalTime = recipe["totalTime"] as? Double,
+                       let cuisineType = recipe["cuisineType"] as? [String],
+                       let ingredients = recipe["ingredients"] as? [AnyObject] {
+                        var recipeIngredients : [String] = []
+                        for object in ingredients {
+                            if let text = object["text"] as? String {
+                                recipeIngredients.append(text)
+                            } else {
+                                completion(nil, false)
+                            }
+                        }
+                        let decodedRecipe = Recipe(label: label, calories: calories, cookTime: totalTime, cuisineType: cuisineType, ingredients: recipeIngredients)
+                        totalRecipes.append(decodedRecipe)
+                    } else {
+                        completion(nil, false)
+                    }
+                }
+                
+                completion(totalRecipes, true)
+            } else {
+                completion(nil, false)
             }
         }
     }
+    
+    
     func addToFavorite(recipe: Recipe) {
         // TODO: Save to Core Data
         favorites.append(recipe)
-        for recipe in favorites {
-            print(recipe.label)
+        do {
+            try AppDelegate.persistantContainer.viewContext.save()
+        } catch let error {
+            print("Error saving data: \(error)")
         }
     }
 }

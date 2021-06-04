@@ -95,7 +95,7 @@ class RecipeDetailsVC: UIViewController {
     
     private func setTextView() {
         for ingredient in recipe.ingredients {
-            informationTextView.text += "\n\(ingredient.text)"
+//            informationTextView.text += "\n\(ingredient.text)"
         }
     }
 }
