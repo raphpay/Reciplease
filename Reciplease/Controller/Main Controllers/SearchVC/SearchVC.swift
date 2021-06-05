@@ -72,6 +72,7 @@ class SearchVC: UIViewController {
                 print("error in callback")
                 return
             }
+            print(recipes)
             tableVC.recipes = recipes
             self.navigationController?.pushViewController(tableVC, animated: true)
         }

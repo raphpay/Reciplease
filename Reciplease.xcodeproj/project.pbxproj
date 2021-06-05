@@ -30,6 +30,7 @@
 		86A7974F266A7B9700B1E9BB /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7974E266A7B9700B1E9BB /* UIViewController+Ext.swift */; };
 		86A79751266A7BA700B1E9BB /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A79750266A7BA700B1E9BB /* AlertVC.swift */; };
 		86A79753266A7FC300B1E9BB /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A79752266A7FC300B1E9BB /* Double+Ext.swift */; };
+		86CD94FA266B644A00775BFC /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86CD94F8266B644A00775BFC /* Reciplease.xcdatamodeld */; };
 		86EB44E82661651F006C0BE2 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EB44E72661651F006C0BE2 /* RecipeService.swift */; };
 		86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7B265A7FC2004A8A03 /* Button.swift */; };
 		86EDDC7E265A82B3004A8A03 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* Label.swift */; };
@@ -63,6 +64,7 @@
 		86A7974E266A7B9700B1E9BB /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		86A79750266A7BA700B1E9BB /* AlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		86A79752266A7FC300B1E9BB /* Double+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		86CD94F9266B644A00775BFC /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		86EB44E72661651F006C0BE2 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		86EDDC7B265A7FC2004A8A03 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		86EDDC7D265A82B3004A8A03 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				86A48E71265FF00B00D584FA /* Recipe.swift */,
+				86CD94F8266B644A00775BFC /* Reciplease.xcdatamodeld */,
 				86EB44E72661651F006C0BE2 /* RecipeService.swift */,
 			);
 			path = Model;
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86CD94FA266B644A00775BFC /* Reciplease.xcdatamodeld in Sources */,
 				86A48E70265FE91900D584FA /* SearchVC+Ext.swift in Sources */,
 				8629C83626598172006669A1 /* EmptyStateVC.swift in Sources */,
 				8651C5A0265A9F4C008EE7FE /* TabBarController.swift in Sources */,
@@ -591,6 +595,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		86CD94F8266B644A00775BFC /* Reciplease.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				86CD94F9266B644A00775BFC /* Reciplease.xcdatamodel */,
+			);
+			currentVersion = 86CD94F9266B644A00775BFC /* Reciplease.xcdatamodel */;
+			path = Reciplease.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8629C80C26592783006669A1 /* Project object */;
 }

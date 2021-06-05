@@ -8,44 +8,49 @@
 import Foundation
 import CoreData
 
-//struct RecipeHits: Decodable {
-//    let hits: [RecipeInformations]
-//}
-//
-//struct RecipeInformations: Decodable {
-//    let recipe: Recipe
-//}
 
-// TODO: Change to struct
-class Recipe {
-//    static var all: [Recipe] {
-//        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
-//        guard let recipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
-//        return recipes
-//    }
+class Recipe: NSManagedObject {
+    static var all: [Recipe] {
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        guard let recipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
+        return recipes
+    }
+}
+
+extension Recipe {
     
-    let label: String
-    let calories: Double
-    let cookTime: Double
-    let cuisineType: [String]
-    let ingredients: [String]
-    
-    init(label: String, calories: Double, cookTime: Double, cuisineType: [String], ingredients: [String]) {
-        self.label = label
-        self.calories = calories
-        self.cookTime = cookTime
-        self.cuisineType = cuisineType
-        self.ingredients = ingredients
+    static var fakeRecipe: Recipe {
+        let recipe = Recipe()
+        recipe.label        = "Pizza"
+        recipe.calories     = 3000
+        recipe.cookTime     = 20
+        recipe.cuisineType  = "Italian"
+        return recipe
     }
     
-    static let fakeRecipe = Recipe(label: "Pizza", calories: 3000, cookTime: 20, cuisineType: ["Italian"], ingredients: ["Mozzarella", "Cheese", "Tomato"])
-
-    static let mockRecipes = [
-        Recipe(label: "Pizza", calories: 3000, cookTime: 20, cuisineType: ["Italian"], ingredients: ["Mozzarella", "Cheese", "Tomato"]),
-        Recipe(label: "Pizza", calories: 3000, cookTime: 20, cuisineType: ["Italian"], ingredients: ["Mozzarella", "Cheese", "Tomato"]),
-        Recipe(label: "Pizza", calories: 3000, cookTime: 20, cuisineType: ["Italian"], ingredients: ["Mozzarella", "Cheese", "Tomato"]),
-        Recipe(label: "Pizza", calories: 3000, cookTime: 20, cuisineType: ["Italian"], ingredients: ["Mozzarella", "Cheese", "Tomato"])
-    ]
+    static var mockRecipes: [Recipe] {
+        let recipes = [fakeRecipe, fakeRecipe, fakeRecipe]
+        return recipes
+    }
+    
+    
+    static func transformRecipe(dict: [String: Any]) -> Recipe? {
+        let recipe = Recipe(context: AppDelegate.viewContext)
+        
+        guard let label = dict["label"] as? String,
+              let calories = dict["calories"] as? Double,
+              let cookTime = dict["totalTime"] as? Double,
+              let cuisineType = dict["cuisineType"] as? [String]
+        else { return nil }
+        
+        
+        recipe.label = label
+        recipe.calories = calories
+        recipe.cookTime = cookTime
+        recipe.cuisineType = cuisineType[0]
+        #warning("Add ingredients relation")
+        return recipe
+    }
 }
 
 
