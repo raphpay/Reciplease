@@ -50,23 +50,6 @@ class RecipeService {
             var totalRecipes: [Recipe] = []
             
             for hit in hits {
-//                    if let recipe = hit["recipe"] as? [String: Any],
-//                       let label = recipe["label"] as? String,
-//                       let calories = recipe["calories"] as? Double,
-//                       let totalTime = recipe["totalTime"] as? Double,
-//                       let cuisineType = recipe["cuisineType"] as? [String],
-//                       let ingredients = recipe["ingredients"] as? [AnyObject] {
-//                        var recipeIngredients : [String] = []
-//                        for object in ingredients {
-//                            if let text = object["text"] as? String {
-//                                recipeIngredients.append(text)
-//                            } else {
-//                                completion(nil, false)
-//                            }
-//                        }
-//                    } else {
-//                        completion(nil, false)
-//                    }
                 guard let dict = hit["recipe"] as? [String: Any],
                       let recipe = Recipe.transformRecipe(dict: dict)
                       else { completion(nil, false); return }

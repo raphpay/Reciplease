@@ -17,6 +17,14 @@ class Recipe: NSManagedObject {
     }
 }
 
+class Ingredient: NSManagedObject {
+    static var all: [Ingredient] {
+        let request: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
+        guard let ingredients = try? AppDelegate.viewContext.fetch(request) else { return [] }
+        return ingredients
+    }
+}
+
 extension Recipe {
     
     static var fakeRecipe: Recipe {
@@ -43,14 +51,34 @@ extension Recipe {
               let cuisineType = dict["cuisineType"] as? [String]
         else { return nil }
         
+        guard let ingredients = dict["ingredients"] as? [AnyObject] else { return nil }
+        var recipeIngredients: [Ingredient] = []
+        for object in ingredients {
+            guard let ingredient = Ingredient.transformIngredient(dict: object, for: recipe) else { return nil }
+            recipeIngredients.append(ingredient)
+        }
+        print(ingredients)
         
-        recipe.label = label
-        recipe.calories = calories
-        recipe.cookTime = cookTime
-        recipe.cuisineType = cuisineType[0]
+        recipe.label        = label
+        recipe.calories     = calories
+        recipe.cookTime     = cookTime
+        recipe.cuisineType  = cuisineType[0]
+//        recipe.ingredients  = recipeIngredients
+        
         #warning("Add ingredients relation")
         return recipe
     }
 }
 
-
+extension Ingredient {
+    static func transformIngredient(dict: AnyObject, for recipe: Recipe) -> Ingredient? {
+        let ingredient = Ingredient(context: AppDelegate.viewContext)
+        
+        guard let text = dict["text"] as? String else { return nil }
+        
+        ingredient.text     = text
+        ingredient.recipe   = recipe
+        
+        return ingredient
+    }
+}
