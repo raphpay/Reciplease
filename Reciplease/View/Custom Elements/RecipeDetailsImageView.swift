@@ -38,10 +38,15 @@ class RecipeDetailsImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(recipe: Recipe) {
+    init(recipe: Recipe?) {
         super.init(frame: .zero)
-        recipeTitle.text = recipe.label
-        infoView.set(recipe: recipe)
+        if let recipe = recipe {
+            recipeTitle.text = recipe.label
+            infoView.set(recipe: recipe)
+        } else {
+            recipeTitle.text = Recipe.fakeRecipe.label
+            infoView.set(recipe: Recipe.fakeRecipe)
+        }
         configure()
     }
     

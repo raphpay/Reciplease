@@ -46,6 +46,7 @@ class TableViewController: UITableViewController {
         return recipes.count
     }
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecipeCell.reuseID, for: indexPath) as? RecipeCell else {
             fatalError("Cannot dequeue cell for index path: \(indexPath)")
@@ -56,15 +57,19 @@ class TableViewController: UITableViewController {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 230
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destinationVC = RecipeDetailsVC()
-        destinationVC.recipe = recipes[indexPath.row]
-        let detailsVC = UINavigationController(rootViewController: destinationVC)
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedRecipe = recipes[indexPath.row]
+        let destinationVC = RecipeDetailsVC()
+        destinationVC.recipe = selectedRecipe
+        let detailsVC = UINavigationController(rootViewController: destinationVC)
         self.present(detailsVC, animated: true)
     }
 }

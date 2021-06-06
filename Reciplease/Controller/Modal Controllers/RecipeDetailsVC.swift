@@ -14,7 +14,7 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
-    var recipe                  = Recipe.fakeRecipe
+    var recipe: Recipe?
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
@@ -42,7 +42,7 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func addToFavorites() {
-        RecipeService.shared.addToFavorite(recipe: recipe)
+        RecipeService.shared.addToFavorites(recipe: recipe)
     }
     
     @objc func switchButtonTapped() {
@@ -99,8 +99,12 @@ class RecipeDetailsVC: UIViewController {
     
     
     private func setTextView() {
-//        for ingredient in recipe.ingredients {
-//            informationTextView.text += "\n\(ingredient)"
-//        }
+        guard let recipe = recipe,
+              let ingredients = recipe.ingredients else { return }
+        for object in ingredients {
+            guard let ingredient = object as? Ingredient,
+                  let text = ingredient.text else { return }
+            informationTextView.text += "\n\(text)"
+        }
     }
 }

@@ -168,8 +168,8 @@
 		8629C831265927B0006669A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				86A48E71265FF00B00D584FA /* Recipe.swift */,
 				86CD94F8266B644A00775BFC /* Reciplease.xcdatamodeld */,
+				86A48E71265FF00B00D584FA /* Recipe.swift */,
 				86EB44E72661651F006C0BE2 /* RecipeService.swift */,
 			);
 			path = Model;

@@ -52,20 +52,17 @@ extension Recipe {
         else { return nil }
         
         guard let ingredients = dict["ingredients"] as? [AnyObject] else { return nil }
-        var recipeIngredients: [Ingredient] = []
-        for object in ingredients {
-            guard let ingredient = Ingredient.transformIngredient(dict: object, for: recipe) else { return nil }
-            recipeIngredients.append(ingredient)
-        }
-        print(ingredients)
         
         recipe.label        = label
         recipe.calories     = calories
         recipe.cookTime     = cookTime
         recipe.cuisineType  = cuisineType[0]
-//        recipe.ingredients  = recipeIngredients
         
-        #warning("Add ingredients relation")
+        for object in ingredients {
+            guard let _ = Ingredient.transformIngredient(dict: object, for: recipe) else { return nil }
+            // Ingredient - Recipe relation
+        }
+        
         return recipe
     }
 }
