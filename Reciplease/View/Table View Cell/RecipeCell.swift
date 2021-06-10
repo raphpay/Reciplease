@@ -75,6 +75,16 @@ class RecipeCell: UITableViewCell {
     func set(recipe: Recipe) {
         guard let label = recipe.label,
               let cuisineType = recipe.cuisineType else { return }
+        guard let imageURL = recipe.imageURL else {
+            print("no image")
+            return
+        }
+        
+        RecipeService.shared.fetchImageData(from: imageURL) { _data, success in
+            guard success,
+                  let data = _data else { return }
+            self.recipeImage.image = UIImage(data: data)
+        }
         cellTitle.text          = label
         cellDescription.text    = cuisineType.capitalized
         infoView.set(recipe: recipe)

@@ -8,12 +8,13 @@
         <attribute name="calories" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="cookTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="cuisineType" optional="YES" attributeType="String"/>
+        <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient"/>
     </entity>
     <elements>
         <element name="Ingredient" positionX="293.8986206054688" positionY="-3.462509155273438" width="128" height="73"/>
-        <element name="Recipe" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="Recipe" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>

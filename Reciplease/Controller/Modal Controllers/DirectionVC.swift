@@ -46,7 +46,7 @@ extension DirectionVC: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         // TODO: Setup an empty controller
         guard let recipe = recipe,
-              let url = recipe.url else { return }
+              let url = recipe.url  else { return }
         UIApplication.shared.open(url)
     }
     

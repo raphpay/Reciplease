@@ -67,6 +67,19 @@ class RecipeService {
             completion(totalRecipes, true)
         }
     }
+
+    
+    func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?, _ success: Bool) -> Void) {
+        AF.request(url).validate().responseData { response in
+            guard let data = response.data else {
+                completion(nil, false)
+                return
+            }
+            
+            completion(data, true)
+        }
+    }
+    
     
     
     func addToFavorites(recipe: Recipe?) {

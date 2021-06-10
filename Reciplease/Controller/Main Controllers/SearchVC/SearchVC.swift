@@ -60,8 +60,10 @@ class SearchVC: UIViewController {
     // MARK: - Actions
     @objc func searchRecipes() {
         let tableVC = TableViewController()
+        
         searchButton.isEnabled = false
         showLoadingView()
+        
         RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
             self.searchButton.isEnabled = true
             DispatchQueue.main.async {
@@ -77,10 +79,12 @@ class SearchVC: UIViewController {
         }
     }
     
+    
     @objc func addIngredient() {
         guard let text = ingredientsTextField.text else { return }
         addIngredientToTextView(text: text)
     }
+    
     
     @objc func clearIngredients() {
         ingredientsTextView.text = ""
