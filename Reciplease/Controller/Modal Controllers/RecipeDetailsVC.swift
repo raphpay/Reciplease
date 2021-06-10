@@ -42,7 +42,13 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func addToFavorites() {
-        RecipeService.shared.addToFavorites(recipe: recipe)
+        RecipeService.shared.addToFavorites(recipe: recipe) { success, _error in
+            guard success,
+                  _error == nil else {
+                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
+                return
+            }
+        }
     }
     
     @objc func directionButtonTapped() {

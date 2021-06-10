@@ -25,10 +25,8 @@ class DirectionVC: UIViewController {
         guard let recipe = recipe,
               let url = recipe.url else {
             // TODO: Setup an empty controller
-            print("no url or recipe")
             return
         }
-        print(url)
 //        let appleURL = URL(string: "https://www.apple.com/fr")!
         let request = URLRequest(url: url)
         webView.load(request)
@@ -48,9 +46,5 @@ extension DirectionVC: WKNavigationDelegate {
         guard let recipe = recipe,
               let url = recipe.url  else { return }
         UIApplication.shared.open(url)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("ok")
     }
 }

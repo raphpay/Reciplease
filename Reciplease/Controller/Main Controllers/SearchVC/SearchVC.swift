@@ -64,16 +64,17 @@ class SearchVC: UIViewController {
         searchButton.isEnabled = false
         showLoadingView()
         
-        RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success in
+        RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success, _error in
             self.searchButton.isEnabled = true
+            
             DispatchQueue.main.async {
                 self.dismissLoadingView()
             }
             
-            print(self.ingredientsInFridge)
-            guard success,
+            guard _error == nil,
+                success == true,
                   let recipes = _recipes else {
-                print("error in callback")
+                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
                 return
             }
             tableVC.recipes = recipes

@@ -23,9 +23,9 @@ class RecipeService {
     
     
     // MARK: - Public Methods
-    func getRecipe(containing knownIngredients: [String], completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool) -> Void)) {
+    func getRecipe(containing knownIngredients: [String],
+                   completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool, _ error: RecipleaseError?) -> Void)) {
         // TODO : See if there is a way to construct the url with Alamofire
-        #warning("Add error parameter in completion")
         
         var ingredientString = ""
         for ingredient in knownIngredients {
@@ -33,67 +33,67 @@ class RecipeService {
         }
         
         guard !ingredientString.isEmpty else {
-            completion(nil, false)
+            completion(nil, false, .noIngredients)
             return
         }
        
-        print(ingredientString)
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
         AF.request(completeURL).responseData { response in
             guard let data = response.data else {
-                completion(nil, false)
+                completion(nil, false, .invalidData)
                 return
             }
             guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
-                completion(nil, false)
+                completion(nil, false, .invalidData)
                 return
             }
             
-            guard let hits = json["hits"] as? [AnyObject] else {
-                completion(nil, false)
+            guard let hits = json["hits"] as? [AnyObject],
+                  !hits.isEmpty else {
+                completion(nil, false, .noRecipes)
                 return
             }
             
             var totalRecipes: [Recipe] = []
             
             for hit in hits {
+                
                 guard let dict = hit["recipe"] as? [String: Any],
                       let recipe = Recipe.transformRecipe(dict: dict)
                       else {
-                    print("no dict")
-                    completion(nil, false)
+                    completion(nil, false, .invalidResponse)
                     return
                 }
-                
                 totalRecipes.append(recipe)
             }
             
-            completion(totalRecipes, true)
+            completion(totalRecipes, true, nil)
         }
     }
 
     
-    func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?, _ success: Bool) -> Void) {
+    func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?, _ success: Bool,_ error: RecipleaseError?) -> Void) {
         AF.request(url).validate().responseData { response in
             guard let data = response.data else {
-                completion(nil, false)
+                completion(nil, false, .invalidData)
                 return
             }
             
-            completion(data, true)
+            completion(data, true, nil)
         }
     }
     
     
     
-    func addToFavorites(recipe: Recipe?) {
+    func addToFavorites(recipe: Recipe?, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
         // TODO: Save to Core Data
         guard let recipe = recipe else { return }
         favorites.append(recipe)
         do {
             try AppDelegate.persistantContainer.viewContext.save()
-        } catch let error {
-            print("Error saving data: \(error)")
+            completion(true, nil)
+        } catch {
+            completion(false, .unableToFavorite)
         }
     }
 }

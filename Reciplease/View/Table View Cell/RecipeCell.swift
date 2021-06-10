@@ -77,13 +77,11 @@ class RecipeCell: UITableViewCell {
     func set(recipe: Recipe) {
         guard let label = recipe.label,
               let cuisineType = recipe.cuisineType else { return }
-        guard let imageURL = recipe.imageURL else {
-            print("no image")
-            return
-        }
+        guard let imageURL = recipe.imageURL else { return }
         
-        RecipeService.shared.fetchImageData(from: imageURL) { _data, success in
+        RecipeService.shared.fetchImageData(from: imageURL) { _data, success, _error in
             guard success,
+                  _error == nil,
                   let data = _data else { return }
             self.recipeImage.image = UIImage(data: data)
         }

@@ -36,6 +36,7 @@
 		86EDDC7E265A82B3004A8A03 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* Label.swift */; };
 		86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */; };
 		86EDDC86265A8A89004A8A03 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC85265A8A89004A8A03 /* TextView.swift */; };
+		86FEE1AA267275F600B67438 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FEE1A9267275F600B67438 /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		86EDDC7D265A82B3004A8A03 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTextField.swift; sourceTree = "<group>"; };
 		86EDDC85265A8A89004A8A03 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		86FEE1A9267275F600B67438 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		BD6C7576B4722DAC99554100 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 		F1A20F978440D5F602274163 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -180,6 +182,7 @@
 			children = (
 				8629C83226596D5A006669A1 /* Enumerations.swift */,
 				86A79754266A7FC800B1E9BB /* Extensions */,
+				86FEE1A9267275F600B67438 /* Error.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				8651C5A2265AA1BA008EE7FE /* TableViewController.swift in Sources */,
 				86A79753266A7FC300B1E9BB /* Double+Ext.swift in Sources */,
 				8651C598265A9D04008EE7FE /* RecipeCell.swift in Sources */,
+				86FEE1AA267275F600B67438 /* Error.swift in Sources */,
 				86A7974F266A7B9700B1E9BB /* UIViewController+Ext.swift in Sources */,
 				86596EAD265F97C3005A272F /* RecipeDetailsImageView.swift in Sources */,
 				86A48E67265FCF2A00D584FA /* DirectionVC.swift in Sources */,
