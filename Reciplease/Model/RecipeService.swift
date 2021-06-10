@@ -31,11 +31,13 @@ class RecipeService {
         for ingredient in knownIngredients {
             ingredientString += "\(ingredient),"
         }
+        
         guard !ingredientString.isEmpty else {
             completion(nil, false)
             return
         }
-        
+       
+        print(ingredientString)
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
         AF.request(completeURL).responseData { response in
             guard let data = response.data else {
@@ -58,9 +60,11 @@ class RecipeService {
                 guard let dict = hit["recipe"] as? [String: Any],
                       let recipe = Recipe.transformRecipe(dict: dict)
                       else {
+                    print("no dict")
                     completion(nil, false)
                     return
                 }
+                
                 totalRecipes.append(recipe)
             }
             

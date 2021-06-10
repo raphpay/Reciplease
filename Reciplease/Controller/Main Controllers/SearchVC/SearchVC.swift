@@ -69,6 +69,8 @@ class SearchVC: UIViewController {
             DispatchQueue.main.async {
                 self.dismissLoadingView()
             }
+            
+            print(self.ingredientsInFridge)
             guard success,
                   let recipes = _recipes else {
                 print("error in callback")

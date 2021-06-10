@@ -48,7 +48,6 @@ extension Recipe {
         guard let label = dict["label"] as? String,
               let calories = dict["calories"] as? Double,
               let cookTime = dict["totalTime"] as? Double,
-              let cuisineType = dict["cuisineType"] as? [String],
               let urlString = dict["url"] as? String,
               let imageURLString = dict["image"] as? String
         else { return nil }
@@ -56,11 +55,15 @@ extension Recipe {
         guard let ingredients   = dict["ingredients"] as? [AnyObject]   else { return nil }
         guard let url           = URL(string: urlString)                else { return nil }
         guard let imageURL      = URL(string: imageURLString)           else { return nil }
-        
+        if let cuisineType = dict["cuisineType"] as? [String] {
+            recipe.cuisineType = cuisineType[0]
+        } else {
+            recipe.cuisineType = ""
+        }
+
         recipe.label        = label
         recipe.calories     = calories
         recipe.cookTime     = cookTime
-        recipe.cuisineType  = cuisineType[0]
         recipe.url          = url
         recipe.imageURL     = imageURL
         
