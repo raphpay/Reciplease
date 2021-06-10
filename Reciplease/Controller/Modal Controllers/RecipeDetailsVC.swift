@@ -98,7 +98,7 @@ class RecipeDetailsVC: UIViewController {
         containerView.addSubview(informationTitle)
         containerView.addSubview(informationTextView)
         
-        informationTitle.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding))
+        informationTitle.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding) + .top(padding))
         informationTextView.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding))
         informationTextView.topToBottom(of: informationTitle)
     }

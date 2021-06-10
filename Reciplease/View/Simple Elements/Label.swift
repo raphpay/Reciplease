@@ -22,13 +22,15 @@ class Label: UILabel {
          textColor: UIColor = .white,
          alignment: NSTextAlignment = .left,
          fontSize: CGFloat = 25,
-         bold: Bool = false) {
+         bold: Bool = false,
+         numberOfLines: Int = 0) {
         super.init(frame: .zero)
         self.text           = text
         self.textColor      = textColor
         self.textAlignment  = alignment
         self.font           = UIFont.systemFont(ofSize: fontSize,
                                                 weight: bold ? .bold : .medium)
+        self.numberOfLines = numberOfLines
         configure()
     }
     

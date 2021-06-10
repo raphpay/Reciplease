@@ -58,10 +58,8 @@ class RecipeDetailsImageView: UIView {
         
         recipeImage.edgesToSuperview()
         
-        shadowView.edgesToSuperview(excluding: .top)
-        shadowView.height(50)
-        
-        recipeTitle.edgesToSuperview(excluding: .top, insets: .bottom(10))
+        recipeTitle.edgesToSuperview(excluding: .top)
+        shadowView.edges(to: recipeTitle)
         
         infoView.topToSuperview(offset: 10)
         infoView.rightToSuperview(offset: -10)

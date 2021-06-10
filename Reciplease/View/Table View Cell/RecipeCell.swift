@@ -65,6 +65,8 @@ class RecipeCell: UITableViewCell {
         recipeImage.height(containerHeight - 40)
         
         cellTitle.topToBottom(of: recipeImage, offset: padding)
+        cellTitle.leftToSuperview()
+        cellTitle.rightToSuperview()
         cellDescription.topToBottom(of: cellTitle)
         
         infoView.bottomToSuperview(offset: -padding)
