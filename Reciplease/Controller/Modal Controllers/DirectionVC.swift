@@ -6,50 +6,51 @@
 //
 
 import UIKit
+import WebKit
 import TinyConstraints
 
 class DirectionVC: UIViewController {
     
     // MARK: - Properties
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-    
-    // MARK: - Views
-    lazy var scrollView: UIScrollView = {
-        let v = UIScrollView(frame: .zero)
-        v.backgroundColor = CustomColor.background
-        v.frame = self.view.bounds
-        v.contentSize = contentViewSize
-        v.translatesAutoresizingMaskIntoConstraints = false
-        return v
-    }()
-
-    lazy var containerView: UIView = {
-        let v = UIView()
-        v.backgroundColor = CustomColor.background
-        v.frame.size = contentViewSize
-        return v
-    }()
-    
-    let textView = TextView()
-    
-    let topView = UIView()
-    let secondView = UIView()
+    var webView: WKWebView!
+    var recipe: Recipe?
 
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Directions"
-        setupScrollView()
+        
+        guard let recipe = recipe,
+              let url = recipe.url else {
+            // TODO: Setup an empty controller
+            print("no url or recipe")
+            return
+        }
+        print(url)
+//        let appleURL = URL(string: "https://www.apple.com/fr")!
+        let request = URLRequest(url: url)
+        webView.load(request)
     }
     
+    override func loadView() {
+        let webConfig = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfig)
+        webView.navigationDelegate = self
+        view = webView
+    }
+}
+
+extension DirectionVC: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        // TODO: Setup an empty controller
+        guard let recipe = recipe,
+              let url = recipe.url else { return }
+        UIApplication.shared.open(url)
+    }
     
-    // MARK: - Private methods
-    private func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(containerView)
-        containerView.addSubview(textView)
-        scrollView.edgesToSuperview()
-        textView.edgesToSuperview(insets: .left(16) + .right(16))
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("ok")
     }
 }

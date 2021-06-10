@@ -48,7 +48,8 @@ extension Recipe {
         guard let label = dict["label"] as? String,
               let calories = dict["calories"] as? Double,
               let cookTime = dict["totalTime"] as? Double,
-              let cuisineType = dict["cuisineType"] as? [String]
+              let cuisineType = dict["cuisineType"] as? [String],
+              let urlString = dict["url"] as? String
         else { return nil }
         
         guard let ingredients = dict["ingredients"] as? [AnyObject] else { return nil }
@@ -57,6 +58,9 @@ extension Recipe {
         recipe.calories     = calories
         recipe.cookTime     = cookTime
         recipe.cuisineType  = cuisineType[0]
+        
+        let url = URL(string: urlString)
+        recipe.url = url
         
         for object in ingredients {
             guard let _ = Ingredient.transformIngredient(dict: object, for: recipe) else { return nil }

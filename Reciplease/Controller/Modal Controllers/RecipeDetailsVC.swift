@@ -37,7 +37,7 @@ class RecipeDetailsVC: UIViewController {
     
     let informationTitle    = Label(text: "Ingredients", fontSize: 22, bold: true)
     let informationTextView = TextView(fontSize: 16)
-    let switchButton        = Button(backgroundColor: CustomColor.green, title: "Get directions")
+    let directionButton        = Button(backgroundColor: CustomColor.green, title: "Get directions")
     
     
     // MARK: - Actions
@@ -45,8 +45,14 @@ class RecipeDetailsVC: UIViewController {
         RecipeService.shared.addToFavorites(recipe: recipe)
     }
     
-    @objc func switchButtonTapped() {
-        navigationController?.pushViewController(DirectionVC(), animated: true)
+    @objc func directionButtonTapped() {
+        guard let recipe = recipe,
+              let url = recipe.url else {
+            presentAlert(title: "Oups", message: "Couldn't load the recipe's directions.\nPlease try again later")
+            return
+        }
+        // TODO: Remove the direction VC if this is validated
+        UIApplication.shared.open(url)
     }
     
 
@@ -68,23 +74,23 @@ class RecipeDetailsVC: UIViewController {
         
         view.addSubview(recipeImage)
         view.addSubview(scrollView)
-        view.addSubview(switchButton)
+        view.addSubview(directionButton)
         
         scrollView.addSubview(containerView)
         recipeImage.edgesToSuperview(excluding: .bottom, usingSafeArea: true)
         recipeImage.height(250)
         
-        scrollView.bottomToTop(of: switchButton)
+        scrollView.bottomToTop(of: directionButton)
         scrollView.leftToSuperview()
         scrollView.rightToSuperview()
         scrollView.topToBottom(of: recipeImage)
         setupContainerView()
         
-        switchButton.edgesToSuperview(excluding: .top,
+        directionButton.edgesToSuperview(excluding: .top,
                                       insets: .left(padding) + .right(padding) + .bottom(padding),
                                       usingSafeArea: true)
-        switchButton.height(60)
-        switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
+        directionButton.height(60)
+        directionButton.addTarget(self, action: #selector(directionButtonTapped), for: .touchUpInside)
     }
     
     
