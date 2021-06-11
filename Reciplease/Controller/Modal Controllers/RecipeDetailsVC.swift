@@ -17,7 +17,6 @@ class RecipeDetailsVC: UIViewController {
     var recipe: Recipe?
     
     // MARK: - Views
-    #warning("Add Favorites button not in nav bar")
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
     
     lazy var scrollView: UIScrollView = {
@@ -36,9 +35,20 @@ class RecipeDetailsVC: UIViewController {
         return v
     }()
     
+    #warning("Add action")
+    #warning("Change color")
+    lazy var favoriteButton: UIButton = {
+        let b = UIButton(type: .system)
+        b.setImage(Icon.star, for: .normal)
+        b.tintColor = .black
+        b.translatesAutoresizingMaskIntoConstraints = false
+        return b
+    }()
+    
     let informationTitle    = Label(text: "Ingredients", fontSize: 22, bold: true)
-    let informationTextView = TextView(fontSize: 16)
+    let informationTextView = TextView(fontSize: 18)
     let directionButton     = Button(backgroundColor: CustomColor.green, title: "Get directions")
+    
     
     
     // MARK: - Actions
@@ -70,21 +80,14 @@ class RecipeDetailsVC: UIViewController {
         title = "Reciplease"
         view.backgroundColor = CustomColor.background
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Icon.star, style: .done, target: self, action: #selector(addToFavorites))
-        navigationItem.rightBarButtonItem?.tintColor = CustomColor.background
-        
-        view.addSubview(recipeImage)
         view.addSubview(scrollView)
         view.addSubview(directionButton)
         
         scrollView.addSubview(containerView)
-        recipeImage.edgesToSuperview(excluding: .bottom, usingSafeArea: true)
-        recipeImage.height(250)
         
+        scrollView.edgesToSuperview(excluding: .bottom)
         scrollView.bottomToTop(of: directionButton)
-        scrollView.leftToSuperview()
-        scrollView.rightToSuperview()
-        scrollView.topToBottom(of: recipeImage)
+        
         setupContainerView()
         
         directionButton.edgesToSuperview(excluding: .top,
@@ -96,12 +99,29 @@ class RecipeDetailsVC: UIViewController {
     
     
     private func setupContainerView() {
+        containerView.addSubview(favoriteButton)
+        containerView.addSubview(recipeImage)
         containerView.addSubview(informationTitle)
         containerView.addSubview(informationTextView)
         
-        informationTitle.edgesToSuperview(excluding: .bottom, insets: .left(padding) + .right(padding) + .top(padding))
-        informationTextView.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding))
+        favoriteButton.topToSuperview()
+        favoriteButton.rightToSuperview(offset: -20)
+        favoriteButton.height(44)
+        favoriteButton.width(44)
+        
+        recipeImage.topToBottom(of: favoriteButton, offset: 10)
+        recipeImage.leftToSuperview()
+        recipeImage.rightToSuperview()
+        recipeImage.height(250)
+        
+        informationTitle.topToBottom(of: recipeImage)
+        informationTitle.leftToSuperview(offset: padding)
+        informationTitle.rightToSuperview(offset: -padding)
+        
         informationTextView.topToBottom(of: informationTitle)
+        informationTextView.leftToSuperview(offset: padding)
+        informationTextView.rightToSuperview(offset: -padding)
+        informationTextView.bottomToSuperview()
     }
     
     
