@@ -17,6 +17,7 @@ class RecipeDetailsVC: UIViewController {
     var recipe: Recipe?
     
     // MARK: - Views
+    #warning("Add Favorites button not in nav bar")
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
     
     lazy var scrollView: UIScrollView = {
@@ -37,18 +38,12 @@ class RecipeDetailsVC: UIViewController {
     
     let informationTitle    = Label(text: "Ingredients", fontSize: 22, bold: true)
     let informationTextView = TextView(fontSize: 16)
-    let directionButton        = Button(backgroundColor: CustomColor.green, title: "Get directions")
+    let directionButton     = Button(backgroundColor: CustomColor.green, title: "Get directions")
     
     
     // MARK: - Actions
     @objc func addToFavorites() {
-        RecipeService.shared.addToFavorites(recipe: recipe) { success, _error in
-            guard success,
-                  _error == nil else {
-                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
-                return
-            }
-        }
+        // TODO: Add to favorites
     }
     
     @objc func directionButtonTapped() {
@@ -57,7 +52,7 @@ class RecipeDetailsVC: UIViewController {
             presentAlert(title: "Oups", message: "Couldn't load the recipe's directions.\nPlease try again later")
             return
         }
-        // TODO: Remove the direction VC if this is validated
+        // TODO: Open SFSafariView
         UIApplication.shared.open(url)
     }
     
@@ -114,9 +109,7 @@ class RecipeDetailsVC: UIViewController {
         guard let recipe = recipe,
               let ingredients = recipe.ingredients else { return }
         for object in ingredients {
-            guard let ingredient = object as? Ingredient,
-                  let text = ingredient.text else { return }
-            informationTextView.text += "\n\(text)"
+            informationTextView.text += "\n\(object)"
         }
     }
 }

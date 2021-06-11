@@ -77,6 +77,7 @@ class SearchVC: UIViewController {
                 self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
                 return
             }
+            
             tableVC.recipes = recipes
             self.navigationController?.pushViewController(tableVC, animated: true)
         }

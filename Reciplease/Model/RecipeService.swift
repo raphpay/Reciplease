@@ -19,8 +19,6 @@ class RecipeService {
     private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
     private let maxRecipes      = 2
     
-    var favorites: [Recipe]     = []
-    
     
     // MARK: - Public Methods
     func getRecipe(containing knownIngredients: [String],
@@ -38,11 +36,14 @@ class RecipeService {
         }
        
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
+        
         AF.request(completeURL).responseData { response in
+            
             guard let data = response.data else {
                 completion(nil, false, .invalidData)
                 return
             }
+            
             guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
                 completion(nil, false, .invalidData)
                 return
@@ -59,11 +60,12 @@ class RecipeService {
             for hit in hits {
                 
                 guard let dict = hit["recipe"] as? [String: Any],
-                      let recipe = Recipe.transformRecipe(dict: dict)
+                      let recipe = RecipeDataModel.transformRecipe(dict: dict)
                       else {
                     completion(nil, false, .invalidResponse)
                     return
                 }
+                
                 totalRecipes.append(recipe)
             }
             
@@ -85,15 +87,15 @@ class RecipeService {
     
     
     
-    func addToFavorites(recipe: Recipe?, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
-        // TODO: Save to Core Data
-        guard let recipe = recipe else { return }
-        favorites.append(recipe)
-        do {
-            try AppDelegate.persistantContainer.viewContext.save()
-            completion(true, nil)
-        } catch {
-            completion(false, .unableToFavorite)
-        }
-    }
+//    func addToFavorites(recipe: RecipeDataModel?, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
+//        // TODO: Save to Core Data
+//        guard let recipe = recipe else { return }
+//        favorites.append(recipe)
+//        do {
+//            try AppDelegate.persistantContainer.viewContext.save()
+//            completion(true, nil)
+//        } catch {
+//            completion(false, .unableToFavorite)
+//        }
+//    }
 }

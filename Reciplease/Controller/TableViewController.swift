@@ -69,7 +69,6 @@ class TableViewController: UITableViewController {
         let selectedRecipe = recipes[indexPath.row]
         let destinationVC = RecipeDetailsVC()
         destinationVC.recipe = selectedRecipe
-        let detailsVC = UINavigationController(rootViewController: destinationVC)
-        self.present(detailsVC, animated: true)
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
