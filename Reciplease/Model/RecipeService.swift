@@ -87,9 +87,11 @@ class RecipeService {
     
     
     func addToFavorites(recipe: Recipe, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
-        // TODO: Save to CoreData
        
         Recipe.transformToDataModel(recipe: recipe)
+        
+        print(AppDelegate.viewContext.insertedObjects)
+        
         do {
             try AppDelegate.persistantContainer.viewContext.save()
             completion(true, nil)

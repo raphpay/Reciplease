@@ -63,23 +63,27 @@ class RecipeDataModel: NSManagedObject {
 
 extension RecipeDataModel {
     
-    static func transformToObject(dataModel: RecipeDataModel) -> Recipe? {
+    func transformToObject() -> Recipe? {
         let recipe = Recipe()
         
-        recipe.label        = dataModel.label
-        recipe.calories     = dataModel.calories
-        recipe.cookTime     = dataModel.cookTime
-        recipe.cuisineType  = dataModel.cuisineType
-        recipe.url          = dataModel.url
-        recipe.imageURL     = dataModel.imageURL
         
-        guard let ingredients = dataModel.ingredients else { return nil }
+        recipe.label        = self.label
+        recipe.calories     = self.calories
+        recipe.cookTime     = self.cookTime
+        recipe.cuisineType  = self.cuisineType
+        recipe.url          = self.url
+        recipe.imageURL     = self.imageURL
+        
+        guard let ingredients = self.ingredients else { return nil }
         var ingredientsArray: [String] = []
         
         for ingredient in ingredients {
-            guard let ingredientsString = ingredient as? String else { return nil }
-            ingredientsArray.append(ingredientsString)
+            if let ingredientString = ingredient as? String {
+                #warning("Convert ingredients")
+                ingredientsArray.append(ingredientString)
+            }
         }
+        
         recipe.ingredients = ingredientsArray
         
         return recipe

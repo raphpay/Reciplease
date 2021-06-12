@@ -9,9 +9,11 @@ import UIKit
 
 class FavoritesVC: UIViewController {
     
-    private var shouldShowEmptyState = false
+//    private var shouldShowEmptyState = false
     let tableVC     = TableViewController()
     let emptyVC     = EmptyStateVC()
+    
+    var recipes: [Recipe] = []
 
     // MARK: - Override methods
     override func viewDidLoad() {
@@ -21,18 +23,23 @@ class FavoritesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        let favorites = RecipeDataModel.all
-//        if favorites.isEmpty {
-//            shouldShowEmptyState = true
-//            addChildVC(vc: emptyVC)
-//        } else {
-//            shouldShowEmptyState = false
-//            // TODO: Change favorites to recipes
-////            tableVC.recipes = favorites
-//            addChildVC(vc: tableVC)
-//        }
+        recipes.removeAll()
         let favorites = RecipeDataModel.all
-        print(favorites)
+        
+        if favorites.isEmpty {
+            addChildVC(vc: emptyVC)
+            print("no fav")
+        } else {
+            for object in favorites {
+                guard let recipe = object.transformToObject() else { return }
+                recipes.append(recipe)
+            }
+            tableVC.recipes = recipes
+            tableVC.tableView.reloadData()
+            addChildVC(vc: tableVC)
+        }
+    
+
     }
     
     // MARK: - Private Methods

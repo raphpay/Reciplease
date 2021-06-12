@@ -93,6 +93,11 @@ class SearchVC: UIViewController {
     @objc func clearIngredients() {
         ingredientsTextView.text = ""
         ingredientsInFridge.removeAll()
+        
+        for object in RecipeDataModel.all {
+            AppDelegate.viewContext.delete(object)
+            try? AppDelegate.viewContext.save()
+        }
     }
     
     // MARK: - Override Methods
