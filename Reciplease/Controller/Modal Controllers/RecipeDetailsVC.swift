@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 import TinyConstraints
 
 class RecipeDetailsVC: UIViewController {
@@ -62,8 +63,11 @@ class RecipeDetailsVC: UIViewController {
             presentAlert(title: "Oups", message: "Couldn't load the recipe's directions.\nPlease try again later")
             return
         }
-        // TODO: Open SFSafariView
-        UIApplication.shared.open(url)
+        
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        let safari = SFSafariViewController(url: url, configuration: config)
+        self.present(safari, animated: true)
     }
     
 
