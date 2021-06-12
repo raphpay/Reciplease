@@ -16,5 +16,5 @@ enum RecipleaseError: String, Error {
     case invalidResponse    = "Invalid response from the server. Please try again."
     case invalidData        = "The data received from the server was invalid. Please try again."
     case unableToFavorite   = "There was an error favoriting this recipe. Please try again."
-    case alreadyInFavorites = "You've already favorited this recipe. You must REALLY like them!"
+    case alreadyInFavorites = "You already have that recipe in favorites !\nIt must be REALLY delicious !"
 }

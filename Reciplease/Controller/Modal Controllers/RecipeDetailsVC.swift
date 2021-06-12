@@ -55,11 +55,16 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func addToFavorites() {
-        // TODO: Add to favorites
-        print("Add")
         guard let recipe = recipe else { return }
         RecipeService.shared.addToFavorites(recipe: recipe) { success, _error in
-            // TODO: Handle error
+            
+            guard success,
+                  _error == nil else {
+                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
+                return
+            }
+            
+            // TODO: Show an alert when ok too
         }
     }
     

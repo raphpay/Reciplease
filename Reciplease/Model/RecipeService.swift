@@ -88,9 +88,14 @@ class RecipeService {
     
     func addToFavorites(recipe: Recipe, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
        
-        Recipe.transformToDataModel(recipe: recipe)
+        for object in RecipeDataModel.all {
+            guard object.label != recipe.label else {
+                completion(false, .alreadyInFavorites)
+                return 
+            }
+        }
         
-        print(AppDelegate.viewContext.insertedObjects)
+        Recipe.transformToDataModel(recipe: recipe)
         
         do {
             try AppDelegate.persistantContainer.viewContext.save()
