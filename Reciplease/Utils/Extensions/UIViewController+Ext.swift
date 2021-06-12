@@ -10,6 +10,15 @@ import UIKit
 
 fileprivate var containerView: UIView!
 
+fileprivate var favoriteTextContainer: UIView = {
+    let v = UIView()
+    v.backgroundColor       = .black
+    v.layer.cornerRadius    = 10
+    return v
+}()
+
+fileprivate var favoriteText = Label(text: "Added to favorites !", alignment: .center, fontSize: 20)
+
 extension UIViewController {
     
     func presentCustomAlert(title: String, message: String, buttonTitle: String) {
@@ -60,5 +69,35 @@ extension UIViewController {
     func dismissLoadingView() {
         containerView.removeFromSuperview()
         containerView = nil
+    }
+    
+    func showFavoritesAlert() {
+        containerView = UIView(frame: view.bounds)
+        view.addSubview(containerView)
+        view.addSubview(favoriteTextContainer)
+        
+        favoriteTextContainer.centerInSuperview()
+        favoriteTextContainer.height(50)
+        favoriteTextContainer.width(200)
+        
+        favoriteTextContainer.addSubview(favoriteText)
+        favoriteText.edgesToSuperview()
+        
+        containerView.backgroundColor = CustomColor.background
+        containerView.alpha = 0
+        
+        UIView.animate(withDuration: 0.25) {
+            containerView.alpha = 0.8
+        } completion: { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                UIView.animate(withDuration: 0.25, delay: 1.5) {
+                    containerView.removeFromSuperview()
+                    favoriteTextContainer.removeFromSuperview()
+                    favoriteText.removeFromSuperview()
+                    containerView = nil
+                }
+            }
+        }
+
     }
 }

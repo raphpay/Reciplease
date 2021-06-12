@@ -65,6 +65,7 @@ class RecipeDetailsVC: UIViewController {
             }
             
             // TODO: Show an alert when ok too
+            self.showFavoritesAlert()
         }
     }
     
