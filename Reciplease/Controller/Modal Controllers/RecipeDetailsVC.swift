@@ -43,6 +43,7 @@ class RecipeDetailsVC: UIViewController {
         b.setImage(Icon.star, for: .normal)
         b.tintColor = .black
         b.translatesAutoresizingMaskIntoConstraints = false
+        b.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         return b
     }()
     
@@ -55,6 +56,11 @@ class RecipeDetailsVC: UIViewController {
     // MARK: - Actions
     @objc func addToFavorites() {
         // TODO: Add to favorites
+        print("Add")
+        guard let recipe = recipe else { return }
+        RecipeService.shared.addToFavorites(recipe: recipe) { success, _error in
+            // TODO: Handle error
+        }
     }
     
     @objc func directionButtonTapped() {

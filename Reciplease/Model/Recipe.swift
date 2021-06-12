@@ -9,23 +9,47 @@ import Foundation
 import CoreData
 
 
-struct Recipe: Decodable {
-    let label: String?
-    let cuisineType: String?
-    let calories: Double?
-    let cookTime: Double?
-    let ingredients: [String]?
-    let url: URL?
-    let imageURL: URL?
+class Recipe {
+    var label: String?
+    var cuisineType: String?
+    var calories: Double?
+    var cookTime: Double?
+    var ingredients: [String]?
+    var url: URL?
+    var imageURL: URL?
+    
     
     static var fakeRecipe: Recipe {
-        let recipe = Recipe(label: "Pizza", cuisineType: "Italian", calories: 3000, cookTime: 20, ingredients: ["Tomato", "Mozzarella", "Cheese"], url: nil, imageURL: nil)
+        let recipe = Recipe()
+        
+        recipe.label        = "Pizza"
+        recipe.calories     = 3000
+        recipe.cookTime     = 20
+        recipe.cuisineType  = "Italian"
+        recipe.ingredients  = ["Tomato", "Mozzarella", "Cheese"]
+        
         return recipe
     }
+
     
     static var mockRecipes: [Recipe] {
         let recipes = [fakeRecipe, fakeRecipe, fakeRecipe]
         return recipes
+    }
+    
+    
+    static func transformToDataModel(recipe: Recipe) {
+        let dataModel = RecipeDataModel(context: AppDelegate.viewContext)
+        
+        dataModel.label         = recipe.label
+        dataModel.cuisineType   = recipe.cuisineType
+        dataModel.calories      = recipe.calories ?? 0
+        dataModel.cookTime      = recipe.cookTime ?? 0
+        if let ingredients = recipe.ingredients {
+            dataModel.ingredients   = NSSet(array: ingredients)
+        }
+        dataModel.url           = recipe.url
+        dataModel.imageURL      = recipe.imageURL
     }
 }
 
@@ -39,17 +63,28 @@ class RecipeDataModel: NSManagedObject {
 
 extension RecipeDataModel {
     
-    
-    static func transformRecipeToDataModel(recipe: Recipe) -> RecipeDataModel {
-        let dataModel = RecipeDataModel(context: AppDelegate.viewContext)
-        dataModel.label = recipe.label
-        return dataModel
-    }
-    
-    static func transformRecipeFromDataModel(dataModel: RecipeDataModel) -> Recipe {
-        let recipe = Recipe(label: dataModel.label, cuisineType: dataModel.cuisineType, calories: dataModel.calories, cookTime: dataModel.cookTime, ingredients: [""], url: dataModel.url, imageURL: dataModel.imageURL)
+    static func transformToObject(dataModel: RecipeDataModel) -> Recipe? {
+        let recipe = Recipe()
+        
+        recipe.label        = dataModel.label
+        recipe.calories     = dataModel.calories
+        recipe.cookTime     = dataModel.cookTime
+        recipe.cuisineType  = dataModel.cuisineType
+        recipe.url          = dataModel.url
+        recipe.imageURL     = dataModel.imageURL
+        
+        guard let ingredients = dataModel.ingredients else { return nil }
+        var ingredientsArray: [String] = []
+        
+        for ingredient in ingredients {
+            guard let ingredientsString = ingredient as? String else { return nil }
+            ingredientsArray.append(ingredientsString)
+        }
+        recipe.ingredients = ingredientsArray
+        
         return recipe
     }
+    
     
     static func transformRecipe(dict: [String: Any]) -> Recipe? {
         guard let label = dict["label"] as? String,
@@ -73,10 +108,20 @@ extension RecipeDataModel {
             ingredientsString.append(text)
         }
         
-        let recipe = Recipe(label: label, cuisineType: cuisineType, calories: calories, cookTime: cookTime, ingredients: ingredientsString, url: url, imageURL: imageURL)
+        let recipe = Recipe()
+        
+        recipe.label        = label
+        recipe.calories     = calories
+        recipe.cookTime     = cookTime
+        recipe.cuisineType  = cuisineType
+        recipe.url          = url
+        recipe.imageURL     = imageURL
+        
         return recipe
     }
 }
+
+
 
 class Ingredient: NSManagedObject {
     static var all: [Ingredient] {
@@ -85,6 +130,8 @@ class Ingredient: NSManagedObject {
         return ingredients
     }
 }
+
+
 
 extension Ingredient {
     static func transformIngredient(dict: AnyObject, for recipe: RecipeDataModel) -> Ingredient? {

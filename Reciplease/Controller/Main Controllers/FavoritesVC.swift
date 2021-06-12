@@ -21,16 +21,18 @@ class FavoritesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        let favorites = RecipeDataModel.all
+//        if favorites.isEmpty {
+//            shouldShowEmptyState = true
+//            addChildVC(vc: emptyVC)
+//        } else {
+//            shouldShowEmptyState = false
+//            // TODO: Change favorites to recipes
+////            tableVC.recipes = favorites
+//            addChildVC(vc: tableVC)
+//        }
         let favorites = RecipeDataModel.all
-        if favorites.isEmpty {
-            shouldShowEmptyState = true
-            addChildVC(vc: emptyVC)
-        } else {
-            shouldShowEmptyState = false
-            // TODO: Change favorites to recipes
-//            tableVC.recipes = favorites
-            addChildVC(vc: tableVC)
-        }
+        print(favorites)
     }
     
     // MARK: - Private Methods

@@ -72,7 +72,7 @@ class RecipeService {
             completion(totalRecipes, true, nil)
         }
     }
-
+    
     
     func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?, _ success: Bool,_ error: RecipleaseError?) -> Void) {
         AF.request(url).validate().responseData { response in
@@ -86,16 +86,15 @@ class RecipeService {
     }
     
     
-    
-//    func addToFavorites(recipe: RecipeDataModel?, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
-//        // TODO: Save to Core Data
-//        guard let recipe = recipe else { return }
-//        favorites.append(recipe)
-//        do {
-//            try AppDelegate.persistantContainer.viewContext.save()
-//            completion(true, nil)
-//        } catch {
-//            completion(false, .unableToFavorite)
-//        }
-//    }
+    func addToFavorites(recipe: Recipe, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
+        // TODO: Save to CoreData
+       
+        Recipe.transformToDataModel(recipe: recipe)
+        do {
+            try AppDelegate.persistantContainer.viewContext.save()
+            completion(true, nil)
+        } catch {
+            completion(false, .unableToFavorite)
+        }
+    }
 }
