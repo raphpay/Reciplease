@@ -25,17 +25,19 @@ class RecipeService {
                    completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool, _ error: RecipleaseError?) -> Void)) {
         // TODO : See if there is a way to construct the url with Alamofire
         
+        guard knownIngredients.isEmpty else {
+            completion(nil, false, .noIngredients)
+            return
+        }
+        
         var ingredientString = ""
         for ingredient in knownIngredients {
             ingredientString += "\(ingredient),"
         }
-        
-        guard !ingredientString.isEmpty else {
-            completion(nil, false, .noIngredients)
-            return
-        }
        
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
+        
+        
         
         AF.request(completeURL).responseData { response in
             

@@ -9,6 +9,7 @@ import UIKit
 
 class TextView: UITextView {
     
+    static let placeholder = "Nothing in the fridge for the moment.\nPlease enter some ingredients !"
     var fontSize = CGFloat(20)
     var alignment = NSTextAlignment.left
     
@@ -36,6 +37,7 @@ class TextView: UITextView {
         backgroundColor = .clear
         textColor       = .white
         textAlignment   = alignment
+        text            = TextView.placeholder
         font            = UIFont.systemFont(ofSize: fontSize)
     }
 }

@@ -15,6 +15,9 @@ extension SearchVC: UITextFieldDelegate {
     
     
     func addIngredientToTextView(text: String) {
+        if ingredientsTextView.text == TextView.placeholder {
+            ingredientsTextView.text = ""
+        }
         ingredientsTextView.text += "\n\(text)"
         ingredientsTextField.text = ""
         ingredientsInFridge.append(text)
