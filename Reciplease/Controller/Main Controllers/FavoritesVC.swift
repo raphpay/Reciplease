@@ -28,7 +28,6 @@ class FavoritesVC: UIViewController {
         
         if favorites.isEmpty {
             addChildVC(vc: emptyVC)
-            print("no fav")
         } else {
             for object in favorites {
                 guard let recipe = object.transformToObject() else { return }

@@ -25,7 +25,7 @@ class RecipeService {
                    completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool, _ error: RecipleaseError?) -> Void)) {
         // TODO : See if there is a way to construct the url with Alamofire
         
-        guard knownIngredients.isEmpty else {
+        guard !knownIngredients.isEmpty else {
             completion(nil, false, .noIngredients)
             return
         }
@@ -60,14 +60,12 @@ class RecipeService {
             var totalRecipes: [Recipe] = []
             
             for hit in hits {
-                
                 guard let dict = hit["recipe"] as? [String: Any],
                       let recipe = RecipeDataModel.transformRecipe(dict: dict)
                       else {
                     completion(nil, false, .invalidResponse)
                     return
                 }
-                
                 totalRecipes.append(recipe)
             }
             

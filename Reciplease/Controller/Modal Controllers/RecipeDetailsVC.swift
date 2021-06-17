@@ -144,6 +144,9 @@ class RecipeDetailsVC: UIViewController {
     private func setTextView() {
         guard let recipe = recipe,
               let ingredients = recipe.ingredients else { return }
+        if informationTextView.text == TextView.placeholder {
+            informationTextView.text = ""
+        }
         for object in ingredients {
             informationTextView.text += "\n\(object)"
         }

@@ -97,7 +97,6 @@ extension RecipeDataModel {
               let urlString = dict["url"] as? String,
               let imageURLString = dict["image"] as? String
         else { return nil }
-        
         guard let ingredients   = dict["ingredients"] as? [AnyObject]   else { return nil }
         guard let url           = URL(string: urlString)                else { return nil }
         guard let imageURL      = URL(string: imageURLString)           else { return nil }
@@ -108,7 +107,8 @@ extension RecipeDataModel {
         
         var ingredientsString: [String] = []
         for object in ingredients {
-            guard let text = object["text"] as? String else { return nil }
+            guard let optionalText = object["text"] as? String?,
+                  let text = optionalText else { return nil }
             ingredientsString.append(text)
         }
         
@@ -120,7 +120,8 @@ extension RecipeDataModel {
         recipe.cuisineType  = cuisineType
         recipe.url          = url
         recipe.imageURL     = imageURL
-        
+        recipe.ingredients  = ingredientsString
+
         return recipe
     }
 }
