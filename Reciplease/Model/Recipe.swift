@@ -46,7 +46,11 @@ class Recipe {
         dataModel.calories      = recipe.calories ?? 0
         dataModel.cookTime      = recipe.cookTime ?? 0
         if let ingredients = recipe.ingredients {
-            dataModel.ingredients   = NSSet(array: ingredients)
+            for ingredient in ingredients {
+                if let DMIngredient = Ingredient.transformIngredient(text: ingredient, for: dataModel) {
+                    dataModel.addToIngredients(DMIngredient)
+                }
+            }
         }
         dataModel.url           = recipe.url
         dataModel.imageURL      = recipe.imageURL
@@ -139,13 +143,11 @@ class Ingredient: NSManagedObject {
 
 
 extension Ingredient {
-    static func transformIngredient(dict: AnyObject, for recipe: RecipeDataModel) -> Ingredient? {
+    static func transformIngredient(text: String, for dataModel: RecipeDataModel) -> Ingredient? {
         let ingredient = Ingredient(context: AppDelegate.viewContext)
         
-        guard let text = dict["text"] as? String else { return nil }
-        
         ingredient.text     = text
-        ingredient.recipe   = recipe
+        ingredient.recipe   = dataModel
         
         return ingredient
     }

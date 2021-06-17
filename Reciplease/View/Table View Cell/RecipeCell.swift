@@ -78,7 +78,7 @@ class RecipeCell: UITableViewCell {
         guard let label = recipe.label,
               let cuisineType = recipe.cuisineType else { return }
         guard let imageURL = recipe.imageURL else { return }
-        
+
         RecipeService.shared.fetchImageData(from: imageURL) { _data, success, _error in
             guard success,
                   _error == nil,

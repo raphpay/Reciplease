@@ -52,7 +52,6 @@ class TableViewController: UITableViewController {
             fatalError("Cannot dequeue cell for index path: \(indexPath)")
         }
         let recipe = recipes[indexPath.row]
-        // TODO: See how to present ingredients in description label
         cell.set(recipe: recipe)
         return cell
     }

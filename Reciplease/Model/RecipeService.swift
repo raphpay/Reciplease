@@ -91,7 +91,7 @@ class RecipeService {
         for object in RecipeDataModel.all {
             guard object.label != recipe.label else {
                 completion(false, .alreadyInFavorites)
-                return 
+                return
             }
         }
         

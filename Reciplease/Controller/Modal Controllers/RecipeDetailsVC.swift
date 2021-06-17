@@ -36,7 +36,6 @@ class RecipeDetailsVC: UIViewController {
         return v
     }()
     
-    #warning("Add action")
     #warning("Change color")
     lazy var favoriteButton: UIButton = {
         let b = UIButton(type: .system)
@@ -57,15 +56,15 @@ class RecipeDetailsVC: UIViewController {
     @objc func addToFavorites() {
         guard let recipe = recipe else { return }
         RecipeService.shared.addToFavorites(recipe: recipe) { success, _error in
-            
-            guard success,
-                  _error == nil else {
-                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
-                return
-            }
-            
-            // TODO: Show an alert when ok too
-            self.showFavoritesAlert()
+            #warning("Reput the code")
+//            guard success,
+//                  _error == nil else {
+//                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
+//                return
+//            }
+//
+//            // TODO: Show an alert when ok too
+//            self.showFavoritesAlert()
         }
     }
     
