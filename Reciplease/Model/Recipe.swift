@@ -45,6 +45,9 @@ class Recipe {
         dataModel.cuisineType   = recipe.cuisineType
         dataModel.calories      = recipe.calories ?? 0
         dataModel.cookTime      = recipe.cookTime ?? 0
+        dataModel.url           = recipe.url
+        dataModel.imageURL      = recipe.imageURL
+        
         if let ingredients = recipe.ingredients {
             for ingredient in ingredients {
                 if let DMIngredient = Ingredient.transformIngredient(text: ingredient, for: dataModel) {
@@ -52,8 +55,6 @@ class Recipe {
                 }
             }
         }
-        dataModel.url           = recipe.url
-        dataModel.imageURL      = recipe.imageURL
     }
 }
 

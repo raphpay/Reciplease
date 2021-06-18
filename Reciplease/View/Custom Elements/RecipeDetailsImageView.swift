@@ -14,7 +14,8 @@ class RecipeDetailsImageView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = Images.pizza
+        imageView.image = nil
+        imageView.backgroundColor = CustomColor.gray
         return imageView
     }()
     

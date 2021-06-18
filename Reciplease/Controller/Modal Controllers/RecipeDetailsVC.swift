@@ -36,11 +36,11 @@ class RecipeDetailsVC: UIViewController {
         return v
     }()
     
-    #warning("Change color")
     lazy var favoriteButton: UIButton = {
         let b = UIButton(type: .system)
         b.setImage(Icon.star, for: .normal)
-        b.tintColor = .black
+        // TODO: Change the color when favorited
+        b.tintColor = CustomColor.gray
         b.translatesAutoresizingMaskIntoConstraints = false
         b.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         return b
@@ -61,8 +61,6 @@ class RecipeDetailsVC: UIViewController {
                 self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
                 return
             }
-
-            // TODO: Show an alert when ok too
             self.showFavoritesAlert()
         }
     }

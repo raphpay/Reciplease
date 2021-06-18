@@ -37,4 +37,5 @@ enum CustomColor {
     static let green = UIColor(named: "Green")!
     static let placeholder = UIColor(named: "Placeholder")!
     static let textfield = UIColor(named: "TextFieldBackground")!
+    static let favorite = UIColor(named: "Favorite")!
 }
