@@ -82,7 +82,11 @@ class RecipeCell: UITableViewCell {
         RecipeService.shared.fetchImageData(from: imageURL) { _data, success, _error in
             guard success,
                   _error == nil,
-                  let data = _data else { return }
+                  let data = _data else {
+                self.recipeImage.image = nil
+                self.recipeImage.backgroundColor = CustomColor.gray
+                return
+            }
             self.recipeImage.image = UIImage(data: data)
         }
         cellTitle.text          = label
