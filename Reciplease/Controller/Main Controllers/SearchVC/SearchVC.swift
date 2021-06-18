@@ -91,9 +91,10 @@ class SearchVC: UIViewController {
     
     
     @objc func clearIngredients() {
-        ingredientsTextView.text = ""
+        ingredientsTextView.text = TextView.placeholder
         ingredientsInFridge.removeAll()
         
+        #warning("To be removed")
         for object in RecipeDataModel.all {
             AppDelegate.viewContext.delete(object)
             try? AppDelegate.viewContext.save()

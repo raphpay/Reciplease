@@ -29,8 +29,8 @@ class FavoritesVC: UIViewController {
         if favorites.isEmpty {
             addChildVC(vc: emptyVC)
         } else {
-            for object in favorites {
-                guard let recipe = object.transformToObject() else { return }
+            for dataModel in favorites {
+                guard let recipe = dataModel.transformToObject() else { return }
                 recipes.append(recipe)
             }
             tableVC.recipes = recipes

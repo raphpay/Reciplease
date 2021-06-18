@@ -78,14 +78,14 @@ extension RecipeDataModel {
         recipe.url          = self.url
         recipe.imageURL     = self.imageURL
         
-        guard let ingredients = self.ingredients else { return nil }
+        guard let ingredients = self.ingredients?.allObjects else { return nil }
         var ingredientsArray: [String] = []
-        
         for ingredient in ingredients {
-            if let ingredientString = ingredient as? String {
-                #warning("Convert ingredients")
-                ingredientsArray.append(ingredientString)
-            }
+            
+            guard let ingredient = ingredient as? Ingredient,
+               let text = ingredient.text else { return nil }
+            
+            ingredientsArray.append(text)
         }
         
         recipe.ingredients = ingredientsArray
