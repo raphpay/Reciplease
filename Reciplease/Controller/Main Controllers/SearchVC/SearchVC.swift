@@ -97,6 +97,7 @@ class SearchVC: UIViewController {
         #warning("To be removed")
         for object in RecipeDataModel.all {
             AppDelegate.viewContext.delete(object)
+            #warning("Add a docatch block")
             try? AppDelegate.viewContext.save()
         }
     }

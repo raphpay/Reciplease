@@ -10,6 +10,7 @@ import CoreData
 
 
 class Recipe {
+    var id: Double?
     var label: String?
     var cuisineType: String?
     var calories: Double?
@@ -17,16 +18,19 @@ class Recipe {
     var ingredients: [String]?
     var url: URL?
     var imageURL: URL?
+    var isFavorite: Bool?
     
     
     static var fakeRecipe: Recipe {
         let recipe = Recipe()
         
+        recipe.id           = 0
         recipe.label        = "Pizza"
         recipe.calories     = 3000
         recipe.cookTime     = 20
         recipe.cuisineType  = "Italian"
         recipe.ingredients  = ["Tomato", "Mozzarella", "Cheese"]
+        recipe.isFavorite   = false
         
         return recipe
     }
@@ -38,9 +42,48 @@ class Recipe {
     }
     
     
+    static func transformRecipe(dict: [String: Any], lastId: Double = 0) -> Recipe? {
+        guard let label = dict["label"] as? String,
+              let calories = dict["calories"] as? Double,
+              let cookTime = dict["totalTime"] as? Double,
+              let urlString = dict["url"] as? String,
+              let imageURLString = dict["image"] as? String
+        else { return nil }
+        guard let ingredients   = dict["ingredients"] as? [AnyObject]   else { return nil }
+        guard let url           = URL(string: urlString)                else { return nil }
+        guard let imageURL      = URL(string: imageURLString)           else { return nil }
+        var cuisineType: String = ""
+        if let cuisineTypes = dict["cuisineType"] as? [String] {
+            cuisineType = cuisineTypes[0]
+        }
+        
+        var ingredientsString: [String] = []
+        for object in ingredients {
+            guard let optionalText = object["text"] as? String?,
+                  let text = optionalText else { return nil }
+            ingredientsString.append(text)
+        }
+        
+        let recipe = Recipe()
+        
+        recipe.id           = lastId + 1
+        recipe.label        = label
+        recipe.calories     = calories
+        recipe.cookTime     = cookTime
+        recipe.cuisineType  = cuisineType
+        recipe.url          = url
+        recipe.imageURL     = imageURL
+        recipe.ingredients  = ingredientsString
+        recipe.isFavorite   = false
+        
+        return recipe
+    }
+    
+    
     static func transformToDataModel(recipe: Recipe) {
         let dataModel = RecipeDataModel(context: AppDelegate.viewContext)
         
+        dataModel.id            = recipe.id ?? 0
         dataModel.label         = recipe.label
         dataModel.cuisineType   = recipe.cuisineType
         dataModel.calories      = recipe.calories ?? 0
@@ -55,6 +98,16 @@ class Recipe {
                 }
             }
         }
+    }
+    
+    func isInFavorites() -> Bool {
+        var isFavorite = false
+        for dataModel in RecipeDataModel.all {
+            if dataModel.id == self.id {
+                isFavorite = true
+            }
+        }
+        return isFavorite
     }
 }
 
@@ -78,6 +131,10 @@ extension RecipeDataModel {
         recipe.cuisineType  = self.cuisineType
         recipe.url          = self.url
         recipe.imageURL     = self.imageURL
+        recipe.id           = self.id
+        
+        // The recipe is forced to be true, caused it's contained by the CoreData stack
+        recipe.isFavorite   = true
         
         guard let ingredients = self.ingredients?.allObjects else { return nil }
         var ingredientsArray: [String] = []
@@ -91,42 +148,6 @@ extension RecipeDataModel {
         
         recipe.ingredients = ingredientsArray
         
-        return recipe
-    }
-    
-    
-    static func transformRecipe(dict: [String: Any]) -> Recipe? {
-        guard let label = dict["label"] as? String,
-              let calories = dict["calories"] as? Double,
-              let cookTime = dict["totalTime"] as? Double,
-              let urlString = dict["url"] as? String,
-              let imageURLString = dict["image"] as? String
-        else { return nil }
-        guard let ingredients   = dict["ingredients"] as? [AnyObject]   else { return nil }
-        guard let url           = URL(string: urlString)                else { return nil }
-        guard let imageURL      = URL(string: imageURLString)           else { return nil }
-        var cuisineType: String = ""
-        if let cuisineTypes = dict["cuisineType"] as? [String] {
-          cuisineType = cuisineTypes[0]
-        }
-        
-        var ingredientsString: [String] = []
-        for object in ingredients {
-            guard let optionalText = object["text"] as? String?,
-                  let text = optionalText else { return nil }
-            ingredientsString.append(text)
-        }
-        
-        let recipe = Recipe()
-        
-        recipe.label        = label
-        recipe.calories     = calories
-        recipe.cookTime     = cookTime
-        recipe.cuisineType  = cuisineType
-        recipe.url          = url
-        recipe.imageURL     = imageURL
-        recipe.ingredients  = ingredientsString
-
         return recipe
     }
 }

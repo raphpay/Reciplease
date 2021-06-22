@@ -46,6 +46,7 @@ class FavoritesVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         view.backgroundColor = CustomColor.background
+        title = "Favorites"
     }
     
     private func addChildVC(vc: UIViewController) {

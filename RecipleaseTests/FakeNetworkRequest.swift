@@ -6,5 +6,12 @@
 //
 
 import Foundation
+import Alamofire
 
-
+class FakeAFSession: Session {
+    var request: DataRequest?
+    
+    init(request: DataRequest) {
+        self.request = request
+    }
+}

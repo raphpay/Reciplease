@@ -17,7 +17,15 @@ class RecipeService {
     private let baseURL         = "https://api.edamam.com/search?"
     private let APP_ID          = "08b5ed9a"
     private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
+    private var lastID          = 0
+    #warning("To be changed")
     private let maxRecipes      = 2
+    
+    private var session = Session()
+    
+    init(session: Session) {
+        self.session = session
+    }
     
     
     // MARK: - Public Methods
@@ -38,8 +46,8 @@ class RecipeService {
         let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
         
         
-        
-        AF.request(completeURL).responseData { response in
+//        session.request(completeURL).responseData(completionHandler: (AFDataResponse<Data> -> Void))
+        session.request(completeURL).responseData { response in
             
             guard let data = response.data else {
                 completion(nil, false, .invalidData)
@@ -61,12 +69,13 @@ class RecipeService {
             
             for hit in hits {
                 guard let dict = hit["recipe"] as? [String: Any],
-                      let recipe = RecipeDataModel.transformRecipe(dict: dict)
-                      else {
+                      let recipe = Recipe.transformRecipe(dict: dict, lastId: Double(self.lastID))
+                else {
                     completion(nil, false, .invalidResponse)
                     return
                 }
                 totalRecipes.append(recipe)
+                self.lastID += 1
             }
             
             completion(totalRecipes, true, nil)
@@ -87,7 +96,6 @@ class RecipeService {
     
     
     func addToFavorites(recipe: Recipe, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
-       
         for object in RecipeDataModel.all {
             guard object.label != recipe.label else {
                 completion(false, .alreadyInFavorites)
@@ -98,10 +106,28 @@ class RecipeService {
         Recipe.transformToDataModel(recipe: recipe)
         
         do {
-            try AppDelegate.persistantContainer.viewContext.save()
+            try AppDelegate.viewContext.save()
+            recipe.isFavorite = true
             completion(true, nil)
         } catch {
+            recipe.isFavorite = false
             completion(false, .unableToFavorite)
+        }
+    }
+    
+    func removeFromFavorites(recipe: Recipe, completion: @escaping (_ success: Bool) -> Void) {
+        // TODO: Implement method
+        // TODO: Remove object by its ID
+        for object in RecipeDataModel.all {
+            if object.id == recipe.id {
+                AppDelegate.viewContext.delete(object)
+                do {
+                    try AppDelegate.viewContext.save()
+                    completion(true)
+                } catch {
+                    completion(false)
+                }
+            }
         }
     }
 }

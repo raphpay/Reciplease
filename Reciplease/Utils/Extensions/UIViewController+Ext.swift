@@ -17,7 +17,8 @@ fileprivate var favoriteTextContainer: UIView = {
     return v
 }()
 
-fileprivate var favoriteText = Label(text: "Added to favorites !", alignment: .center, fontSize: 20)
+fileprivate var favoriteText    = Label(text: "Added to favorites !", alignment: .center, fontSize: 20)
+fileprivate var unfavoredText  = Label(text: "Removed from favorites !", alignment: .center, fontSize: 20)
 
 extension UIViewController {
     
@@ -71,20 +72,29 @@ extension UIViewController {
         containerView = nil
     }
     
-    func showFavoritesAlert() {
-        containerView = UIView(frame: view.bounds)
-        view.addSubview(containerView)
-        view.addSubview(favoriteTextContainer)
-        
-        favoriteTextContainer.centerInSuperview()
-        favoriteTextContainer.height(50)
-        favoriteTextContainer.width(200)
-        
-        favoriteTextContainer.addSubview(favoriteText)
-        favoriteText.edgesToSuperview()
-        
-        containerView.backgroundColor = CustomColor.background
-        containerView.alpha = 0
+    func showFavoritesAlert(isFavorite: Bool) {
+        DispatchQueue.main.async {
+            containerView = UIView(frame: self.view.bounds)
+            self.view.addSubview(containerView)
+            self.view.addSubview(favoriteTextContainer)
+            
+            favoriteTextContainer.centerInSuperview()
+            favoriteTextContainer.height(50)
+            favoriteTextContainer.width(200)
+            
+            if isFavorite {
+                unfavoredText.removeFromSuperview()
+                favoriteTextContainer.addSubview(favoriteText)
+                favoriteText.edgesToSuperview()
+            } else {
+                favoriteText.removeFromSuperview()
+                favoriteTextContainer.addSubview(unfavoredText)
+                unfavoredText.edgesToSuperview()
+            }
+            
+            containerView.backgroundColor = CustomColor.background
+            containerView.alpha = 0
+        }
         
         UIView.animate(withDuration: 0.25) {
             containerView.alpha = 0.8
@@ -94,6 +104,7 @@ extension UIViewController {
                     containerView.removeFromSuperview()
                     favoriteTextContainer.removeFromSuperview()
                     favoriteText.removeFromSuperview()
+                    unfavoredText.removeFromSuperview()
                     containerView = nil
                 }
             }

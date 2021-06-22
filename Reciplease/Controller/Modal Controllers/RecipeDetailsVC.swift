@@ -15,7 +15,8 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
-    var recipe: Recipe?
+    var recipe: Recipe?         = nil
+    let service                 = RecipeService.shared
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
@@ -39,10 +40,9 @@ class RecipeDetailsVC: UIViewController {
     lazy var favoriteButton: UIButton = {
         let b = UIButton(type: .system)
         b.setImage(Icon.star, for: .normal)
-        // TODO: Change the color when favorited
-        b.tintColor = CustomColor.gray
         b.translatesAutoresizingMaskIntoConstraints = false
-        b.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        b.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
+        // TODO: Change the icon color
         return b
     }()
     
@@ -53,15 +53,29 @@ class RecipeDetailsVC: UIViewController {
     
     
     // MARK: - Actions
-    @objc func addToFavorites() {
+    @objc func toggleFavorite() {
         guard let recipe = recipe else { return }
-        RecipeService.shared.addToFavorites(recipe: recipe) { success, _error in
-            guard success,
-                  _error == nil else {
-                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
-                return
+        let isFavorite = recipe.isInFavorites()
+        
+        if isFavorite {
+            // Remove from fav
+            service.removeFromFavorites(recipe: recipe) { success in
+                if success {
+                    self.showFavoritesAlert(isFavorite: false)
+                } else {
+                    self.presentAlert(message: "We couldn't remove it from favorites ! Retry later.")
+                }
             }
-            self.showFavoritesAlert()
+        } else {
+            // Add to fav
+            service.addToFavorites(recipe: recipe) { success, _error in
+                guard success,
+                      _error == nil else {
+                    self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
+                    return
+                }
+                self.showFavoritesAlert(isFavorite: true)
+            }
         }
     }
     
