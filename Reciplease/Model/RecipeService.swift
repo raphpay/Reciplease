@@ -8,6 +8,12 @@
 import Foundation
 import Alamofire
 
+#warning("Implement those methods")
+protocol RecipeRequest {
+    func getRecipe(with ingredients: [String]) -> Result<Recipe, RecipleaseError>
+    func fetchImage(from url : URL) -> Result<Data, RecipleaseError>
+}
+
 class RecipeService {
     
     // MARK: - Properties
@@ -18,8 +24,7 @@ class RecipeService {
     private let APP_ID          = "08b5ed9a"
     private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
     private var lastID          = 0
-    #warning("To be changed")
-    private let maxRecipes      = 2
+    private let maxRecipes      = 10
     
     private var session = Session()
     

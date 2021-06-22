@@ -6,11 +6,12 @@
 //
 
 import XCTest
+import Alamofire
 @testable import Reciplease
 
 class RecipeServiceTests: XCTestCase {
 
-    func testGivenCallbackFailed_WhenErrorInNetworkCall_ThenObjectReturnAreNil(){
+    func testGivenCallbackFailed_WhenErrorInNetworkCall_ThenObjectReturnAreNil(){        
 //        // MARK: - Given
 //
 //        // I want to create a fake request
@@ -37,5 +38,7 @@ class RecipeServiceTests: XCTestCase {
 //        }
 //        wait(for: [expectation], timeout: 0.01)
     }
+    
+    
     
 }

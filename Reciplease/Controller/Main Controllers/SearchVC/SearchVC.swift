@@ -93,13 +93,6 @@ class SearchVC: UIViewController {
     @objc func clearIngredients() {
         ingredientsTextView.text = TextView.placeholder
         ingredientsInFridge.removeAll()
-        
-        #warning("To be removed")
-        for object in RecipeDataModel.all {
-            AppDelegate.viewContext.delete(object)
-            #warning("Add a docatch block")
-            try? AppDelegate.viewContext.save()
-        }
     }
     
     // MARK: - Override Methods
