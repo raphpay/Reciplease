@@ -14,6 +14,7 @@ class SearchVC: UIViewController {
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var ingredientsInFridge: [String] = []
+    var service = RecipeService.shared
     
     // MARK: - Views
     lazy var scrollView: UIScrollView = {
@@ -59,25 +60,24 @@ class SearchVC: UIViewController {
     
     // MARK: - Actions
     @objc func searchRecipes() {
-        let tableVC = TableViewController()
-        
         searchButton.isEnabled = false
         showLoadingView()
         
-        RecipeService.shared.getRecipe(containing: ingredientsInFridge) { _recipes, success, _error in
+        guard let apiURL = RecipeService.shared.createAPIURL(with: ingredientsInFridge) else { return }
+        let service = RecipeService(url: apiURL)
+        
+        service.getRecipes { _recipes,_error in
             self.searchButton.isEnabled = true
             
-            DispatchQueue.main.async {
-                self.dismissLoadingView()
-            }
+            self.dismissLoadingView()
             
             guard _error == nil,
-                success == true,
                   let recipes = _recipes else {
                 self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
                 return
             }
             
+            let tableVC = TableViewController()
             tableVC.recipes = recipes
             self.navigationController?.pushViewController(tableVC, animated: true)
         }

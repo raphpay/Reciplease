@@ -50,6 +50,4 @@ class RecipeTests: XCTestCase {
             // B : Tester avec un mauvais string ( empty string )
             // C : Tester avec un mauvais recipe 
     }
-    
-
 }

@@ -9,64 +9,38 @@ import Foundation
 import Alamofire
 
 #warning("Implement those methods")
-protocol RecipeRequest {
-    func getRecipe(with ingredients: [String]) -> Result<Recipe, RecipleaseError>
-    func fetchImage(from url : URL) -> Result<Data, RecipleaseError>
+protocol RecipeRequestDelegate {
+    var lastID: Double { get set }
+    var maxRecipes: Int { get set }
+    var url: URL? { get set }
+    
+    func getRecipes(completion: @escaping (_ recipe: [Recipe]?,_ error: RecipleaseError?) -> Void)
 }
 
-class RecipeService {
+extension RecipeRequestDelegate {
     
-    // MARK: - Properties
-    static var shared = RecipeService()
-    private init() {}
-    
-    private let baseURL         = "https://api.edamam.com/search?"
-    private let APP_ID          = "08b5ed9a"
-    private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
-    private var lastID          = 0
-    private let maxRecipes      = 10
-    
-    private var session = Session()
-    
-    init(session: Session) {
-        self.session = session
-    }
-    
-    
-    // MARK: - Public Methods
-    func getRecipe(containing knownIngredients: [String],
-                   completion: @escaping ((_ recipes: [Recipe]?,_ success: Bool, _ error: RecipleaseError?) -> Void)) {
+    func getRecipes(completion: @escaping ([Recipe]?, RecipleaseError?) -> Void) {
         // TODO : See if there is a way to construct the url with Alamofire
-        
-        guard !knownIngredients.isEmpty else {
-            completion(nil, false, .noIngredients)
+        guard let url = self.url else {
+            print("Invalid URL: \(self.url)")
             return
         }
         
-        var ingredientString = ""
-        for ingredient in knownIngredients {
-            ingredientString += "\(ingredient),"
-        }
-       
-        let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
-        
-        
-//        session.request(completeURL).responseData(completionHandler: (AFDataResponse<Data> -> Void))
-        session.request(completeURL).responseData { response in
-            
+        AF.request(url).responseData { response in
+            print("in request")
             guard let data = response.data else {
-                completion(nil, false, .invalidData)
+                completion(nil, .invalidData)
                 return
             }
             
             guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
-                completion(nil, false, .invalidData)
+                completion(nil, .invalidData)
                 return
             }
             
             guard let hits = json["hits"] as? [AnyObject],
                   !hits.isEmpty else {
-                completion(nil, false, .noRecipes)
+                completion(nil, .noRecipes)
                 return
             }
             
@@ -76,17 +50,52 @@ class RecipeService {
                 guard let dict = hit["recipe"] as? [String: Any],
                       let recipe = Recipe.transformRecipe(dict: dict, lastId: Double(self.lastID))
                 else {
-                    completion(nil, false, .invalidResponse)
+                    completion(nil, .invalidResponse)
                     return
                 }
+
                 totalRecipes.append(recipe)
-                self.lastID += 1
             }
             
-            completion(totalRecipes, true, nil)
+            completion(totalRecipes, nil)
         }
     }
+}
+
+class RecipeService: RecipeRequestDelegate {
+    var url: URL?
+    var lastID: Double = 0
+    var maxRecipes: Int = 10
     
+    // MARK: - Properties
+    static var shared = RecipeService()
+    private init() {}
+    
+    private let baseURL         = "https://api.edamam.com/search?"
+    private let APP_ID          = "08b5ed9a"
+    private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
+    
+    init(url: URL?) {
+        guard let url = url else {
+            self.url = URL(string: "https://apple.com")
+            return
+        }
+        self.url = url
+    }
+    
+    
+    // MARK: - Public Methods
+    func createAPIURL(with ingredients: [String]) -> URL? {
+        guard !ingredients.isEmpty else { return nil }
+
+        var ingredientString = ""
+        for text in ingredients {
+            ingredientString += "\(text),"
+        }
+
+        let urlString = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
+        return URL(string: urlString)
+    }
     
     func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?, _ success: Bool,_ error: RecipleaseError?) -> Void) {
         AF.request(url).validate().responseData { response in

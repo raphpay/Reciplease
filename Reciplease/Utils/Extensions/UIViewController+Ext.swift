@@ -68,8 +68,10 @@ extension UIViewController {
     }
     
     func dismissLoadingView() {
-        containerView.removeFromSuperview()
-        containerView = nil
+        DispatchQueue.main.async {
+            containerView.removeFromSuperview()
+            containerView = nil
+        }
     }
     
     func showFavoritesAlert(isFavorite: Bool) {
