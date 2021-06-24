@@ -46,9 +46,8 @@ class RecipeDetailsImageView: UIView {
             recipeTitle.text = recipe.label
             infoView.set(recipe: recipe)
             guard let imageURL = recipe.imageURL else { return }
-            RecipeService.shared.fetchImageData(from: imageURL) { _data, success, _error in
-                guard success,
-                      _error == nil,
+            RecipeService.shared.fetchImageData(from: imageURL) { _data, _error in
+                guard _error == nil,
                       let data = _data else {
                     self.recipeImage.backgroundColor = CustomColor.gray
                     self.recipeImage.image = nil

@@ -79,16 +79,17 @@ class RecipeCell: UITableViewCell {
               let cuisineType = recipe.cuisineType else { return }
         guard let imageURL = recipe.imageURL else { return }
 
-        RecipeService.shared.fetchImageData(from: imageURL) { _data, success, _error in
-            guard success,
-                  _error == nil,
+        RecipeService.shared.fetchImageData(from: imageURL) { _data, _error in
+            guard _error == nil,
                   let data = _data else {
                 self.recipeImage.image = nil
                 self.recipeImage.backgroundColor = CustomColor.gray
                 return
             }
+            
             self.recipeImage.image = UIImage(data: data)
         }
+        
         cellTitle.text          = label
         cellDescription.text    = cuisineType.capitalized
         infoView.set(recipe: recipe)

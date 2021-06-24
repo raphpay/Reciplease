@@ -63,19 +63,25 @@ class SearchVC: UIViewController {
         searchButton.isEnabled = false
         showLoadingView()
         
-        guard let apiURL = RecipeService.shared.createAPIURL(with: ingredientsInFridge) else { return }
-        let service = RecipeService(url: apiURL)
+        guard let url = service.createAPIURL(with: ingredientsInFridge) else {
+            self.presentAlert(title: RecipleaseError.title.rawValue, message: RecipleaseError.noIngredients.rawValue)
+            return
+        }
         
-        service.getRecipes { _recipes,_error in
-            self.searchButton.isEnabled = true
-            
-            self.dismissLoadingView()
-            
-            guard _error == nil,
-                  let recipes = _recipes else {
+        service.getRecipeHits(from: url) { _hits, _error in
+            guard _error == nil else {
                 self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
                 return
             }
+            
+            guard let hits = _hits,
+            let recipes = self.service.transformHitsToRecipes(hits) else {
+                self.presentAlert(title: RecipleaseError.title.rawValue, message: RecipleaseError.invalidResponse.rawValue)
+                return
+            }
+            
+            self.dismissLoadingView()
+            self.searchButton.isEnabled = true
             
             let tableVC = TableViewController()
             tableVC.recipes = recipes

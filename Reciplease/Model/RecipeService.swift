@@ -8,26 +8,37 @@
 import Foundation
 import Alamofire
 
-#warning("Implement those methods")
-protocol RecipeRequestDelegate {
-    var lastID: Double { get set }
-    var maxRecipes: Int { get set }
-    var url: URL? { get set }
-    
-    func getRecipes(completion: @escaping (_ recipe: [Recipe]?,_ error: RecipleaseError?) -> Void)
+protocol RecipeDelegate {
+    func createAPIURL(with ingredients: [String]) -> URL?
+    func getRecipeHits(from url: URL, completion: @escaping (_ hits: [AnyObject]?,_ error: RecipleaseError?) -> Void)
+    func transformHitsToRecipes(_ hits: [AnyObject]?) -> [Recipe]?
+    func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?,_ error: RecipleaseError?) -> Void)
 }
 
-extension RecipeRequestDelegate {
+extension RecipeDelegate {
     
-    func getRecipes(completion: @escaping ([Recipe]?, RecipleaseError?) -> Void) {
-        // TODO : See if there is a way to construct the url with Alamofire
-        guard let url = self.url else {
-            print("Invalid URL: \(self.url)")
-            return
+    func createAPIURL(with ingredients: [String]) -> URL? {
+        let baseURL         = "https://api.edamam.com/search?"
+        let APP_ID          = "08b5ed9a"
+        let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
+        let maxRecipes      = 10
+        
+        guard !ingredients.isEmpty else { return nil }
+        
+        var ingredientString = String()
+        for ingredient in ingredients {
+            ingredientString += "\(ingredient),"
         }
         
-        AF.request(url).responseData { response in
-            print("in request")
+        let completeURL = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
+        guard let url = URL(string: completeURL) else { return nil }
+        
+        return url
+    }
+    
+    
+    func getRecipeHits(from url: URL, completion: @escaping ([AnyObject]?, RecipleaseError?) -> Void) {
+        AF.request(url).validate().responseData { response in
             guard let data = response.data else {
                 completion(nil, .invalidData)
                 return
@@ -44,100 +55,38 @@ extension RecipeRequestDelegate {
                 return
             }
             
-            var totalRecipes: [Recipe] = []
-            
-            for hit in hits {
-                guard let dict = hit["recipe"] as? [String: Any],
-                      let recipe = Recipe.transformRecipe(dict: dict, lastId: Double(self.lastID))
-                else {
-                    completion(nil, .invalidResponse)
-                    return
-                }
-
-                totalRecipes.append(recipe)
+            completion(hits, nil)
+        }
+    }
+    
+    func transformHitsToRecipes(_ hits: [AnyObject]?) -> [Recipe]? {
+        guard let hits = hits else { return nil }
+        
+        var recipes = [Recipe]()
+        for hit in hits {
+            guard let dict = hit["recipe"] as? [String: Any],
+                  let recipe = Recipe.transformRecipe(dict: dict) else { return nil }
+            recipes.append(recipe)
+        }
+        
+        return recipes
+    }
+    
+    func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?,_ error: RecipleaseError?) -> Void) {
+        AF.request(url).validate().responseData { response in
+            guard let data = response.data else {
+                completion(nil, .invalidData)
+                return
             }
             
-            completion(totalRecipes, nil)
+            completion(data, nil)
         }
     }
 }
 
-class RecipeService: RecipeRequestDelegate {
-    var url: URL?
-    var lastID: Double = 0
-    var maxRecipes: Int = 10
-    
-    // MARK: - Properties
-    static var shared = RecipeService()
+class RecipeService: RecipeDelegate {
+    static let shared = RecipeService()
     private init() {}
     
-    private let baseURL         = "https://api.edamam.com/search?"
-    private let APP_ID          = "08b5ed9a"
-    private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
     
-    init(url: URL) {
-        self.url = url
-    }
-    
-    
-    // MARK: - Public Methods
-    func createAPIURL(with ingredients: [String]) -> URL? {
-        guard !ingredients.isEmpty else { return nil }
-
-        var ingredientString = ""
-        for text in ingredients {
-            ingredientString += "\(text),"
-        }
-
-        let urlString = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
-        return URL(string: urlString)
-    }
-    
-    func fetchImageData(from url: URL, completion: @escaping (_ imageData: Data?, _ success: Bool,_ error: RecipleaseError?) -> Void) {
-        AF.request(url).validate().responseData { response in
-            guard let data = response.data else {
-                completion(nil, false, .invalidData)
-                return
-            }
-            
-            completion(data, true, nil)
-        }
-    }
-    
-    
-    func addToFavorites(recipe: Recipe, completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
-        for object in RecipeDataModel.all {
-            guard object.label != recipe.label else {
-                completion(false, .alreadyInFavorites)
-                return
-            }
-        }
-        
-        Recipe.transformToDataModel(recipe: recipe)
-        
-        do {
-            try AppDelegate.viewContext.save()
-            recipe.isFavorite = true
-            completion(true, nil)
-        } catch {
-            recipe.isFavorite = false
-            completion(false, .unableToFavorite)
-        }
-    }
-    
-    func removeFromFavorites(recipe: Recipe, completion: @escaping (_ success: Bool) -> Void) {
-        // TODO: Implement method
-        // TODO: Remove object by its ID
-        for object in RecipeDataModel.all {
-            if object.id == recipe.id {
-                AppDelegate.viewContext.delete(object)
-                do {
-                    try AppDelegate.viewContext.save()
-                    completion(true)
-                } catch {
-                    completion(false)
-                }
-            }
-        }
-    }
 }

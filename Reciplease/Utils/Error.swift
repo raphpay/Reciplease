@@ -8,7 +8,7 @@
 import Foundation
 
 enum RecipleaseError: String, Error {
-    
+
     case title              = "Oups ! An error occured."
     case noRecipes          = "No recipe could be find. Please change your ingredients"
     case noIngredients      = "No ingredients was entered. Please insert at least one ingredient"
@@ -18,3 +18,4 @@ enum RecipleaseError: String, Error {
     case unableToFavorite   = "There was an error favoriting this recipe. Please try again."
     case alreadyInFavorites = "You already have that recipe in favorites !\nIt must be REALLY delicious !"
 }
+
