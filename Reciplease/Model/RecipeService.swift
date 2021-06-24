@@ -75,11 +75,7 @@ class RecipeService: RecipeRequestDelegate {
     private let APP_ID          = "08b5ed9a"
     private let APP_KEY         = "ad5b86fa2c4478bfc7c55184d216b14a"
     
-    init(url: URL?) {
-        guard let url = url else {
-            self.url = URL(string: "https://apple.com")
-            return
-        }
+    init(url: URL) {
         self.url = url
     }
     
