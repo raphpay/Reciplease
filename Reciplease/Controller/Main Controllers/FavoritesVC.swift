@@ -24,21 +24,6 @@ class FavoritesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recipes.removeAll()
-        let favorites = RecipeDataModel.all
-        
-        if favorites.isEmpty {
-            addChildVC(vc: emptyVC)
-        } else {
-            for dataModel in favorites {
-                guard let recipe = dataModel.transformToObject() else { return }
-                recipes.append(recipe)
-            }
-            tableVC.recipes = recipes
-            tableVC.tableView.reloadData()
-            addChildVC(vc: tableVC)
-        }
-    
-
     }
     
     // MARK: - Private Methods

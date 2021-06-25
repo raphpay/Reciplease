@@ -42,23 +42,6 @@ class RecipeDetailsImageView: UIView {
     init(recipe: Recipe?) {
         super.init(frame: .zero)
         configure()
-        if let recipe = recipe {
-            recipeTitle.text = recipe.label
-            infoView.set(recipe: recipe)
-            guard let imageURL = recipe.imageURL else { return }
-            RecipeService.shared.fetchImageData(from: imageURL) { _data, _error in
-                guard _error == nil,
-                      let data = _data else {
-                    self.recipeImage.backgroundColor = CustomColor.gray
-                    self.recipeImage.image = nil
-                    return
-                }
-                self.recipeImage.image = UIImage(data: data)
-            }
-        } else {
-            recipeTitle.text = Recipe.fakeRecipe.label
-            infoView.set(recipe: Recipe.fakeRecipe)
-        }
     }
     
     private func configure() {

@@ -16,7 +16,6 @@ class RecipeDetailsVC: UIViewController {
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
     var recipe: Recipe?         = nil
-    let service                 = RecipeService.shared
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
@@ -54,44 +53,10 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func toggleFavorite() {
-        guard let recipe = recipe else { return }
-        let isFavorite = recipe.isInFavorites()
         
-        if isFavorite {
-            // Remove from fav
-            recipe.removeFromFavorites() { success in
-                if success {
-                    self.showFavoritesAlert(isFavorite: false)
-                } else {
-                    self.presentAlert(message: "We couldn't remove it from favorites ! Retry later.")
-                }
-            }
-        } else {
-            // Add to fav
-            recipe.addToFavorites { success, _error in
-                guard success,
-                      _error == nil else {
-                    self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
-                    return
-                }
-                
-                self.showFavoritesAlert(isFavorite: true)
-            }
-        }
     }
     
-    @objc func directionButtonTapped() {
-        guard let recipe = recipe,
-              let url = recipe.url else {
-            presentAlert(title: "Oups", message: "Couldn't load the recipe's directions.\nPlease try again later")
-            return
-        }
-        
-        let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = true
-        let safari = SFSafariViewController(url: url, configuration: config)
-        self.present(safari, animated: true)
-    }
+    @objc func directionButtonTapped() {}
     
 
     // MARK: - Override methods
@@ -153,13 +118,6 @@ class RecipeDetailsVC: UIViewController {
     
     
     private func setTextView() {
-        guard let recipe = recipe,
-              let ingredients = recipe.ingredients else { return }
-        if informationTextView.text == TextView.placeholder {
-            informationTextView.text = ""
-        }
-        for object in ingredients {
-            informationTextView.text += "\n\(object)"
-        }
+        
     }
 }
