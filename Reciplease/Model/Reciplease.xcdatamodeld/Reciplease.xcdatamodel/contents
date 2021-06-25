@@ -2,10 +2,10 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Ingredient" representedClassName=".Ingredient" syncable="YES" codeGenerationType="category">
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeDataModel" inverseName="ingredients" inverseEntity="RecipeDataModel"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredients" inverseEntity="Recipe"/>
     </entity>
-    <entity name="RecipeDataModel" representedClassName=".RecipeDataModel" syncable="YES" codeGenerationType="category">
-        <attribute name="calories" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="Recipe" representedClassName=".Recipe" syncable="YES" codeGenerationType="category">
+        <attribute name="calories" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="cookTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="cuisineType" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -15,7 +15,7 @@
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient"/>
     </entity>
     <elements>
-        <element name="Ingredient" positionX="-36" positionY="9" width="128" height="73"/>
-        <element name="RecipeDataModel" positionX="-345.1026611328125" positionY="-90.64227294921875" width="128" height="149"/>
+        <element name="Recipe" positionX="67.310546875" positionY="-327.3559265136719" width="128" height="163"/>
+        <element name="Ingredient" positionX="-241.160400390625" positionY="-312.3766937255859" width="128" height="73"/>
     </elements>
 </model>

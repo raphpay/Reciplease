@@ -22,11 +22,13 @@
 		8651C5A6265ABF9D008EE7FE /* DetailsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C5A5265ABF9D008EE7FE /* DetailsInfoView.swift */; };
 		86596EAB265F9761005A272F /* RecipeDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86596EAA265F9761005A272F /* RecipeDetailsVC.swift */; };
 		86596EAD265F97C3005A272F /* RecipeDetailsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86596EAC265F97C3005A272F /* RecipeDetailsImageView.swift */; };
+		8663149C268652BD00862376 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8663149B268652BD00862376 /* Recipe.swift */; };
+		8663149E268652CC00862376 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8663149D268652CC00862376 /* CoreDataStack.swift */; };
+		866314A02686532900862376 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8663149F2686532900862376 /* Ingredients.swift */; };
 		8665844B26849F0300A97EC9 /* FakeRecipe.json in Resources */ = {isa = PBXBuildFile; fileRef = 8665844A26849F0300A97EC9 /* FakeRecipe.json */; };
 		868E534B265BA99E000C9402 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868E534A265BA99E000C9402 /* Icon.swift */; };
 		86A48E6B265FD07100D584FA /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A48E6A265FD07100D584FA /* FavoritesVC.swift */; };
 		86A48E70265FE91900D584FA /* SearchVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A48E6F265FE91900D584FA /* SearchVC+Ext.swift */; };
-		86A48E72265FF00B00D584FA /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A48E71265FF00B00D584FA /* Recipe.swift */; };
 		86A7974F266A7B9700B1E9BB /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A7974E266A7B9700B1E9BB /* UIViewController+Ext.swift */; };
 		86A79751266A7BA700B1E9BB /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A79750266A7BA700B1E9BB /* AlertVC.swift */; };
 		86A79753266A7FC300B1E9BB /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A79752266A7FC300B1E9BB /* Double+Ext.swift */; };
@@ -68,11 +70,13 @@
 		8651C5A5265ABF9D008EE7FE /* DetailsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInfoView.swift; sourceTree = "<group>"; };
 		86596EAA265F9761005A272F /* RecipeDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsVC.swift; sourceTree = "<group>"; };
 		86596EAC265F97C3005A272F /* RecipeDetailsImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsImageView.swift; sourceTree = "<group>"; };
+		8663149B268652BD00862376 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		8663149D268652CC00862376 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		8663149F2686532900862376 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		8665844A26849F0300A97EC9 /* FakeRecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FakeRecipe.json; sourceTree = "<group>"; };
 		868E534A265BA99E000C9402 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		86A48E6A265FD07100D584FA /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		86A48E6F265FE91900D584FA /* SearchVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+Ext.swift"; sourceTree = "<group>"; };
-		86A48E71265FF00B00D584FA /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		86A7974E266A7B9700B1E9BB /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		86A79750266A7BA700B1E9BB /* AlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		86A79752266A7FC300B1E9BB /* Double+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
@@ -195,8 +199,10 @@
 			isa = PBXGroup;
 			children = (
 				86F1378C2673557E00C5B345 /* Reciplease.xcdatamodeld */,
-				86A48E71265FF00B00D584FA /* Recipe.swift */,
 				86EB44E72661651F006C0BE2 /* RecipeService.swift */,
+				8663149B268652BD00862376 /* Recipe.swift */,
+				8663149D268652CC00862376 /* CoreDataStack.swift */,
+				8663149F2686532900862376 /* Ingredients.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -455,18 +461,20 @@
 				86A79751266A7BA700B1E9BB /* AlertVC.swift in Sources */,
 				8629C81C26592783006669A1 /* SearchVC.swift in Sources */,
 				8651C5A6265ABF9D008EE7FE /* DetailsInfoView.swift in Sources */,
-				86A48E72265FF00B00D584FA /* Recipe.swift in Sources */,
 				8651C5A4265ABF6E008EE7FE /* InfoView.swift in Sources */,
 				8629C83326596D5A006669A1 /* Enumerations.swift in Sources */,
 				86A48E6B265FD07100D584FA /* FavoritesVC.swift in Sources */,
 				86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */,
 				86EDDC7E265A82B3004A8A03 /* Label.swift in Sources */,
 				86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */,
+				866314A02686532900862376 /* Ingredients.swift in Sources */,
 				8629C81826592783006669A1 /* AppDelegate.swift in Sources */,
 				86EDDC86265A8A89004A8A03 /* TextView.swift in Sources */,
 				868E534B265BA99E000C9402 /* Icon.swift in Sources */,
 				86596EAB265F9761005A272F /* RecipeDetailsVC.swift in Sources */,
 				8651C596265A8EB7008EE7FE /* BackgroundImage.swift in Sources */,
+				8663149C268652BD00862376 /* Recipe.swift in Sources */,
+				8663149E268652CC00862376 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
