@@ -83,7 +83,6 @@ class Recipe {
     static func transformToDataModel(recipe: Recipe) {
         let dataModel = RecipeDataModel(context: AppDelegate.viewContext)
         
-        dataModel.id            = recipe.id ?? 0
         dataModel.label         = recipe.label
         dataModel.cuisineType   = recipe.cuisineType
         dataModel.calories      = recipe.calories ?? 0
@@ -103,7 +102,7 @@ class Recipe {
     func isInFavorites() -> Bool {
         var isFavorite = false
         for dataModel in RecipeDataModel.all {
-            if dataModel.id == self.id {
+            if dataModel.label == self.label {
                 isFavorite = true
             }
         }
@@ -131,7 +130,6 @@ extension RecipeDataModel {
         recipe.cuisineType  = self.cuisineType
         recipe.url          = self.url
         recipe.imageURL     = self.imageURL
-        recipe.id           = self.id
         
         // The recipe is forced to be true, caused it's contained by the CoreData stack
         recipe.isFavorite   = true

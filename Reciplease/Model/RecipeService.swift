@@ -133,7 +133,7 @@ class RecipeService: RecipeRequestDelegate {
         // TODO: Implement method
         // TODO: Remove object by its ID
         for object in RecipeDataModel.all {
-            if object.id == recipe.id {
+            if object.label == recipe.label {
                 AppDelegate.viewContext.delete(object)
                 do {
                     try AppDelegate.viewContext.save()
