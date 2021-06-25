@@ -10,7 +10,6 @@ import CoreData
 
 
 class Recipe {
-    var id: Double?
     var label: String?
     var cuisineType: String?
     var calories: Double?
@@ -24,7 +23,6 @@ class Recipe {
     static var fakeRecipe: Recipe {
         let recipe = Recipe()
         
-        recipe.id           = 0
         recipe.label        = "Pizza"
         recipe.calories     = 3000
         recipe.cookTime     = 20
@@ -42,7 +40,7 @@ class Recipe {
     }
     
     
-    static func transformRecipe(dict: [String: Any], lastId: Double = 0) -> Recipe? {
+    static func transformRecipe(dict: [String: Any], lastID: Int) -> Recipe? {
         guard let label = dict["label"] as? String,
               let calories = dict["calories"] as? Double,
               let cookTime = dict["totalTime"] as? Double,
@@ -66,7 +64,7 @@ class Recipe {
         
         let recipe = Recipe()
         
-        recipe.id           = lastId + 1
+        
         recipe.label        = label
         recipe.calories     = calories
         recipe.cookTime     = cookTime
@@ -79,19 +77,28 @@ class Recipe {
         return recipe
     }
     
+    func isInFavorites() -> Bool {
+        var isFavorite = false
+        for dataModel in RecipeDataModel.all {
+            if let name = self.label,
+                dataModel.label == name {
+                isFavorite = true
+            }
+        }
+        return isFavorite
+    }
     
-    static func transformToDataModel(recipe: Recipe) {
+    func transformToDataModel() {
         let dataModel = RecipeDataModel(context: AppDelegate.viewContext)
         
-        dataModel.id            = recipe.id ?? 0
-        dataModel.label         = recipe.label
-        dataModel.cuisineType   = recipe.cuisineType
-        dataModel.calories      = recipe.calories ?? 0
-        dataModel.cookTime      = recipe.cookTime ?? 0
-        dataModel.url           = recipe.url
-        dataModel.imageURL      = recipe.imageURL
+        dataModel.label         = self.label
+        dataModel.cuisineType   = self.cuisineType
+        dataModel.calories      = self.calories ?? 0
+        dataModel.cookTime      = self.cookTime ?? 0
+        dataModel.url           = self.url
+        dataModel.imageURL      = self.imageURL
         
-        if let ingredients = recipe.ingredients {
+        if let ingredients = self.ingredients {
             for ingredient in ingredients {
                 if let DMIngredient = Ingredient.transformIngredient(text: ingredient, for: dataModel) {
                     dataModel.addToIngredients(DMIngredient)
@@ -100,15 +107,41 @@ class Recipe {
         }
     }
     
-    func isInFavorites() -> Bool {
-        var isFavorite = false
-        for dataModel in RecipeDataModel.all {
-            if dataModel.id == self.id {
-                isFavorite = true
+    func addToFavorites(completion: @escaping (_ success: Bool,_ error: RecipleaseError?) -> Void) {
+        for object in RecipeDataModel.all {
+            guard object.label != self.label else {
+                completion(false, .alreadyInFavorites)
+                return
             }
         }
-        return isFavorite
+        
+        self.transformToDataModel()
+        
+        do {
+            try AppDelegate.viewContext.save()
+            self.isFavorite = true
+            completion(true, nil)
+        } catch {
+            self.isFavorite = false
+            completion(false, .unableToFavorite)
+        }
     }
+    
+    func removeFromFavorites(completion: @escaping (_ success: Bool) -> Void) {
+        for object in RecipeDataModel.all {
+            if let name = self.label,
+                object.label == name {
+                AppDelegate.viewContext.delete(object)
+                do {
+                    try AppDelegate.viewContext.save()
+                    completion(true)
+                } catch {
+                    completion(false)
+                }
+            }
+        }
+    }
+    
 }
 
 class RecipeDataModel: NSManagedObject {
@@ -131,7 +164,6 @@ extension RecipeDataModel {
         recipe.cuisineType  = self.cuisineType
         recipe.url          = self.url
         recipe.imageURL     = self.imageURL
-        recipe.id           = self.id
         
         // The recipe is forced to be true, caused it's contained by the CoreData stack
         recipe.isFavorite   = true

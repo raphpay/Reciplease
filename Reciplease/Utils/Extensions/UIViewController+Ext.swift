@@ -75,28 +75,26 @@ extension UIViewController {
     }
     
     func showFavoritesAlert(isFavorite: Bool) {
-        DispatchQueue.main.async {
-            containerView = UIView(frame: self.view.bounds)
-            self.view.addSubview(containerView)
-            self.view.addSubview(favoriteTextContainer)
-            
-            favoriteTextContainer.centerInSuperview()
-            favoriteTextContainer.height(50)
-            favoriteTextContainer.width(200)
-            
-            if isFavorite {
-                unfavoredText.removeFromSuperview()
-                favoriteTextContainer.addSubview(favoriteText)
-                favoriteText.edgesToSuperview()
-            } else {
-                favoriteText.removeFromSuperview()
-                favoriteTextContainer.addSubview(unfavoredText)
-                unfavoredText.edgesToSuperview()
-            }
-            
-            containerView.backgroundColor = CustomColor.background
-            containerView.alpha = 0
+        containerView = UIView(frame: self.view.bounds)
+        self.view.addSubview(containerView)
+        self.view.addSubview(favoriteTextContainer)
+        
+        favoriteTextContainer.centerInSuperview()
+        favoriteTextContainer.height(50)
+        favoriteTextContainer.width(200)
+        
+        if isFavorite {
+            unfavoredText.removeFromSuperview()
+            favoriteTextContainer.addSubview(favoriteText)
+            favoriteText.edgesToSuperview()
+        } else {
+            favoriteText.removeFromSuperview()
+            favoriteTextContainer.addSubview(unfavoredText)
+            unfavoredText.edgesToSuperview()
         }
+        
+        containerView.backgroundColor = CustomColor.background
+        containerView.alpha = 0
         
         UIView.animate(withDuration: 0.25) {
             containerView.alpha = 0.8

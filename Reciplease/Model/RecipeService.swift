@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 protocol RecipeDelegate {
+    var lastID: Int { get set }
     func createAPIURL(with ingredients: [String]) -> URL?
     func getRecipeHits(from url: URL, completion: @escaping (_ hits: [AnyObject]?,_ error: RecipleaseError?) -> Void)
     func transformHitsToRecipes(_ hits: [AnyObject]?) -> [Recipe]?
@@ -65,7 +66,7 @@ extension RecipeDelegate {
         var recipes = [Recipe]()
         for hit in hits {
             guard let dict = hit["recipe"] as? [String: Any],
-                  let recipe = Recipe.transformRecipe(dict: dict) else { return nil }
+                  let recipe = Recipe.transformRecipe(dict: dict, lastID: lastID) else { return nil }
             recipes.append(recipe)
         }
         
@@ -85,8 +86,8 @@ extension RecipeDelegate {
 }
 
 class RecipeService: RecipeDelegate {
+    // TODO: Remove last id if no solution found
+    var lastID = 0
     static let shared = RecipeService()
     private init() {}
-    
-    
 }

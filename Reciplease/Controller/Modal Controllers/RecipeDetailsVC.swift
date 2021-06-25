@@ -59,23 +59,24 @@ class RecipeDetailsVC: UIViewController {
         
         if isFavorite {
             // Remove from fav
-//            service.removeFromFavorites(recipe: recipe) { success in
-//                if success {
-//                    self.showFavoritesAlert(isFavorite: false)
-//                } else {
-//                    self.presentAlert(message: "We couldn't remove it from favorites ! Retry later.")
-//                }
-//            }
+            recipe.removeFromFavorites() { success in
+                if success {
+                    self.showFavoritesAlert(isFavorite: false)
+                } else {
+                    self.presentAlert(message: "We couldn't remove it from favorites ! Retry later.")
+                }
+            }
         } else {
             // Add to fav
-//            service.addToFavorites(recipe: recipe) { success, _error in
-//                guard success,
-//                      _error == nil else {
-//                    self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
-//                    return
-//                }
-//                self.showFavoritesAlert(isFavorite: true)
-//            }
+            recipe.addToFavorites { success, _error in
+                guard success,
+                      _error == nil else {
+                    self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
+                    return
+                }
+                
+                self.showFavoritesAlert(isFavorite: true)
+            }
         }
     }
     
