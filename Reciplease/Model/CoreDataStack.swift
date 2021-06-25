@@ -10,7 +10,7 @@ import CoreData
 
 
 open class CoreDataStack {
-    public static let modelName = "CoreDataApp"
+    public static let modelName = "Reciplease"
     
     public static let model: NSManagedObjectModel = {
         let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd")!
