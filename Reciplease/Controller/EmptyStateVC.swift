@@ -22,7 +22,6 @@ class EmptyStateVC: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         view.addSubview(emptyStateImage)
-        
         emptyStateImage.edgesToSuperview()
     }
 }
