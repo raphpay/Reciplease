@@ -74,7 +74,19 @@ class RecipeCell: UITableViewCell {
     }
     
     
-    func set(recipe: Recipe) {}
+    func set(recipe: RecipeObject) {
+        guard let label = recipe.label,
+              let cuisineType = recipe.cuisineType,
+              let _ = recipe.imageURL else { return }
+        
+        cellTitle.text = label
+        cellDescription.text = cuisineType
+        
+        
+        
+        #warning("Fetch image data")
+        infoView.set(recipe: recipe)
+    }
     
     
 }

@@ -63,4 +63,16 @@ class CoreDataTests: XCTestCase {
         XCTAssertTrue(favorites?.isEmpty ?? false)
     }
 
+    
+    func testGivenRecipeIsNotAdded_WhenCheckingIfInFavorites_ThenReturnFalse() {
+        let boolean = recipeService.isInFavorites(recipe: object)
+        XCTAssertFalse(boolean)
+    }
+    
+    func testGivenRecipeIsAddedToFavorites_WhenCheckingIfInFavorites_ThenReturnTrue() {
+        let _ = recipeService.addRecipeToFavorite(object)
+        
+        let boolean = recipeService.isInFavorites(recipe: object)
+        XCTAssertTrue(boolean)
+    }
 }

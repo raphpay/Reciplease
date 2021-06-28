@@ -10,7 +10,7 @@ import UIKit
 class TableViewController: UITableViewController {
     
     // MARK: - Properties
-    var recipes: [Recipe] = []
+    var recipes: [RecipeObject] = []
     
     // MARK: - Override Methods
     override func viewDidLoad() {

@@ -58,4 +58,14 @@ extension RecipeService {
         }
         return nil
     }
+    
+    func isInFavorites(recipe: RecipeObject) -> Bool {
+        guard let favorites = getRecipes() else { return false }
+        
+        for favorite in favorites {
+            if recipe.id == favorite.id { return true }
+        }
+        
+        return false
+    }
 }

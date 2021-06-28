@@ -15,7 +15,10 @@ class RecipeDetailsVC: UIViewController {
     lazy var contentViewSize    = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
-    var recipe: Recipe?         = nil
+    var recipe: RecipeObject?   = nil
+    let coreDataStack           = CoreDataStack()
+    lazy var recipeService      = RecipeService(managedObjectContext: coreDataStack.viewContext,
+                                                coreDataStack: coreDataStack)
     
     // MARK: - Views
     lazy var recipeImage = RecipeDetailsImageView(recipe: recipe)
@@ -36,12 +39,10 @@ class RecipeDetailsVC: UIViewController {
         return v
     }()
     
-    lazy var favoriteButton: UIButton = {
+    lazy var starButton: UIButton = {
         let b = UIButton(type: .system)
-        b.setImage(Icon.star, for: .normal)
         b.translatesAutoresizingMaskIntoConstraints = false
         b.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
-        // TODO: Change the icon color
         return b
     }()
     
@@ -53,7 +54,10 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func toggleFavorite() {
+        // Toggle favorite
         
+        // Change star icon
+        setStarImage()
     }
     
     @objc func directionButtonTapped() {}
@@ -64,6 +68,7 @@ class RecipeDetailsVC: UIViewController {
         super.viewDidLoad()
         setUpViewController()
         setTextView()
+        setStarImage()
     }
     
     
@@ -91,17 +96,17 @@ class RecipeDetailsVC: UIViewController {
     
     
     private func setupContainerView() {
-        containerView.addSubview(favoriteButton)
+        containerView.addSubview(starButton)
         containerView.addSubview(recipeImage)
         containerView.addSubview(informationTitle)
         containerView.addSubview(informationTextView)
         
-        favoriteButton.topToSuperview()
-        favoriteButton.rightToSuperview(offset: -20)
-        favoriteButton.height(44)
-        favoriteButton.width(44)
+        starButton.topToSuperview()
+        starButton.rightToSuperview(offset: -20)
+        starButton.height(44)
+        starButton.width(44)
         
-        recipeImage.topToBottom(of: favoriteButton, offset: 10)
+        recipeImage.topToBottom(of: starButton, offset: 10)
         recipeImage.leftToSuperview()
         recipeImage.rightToSuperview()
         recipeImage.height(250)
@@ -119,5 +124,16 @@ class RecipeDetailsVC: UIViewController {
     
     private func setTextView() {
         
+    }
+    
+    private func setStarImage() {
+        guard let recipe = recipe else { return }
+        let isRecipeInFavorites = recipeService.isInFavorites(recipe: recipe)
+        
+        if isRecipeInFavorites {
+            starButton.setImage(Icon.favoriteStar, for: .normal)
+        } else {
+            starButton.setImage(Icon.notFavoriteStar, for: .normal)
+        }
     }
 }

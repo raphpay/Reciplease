@@ -61,6 +61,8 @@ class SearchVC: UIViewController {
     @objc func searchRecipes() {
         searchButton.isEnabled = false
         showLoadingView()
+        
+        #warning("Add the search logic")
     }
     
     
@@ -82,7 +84,6 @@ class SearchVC: UIViewController {
         configureTextField()
         setupViews()
         connectButtons()
-        view.backgroundColor = UIColor(named: "Background")
     }
     
     
