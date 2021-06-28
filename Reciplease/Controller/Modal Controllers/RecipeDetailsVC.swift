@@ -128,8 +128,14 @@ class RecipeDetailsVC: UIViewController {
     
     
     private func setTextView() {
-        #warning("Actions here")
-        // TODO: Add recipe ingredients in the text view
+        guard let recipe = recipe,
+              let ingredients = recipe.ingredients else { return }
+        if informationTextView.text == TextView.placeholder {
+            informationTextView.text = ""
+        }
+        for object in ingredients {
+            informationTextView.text += "\n\(object)"
+        }
     }
     
     private func setStarImage(favorite: Bool) {
