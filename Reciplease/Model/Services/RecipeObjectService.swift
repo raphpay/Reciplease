@@ -29,7 +29,27 @@ class RecipeObjectService {
         return recipeObject
     }
     
-    func transformFromCoreData(object: Recipe) -> RecipeObject? {
-        return nil
+    func transformFromCoreData(recipe: Recipe?) -> RecipeObject? {
+        guard let recipe = recipe,
+              let id = recipe.id,
+              let label = recipe.label,
+              let cuisineType = recipe.cuisineType,
+              let url = recipe.url,
+              let imageURL = recipe.imageURL,
+              let ingredients = recipe.ingredients?.allObjects else { return nil }
+        
+        var ingredientsArray: [String] = []
+        for ingredient in ingredients {
+            
+            guard let ingredient = ingredient as? Ingredient,
+                  let text = ingredient.text else { return nil }
+            
+            ingredientsArray.append(text)
+        }
+        
+        let object = RecipeObject(id: id, label: label, cuisineType: cuisineType, ingredients: ingredientsArray,
+                                  calories: recipe.calories, cookTime: recipe.cookTime, url: url, imageURL: imageURL)
+        
+        return object
     }
 }

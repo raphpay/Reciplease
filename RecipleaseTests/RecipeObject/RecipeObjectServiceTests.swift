@@ -10,9 +10,8 @@ import XCTest
 
 class RecipeObjectServiceTests: XCTestCase {
     
-    let service = RecipeObjectService.shared
-    
     func testGivenIncorrectDict_WhenTransformingToRecipeObject_ThenRecipeIsNotNil() {
+        let service = RecipeObjectService.shared
         let recipe = service.transformFromDict(FakeRecipeObjectData.correctDict)
         
         let url = URL(string: "http://www.seriouseats.com/recipes/2008/04/essentials-how-to-cook-rice.html")
@@ -29,6 +28,7 @@ class RecipeObjectServiceTests: XCTestCase {
     }
     
     func testGivenCorrectDict_WhenTransformingToRecipeObject_ThenRecipeIsNotNil() {
+        let service = RecipeObjectService.shared
         let recipe = service.transformFromDict(FakeRecipeObjectData.incorrectDict)
         
         XCTAssertNil(recipe)
@@ -39,5 +39,43 @@ class RecipeObjectServiceTests: XCTestCase {
         XCTAssertNil(recipe?.url)
         XCTAssertNil(recipe?.imageURL)
         XCTAssertNil(recipe?.ingredients)
+    }
+    
+    func testGivenCorrectRecipeInCoreData_WhenTransformingToRecipeObject_ThenObjectIsNotNil() {
+        let coreDataStack   = FakeCoreDataStack()
+        let recipeService   = RecipeService(managedObjectContext: coreDataStack.viewContext, coreDataStack: coreDataStack)
+        let service         = RecipeObjectService.shared
+         
+        let object = RecipeObject(id: UUID(), label: "Rice", cuisineType: "Chinese", ingredients: ["Ing1"], calories: 3000, cookTime: 20, url: FakeRecipeData.url, imageURL: FakeRecipeData.imageURL)
+        let recipe = recipeService.addRecipeToFavorite(object)
+        
+        let newObject = service.transformFromCoreData(recipe: recipe)
+        
+        
+        XCTAssertNotNil(newObject)
+        XCTAssertEqual(newObject?.id, object.id)
+        XCTAssertEqual(newObject?.label, object.label)
+        XCTAssertEqual(newObject?.cuisineType, object.cuisineType)
+        XCTAssertEqual(newObject?.ingredients, object.ingredients)
+        XCTAssertEqual(newObject?.calories, object.calories)
+        XCTAssertEqual(newObject?.cookTime, object.cookTime)
+        XCTAssertEqual(newObject?.url, object.url)
+        XCTAssertEqual(newObject?.imageURL, object.imageURL)
+    }
+    
+    func testGivenNoRecipeInCoreData_WhenTransformingToRecipeObject_ThenObjectIsNIl() {
+        let service         = RecipeObjectService.shared
+        
+        let newObject = service.transformFromCoreData(recipe: nil)
+        
+        XCTAssertNil(newObject)
+        XCTAssertNil(newObject?.id)
+        XCTAssertNil(newObject?.label)
+        XCTAssertNil(newObject?.calories)
+        XCTAssertNil(newObject?.cookTime)
+        XCTAssertNil(newObject?.cuisineType)
+        XCTAssertNil(newObject?.ingredients)
+        XCTAssertNil(newObject?.url)
+        XCTAssertNil(newObject?.imageURL)
     }
 }
