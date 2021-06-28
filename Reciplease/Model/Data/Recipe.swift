@@ -33,4 +33,12 @@ class RecipeObject {
         self.url            = url
         self.imageURL       = imageURL
     }
+
+    
+    static let mockRecipe = RecipeObject(id: UUID(), label: "Pizza", cuisineType: "Italian",
+                                         ingredients: ["Mozzarella", "Tomato"],
+                                         calories: 3000, cookTime: 20, url: URL(string: "https://www.apple.com")!,
+                                         imageURL: URL(string: "https://www.apple.com")!)
+    
+    static let mockRecipes = [mockRecipe, mockRecipe, mockRecipe]
 }

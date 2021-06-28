@@ -62,11 +62,11 @@ extension RecipeService {
         do {
             let results = try managedObjectContext.fetch(recipeFetch)
             return results
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
+        } catch  {
+            return nil
         }
-        return nil
     }
+    
     
     func isInFavorites(recipe: RecipeObject) -> Bool {
         guard let favorites = getRecipes() else { return false }

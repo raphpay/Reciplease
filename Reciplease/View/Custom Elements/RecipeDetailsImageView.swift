@@ -19,6 +19,12 @@ class RecipeDetailsImageView: UIView {
         return imageView
     }()
     
+    let activityIndicator : UIActivityIndicatorView = {
+        let ac = UIActivityIndicatorView()
+        ac.translatesAutoresizingMaskIntoConstraints = false
+        return ac
+    }()
+    
     let recipeTitle = Label(text: "", alignment: .center, fontSize: 30)
     
     let shadowView: UIView = {
@@ -42,21 +48,41 @@ class RecipeDetailsImageView: UIView {
     init(recipe: RecipeObject?) {
         super.init(frame: .zero)
         configure()
+        set(recipe: recipe)
     }
     
     private func configure() {
         addSubview(recipeImage)
+        addSubview(activityIndicator)
         addSubview(shadowView)
         addSubview(recipeTitle)
         addSubview(infoView)
         
         recipeImage.edgesToSuperview()
         
+        activityIndicator.centerInSuperview()
+        activityIndicator.startAnimating()
+        
         recipeTitle.edgesToSuperview(excluding: .top)
         shadowView.edges(to: recipeTitle)
         
         infoView.topToSuperview(offset: 10)
         infoView.rightToSuperview(offset: -10)
+    }
+    
+    private func set(recipe: RecipeObject?) {
+        if let recipe = recipe {
+            recipeTitle.text = recipe.label
+            infoView.set(recipe: recipe)
+            guard let _ = recipe.imageURL else { return }
+            #warning("Actions here")
+            // TODO: Fetch image
+            // TODO: Remove gray background and activity indicator
+            // TODO: Place real image
+        } else {
+            recipeTitle.text = RecipeObject.mockRecipe.label
+            infoView.set(recipe: RecipeObject.mockRecipe)
+        }
     }
     
 }

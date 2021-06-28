@@ -33,9 +33,8 @@ class FavoritesVC: UIViewController {
         
         if let recipes = favorites,
            !recipes.isEmpty {
+            #warning("Actions here")
             // TODO: Add table vc
-            print("====================\n recipes \(recipes) \(recipes.isEmpty) \n====================")
-            print("====================\n TODO: add table vc \n====================")
         } else {
             addChildVC(emptyVC)
         }

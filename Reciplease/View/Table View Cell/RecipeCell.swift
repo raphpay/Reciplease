@@ -82,9 +82,6 @@ class RecipeCell: UITableViewCell {
         cellTitle.text = label
         cellDescription.text = cuisineType
         
-        
-        
-        #warning("Fetch image data")
         infoView.set(recipe: recipe)
     }
     

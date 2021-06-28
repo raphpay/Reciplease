@@ -54,10 +54,14 @@ class RecipeDetailsVC: UIViewController {
     
     // MARK: - Actions
     @objc func toggleFavorite() {
-        // Toggle favorite
-        
-        // Change star icon
-        setStarImage()
+        guard let recipe = recipe else { return }
+        if recipeService.isInFavorites(recipe: recipe) {
+            recipeService.removeRecipeFromFavorites(recipe)
+            setStarImage(favorite: false)
+        } else {
+            let _ = recipeService.addRecipeToFavorite(recipe)
+            setStarImage(favorite: true)
+        }
     }
     
     @objc func directionButtonTapped() {}
@@ -68,7 +72,8 @@ class RecipeDetailsVC: UIViewController {
         super.viewDidLoad()
         setUpViewController()
         setTextView()
-        setStarImage()
+        guard let recipe = recipe else { return }
+        setStarImage(favorite: recipeService.isInFavorites(recipe: recipe))
     }
     
     
@@ -123,16 +128,11 @@ class RecipeDetailsVC: UIViewController {
     
     
     private func setTextView() {
-        
+        #warning("Actions here")
+        // TODO: Add recipe ingredients in the text view
     }
     
-    private func setStarImage() {
-        guard let recipe = recipe else { return }
-        
-        if recipeService.isInFavorites(recipe: recipe) {
-            starButton.setImage(Icon.favoriteStar, for: .normal)
-        } else {
-            starButton.setImage(Icon.notFavoriteStar, for: .normal)
-        }
+    private func setStarImage(favorite: Bool) {
+        starButton.setImage(favorite ? Icon.favoriteStar : Icon.notFavoriteStar, for: .normal)
     }
 }
