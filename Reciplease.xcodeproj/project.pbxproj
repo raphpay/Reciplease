@@ -204,8 +204,7 @@
 			children = (
 				86A48E77265FF80900D584FA /* Main Controllers */,
 				86A48E78265FF82800D584FA /* Modal Controllers */,
-				8629C83526598172006669A1 /* EmptyStateVC.swift */,
-				8651C5A1265AA1BA008EE7FE /* TableViewController.swift */,
+				86F029E2268A213D00AC077E /* Generic Controllers */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -232,20 +231,10 @@
 		8629C83426597F2D006669A1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8629C83226596D5A006669A1 /* Enumerations.swift */,
+				86F029E3268A215300AC077E /* Enumerations */,
 				86A79754266A7FC800B1E9BB /* Extensions */,
-				86FEE1A9267275F600B67438 /* Error.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		86A48E6E265FE90900D584FA /* SearchVC */ = {
-			isa = PBXGroup;
-			children = (
-				8629C81B26592783006669A1 /* SearchVC.swift */,
-				86A48E6F265FE91900D584FA /* SearchVC+Ext.swift */,
-			);
-			path = SearchVC;
 			sourceTree = "<group>";
 		};
 		86A48E73265FF78800D584FA /* Table View Cell */ = {
@@ -291,7 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				8651C59F265A9F4C008EE7FE /* TabBarController.swift */,
-				86A48E6E265FE90900D584FA /* SearchVC */,
+				8629C81B26592783006669A1 /* SearchVC.swift */,
+				86A48E6F265FE91900D584FA /* SearchVC+Ext.swift */,
 				86A48E6A265FD07100D584FA /* FavoritesVC.swift */,
 			);
 			path = "Main Controllers";
@@ -364,6 +354,24 @@
 				8663149F2686532900862376 /* Ingredients.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		86F029E2268A213D00AC077E /* Generic Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8629C83526598172006669A1 /* EmptyStateVC.swift */,
+				8651C5A1265AA1BA008EE7FE /* TableViewController.swift */,
+			);
+			path = "Generic Controllers";
+			sourceTree = "<group>";
+		};
+		86F029E3268A215300AC077E /* Enumerations */ = {
+			isa = PBXGroup;
+			children = (
+				8629C83226596D5A006669A1 /* Enumerations.swift */,
+				86FEE1A9267275F600B67438 /* Error.swift */,
+			);
+			path = Enumerations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
