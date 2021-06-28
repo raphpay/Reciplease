@@ -10,6 +10,9 @@ import CoreData
 
 
 open class CoreDataStack {
+    static let shared = CoreDataStack()
+    public init() {}
+    
     public static let modelName = "Reciplease"
     
     public static let model: NSManagedObjectModel = {
@@ -17,7 +20,6 @@ open class CoreDataStack {
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
-    public init() {}
     
     public lazy var persistantContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: CoreDataStack.modelName, managedObjectModel: CoreDataStack.model)

@@ -29,7 +29,16 @@ extension RecipeService {
         dataModel.cookTime      = recipe.cookTime ?? 0
         dataModel.url           = recipe.url
         dataModel.imageURL      = recipe.imageURL
-        // TODO: Convert ingredients array to ns set
+        
+        if let ingredients = recipe.ingredients {
+            for ingredient in ingredients {
+                if let dataModelIngredient = Ingredient.transformIngredient(text: ingredient,
+                                                                            for: dataModel,
+                                                                            context: managedObjectContext) {
+                    dataModel.addToIngredients(dataModelIngredient)
+                }
+            }
+        }
         
         
         coreDataStack.saveContext(managedObjectContext)

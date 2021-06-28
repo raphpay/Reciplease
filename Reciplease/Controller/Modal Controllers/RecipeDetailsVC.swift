@@ -16,7 +16,7 @@ class RecipeDetailsVC: UIViewController {
     var showDirections: Bool    = false
     let padding                 = CGFloat(16)
     var recipe: RecipeObject?   = nil
-    let coreDataStack           = CoreDataStack()
+    let coreDataStack           = CoreDataStack.shared
     lazy var recipeService      = RecipeService(managedObjectContext: coreDataStack.viewContext,
                                                 coreDataStack: coreDataStack)
     
@@ -128,9 +128,8 @@ class RecipeDetailsVC: UIViewController {
     
     private func setStarImage() {
         guard let recipe = recipe else { return }
-        let isRecipeInFavorites = recipeService.isInFavorites(recipe: recipe)
         
-        if isRecipeInFavorites {
+        if recipeService.isInFavorites(recipe: recipe) {
             starButton.setImage(Icon.favoriteStar, for: .normal)
         } else {
             starButton.setImage(Icon.notFavoriteStar, for: .normal)

@@ -11,7 +11,7 @@ import XCTest
 class CoreDataTests: XCTestCase {
     var recipeService: RecipeService!
     var coreDataStack: CoreDataStack!
-    let object = RecipeObject(id: UUID(), label: "Rice", cuisineType: "Chinese", calories: 3000, cookTime: 20, url: FakeRecipeData.url, imageURL: FakeRecipeData.imageURL)
+    let object = RecipeObject(id: UUID(), label: "Rice", cuisineType: "Chinese", ingredients: ["Ing1"], calories: 3000, cookTime: 20, url: FakeRecipeData.url, imageURL: FakeRecipeData.imageURL)
     
     override func setUp() {
         super.setUp()
@@ -30,10 +30,10 @@ class CoreDataTests: XCTestCase {
         
         let recipe = recipeService.addRecipeToFavorite(object)
         
-        
         XCTAssertNotNil(recipe, "Recipe should not be nil")
         XCTAssertEqual(recipe.label, object.label)
         XCTAssertEqual(recipe.cuisineType, object.cuisineType)
+        XCTAssertNotNil(recipe.ingredients)
         XCTAssertEqual(recipe.calories, object.calories)
         XCTAssertEqual(recipe.cookTime, object.cookTime)
         XCTAssertEqual(recipe.url, object.url)

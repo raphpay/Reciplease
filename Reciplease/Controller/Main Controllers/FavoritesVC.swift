@@ -12,7 +12,7 @@ class FavoritesVC: UIViewController {
     // MARK: - Objects
     let tableVC     = TableViewController()
     let emptyVC     = EmptyStateVC()
-    let coreDataStack = CoreDataStack()
+    let coreDataStack = CoreDataStack.shared
     
     // MARK: - Properties
     var recipes: [Recipe] = []

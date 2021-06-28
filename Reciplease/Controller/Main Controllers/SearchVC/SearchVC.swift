@@ -9,11 +9,12 @@ import UIKit
 import TinyConstraints
 
 class SearchVC: UIViewController {
-    // TODO: Refactor the views inside a big view: maybe use protocols ?
+    
     // MARK: - Properties
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var ingredientsInFridge: [String] = []
+    
     
     // MARK: - Views
     lazy var scrollView: UIScrollView = {
