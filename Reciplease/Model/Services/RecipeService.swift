@@ -15,7 +15,7 @@ class RecipeService {
     public init(managedObjectContext: NSManagedObjectContext, coreDataStack: CoreDataStack) {
         self.managedObjectContext = managedObjectContext
         self.coreDataStack = coreDataStack
-    }
+    } 
 }
 
 extension RecipeService {
