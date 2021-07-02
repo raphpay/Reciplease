@@ -11,7 +11,7 @@ import CoreData
 class Ingredient: NSManagedObject {}
 
 extension Ingredient {
-    static func transformIngredient(text: String, for dataModel: Recipe, context: NSManagedObjectContext) -> Ingredient? {
+    static func transformIngredient(text: String, for dataModel: RecipeDataModel, context: NSManagedObjectContext) -> Ingredient? {
         let ingredient = Ingredient(context: context)
         
         ingredient.text     = text

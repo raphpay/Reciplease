@@ -15,11 +15,22 @@ public enum NetworkRequestError: Error {
 
 public protocol NetworkRequest {
 //    func getDataFrom(url : URL?, completion: @escaping (_ data: Data?,_ error: RecipleaseError?) -> Void)
-    func get<DataType: Codable>(with dict: [String: Any], completion: @escaping (DataType?, Error?) -> Void)
+//    func get<DataType: Codable>(with dict: [String: Any], completion: @escaping (DataType?, Error?) -> Void)
+    func request(url : URL, completion: @escaping (_ result: AFDataResponse<Any>?) -> Void)
 }
 
 
-class AlamofireService: NetworkRequest {
+class AlamofireNetworkRequest: NetworkRequest {
+    func request(url: URL, completion: @escaping (AFDataResponse<Any>?) -> Void) {
+        AF.request(url).responseJSON { response in
+            completion(response)
+        }
+    }
+    
+    
+    
+    
+    
 //    func getDataFrom(url: URL?, completion: @escaping (_ data: Data?,_ error: RecipleaseError?) -> Void) {
 //        guard let url = url else {
 //            completion(nil, .invalidURL)
@@ -36,10 +47,6 @@ class AlamofireService: NetworkRequest {
 //        }
 //    }
     
-    func get<DataType>(with dict: [String : Any], completion: @escaping (DataType?, Error?) -> Void) where DataType : Decodable, DataType : Encodable {
-        //
-    }
+//    AFDataResponse a trouver
+    
 }
-
-
-

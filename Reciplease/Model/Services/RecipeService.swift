@@ -19,8 +19,8 @@ class RecipeService {
 }
 
 extension RecipeService {
-    public func addRecipeToFavorite(_ recipe: RecipeObject) -> Recipe {
-        let dataModel = Recipe(context: managedObjectContext)
+    public func addRecipeToFavorite(_ recipe: RecipeObject) -> RecipeDataModel {
+        let dataModel = RecipeDataModel(context: managedObjectContext)
         
         dataModel.id            = recipe.id
         dataModel.label         = recipe.label
@@ -57,8 +57,8 @@ extension RecipeService {
     }
     
     
-    public func getRecipes() -> [Recipe]? {
-        let recipeFetch: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+    public func getRecipes() -> [RecipeDataModel]? {
+        let recipeFetch: NSFetchRequest<RecipeDataModel> = RecipeDataModel.fetchRequest()
         do {
             let results = try managedObjectContext.fetch(recipeFetch)
             return results

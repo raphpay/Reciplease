@@ -41,7 +41,7 @@ class CoreDataTests: XCTestCase {
         XCTAssertNotNil(recipe.id)
     }
     
-    func testGetReports() {
+    func testGetFavorites() {
         let newRecipe = recipeService.addRecipeToFavorite(object)
         let favorites = recipeService.getRecipes()
         
@@ -50,7 +50,7 @@ class CoreDataTests: XCTestCase {
         XCTAssertTrue(newRecipe.id == favorites?.first?.id)
     }
     
-    func testDeleteReport() {
+    func testDeleteFavorites() {
         let newRecipe = recipeService.addRecipeToFavorite(object)
         
         var favorites = recipeService.getRecipes()

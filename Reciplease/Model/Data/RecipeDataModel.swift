@@ -8,9 +8,9 @@
 import Foundation
 import CoreData
 
-class Recipe: NSManagedObject {}
+class RecipeDataModel: NSManagedObject {}
 
-extension Recipe {}
+extension RecipeDataModel {}
 
 class RecipeObject {
     var id = UUID()

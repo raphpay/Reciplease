@@ -29,7 +29,7 @@ class RecipeObjectService {
         return recipeObject
     }
     
-    func transformFromCoreData(recipe: Recipe?) -> RecipeObject? {
+    func transformFromCoreData(recipe: RecipeDataModel?) -> RecipeObject? {
         guard let recipe = recipe,
               let id = recipe.id,
               let label = recipe.label,

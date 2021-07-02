@@ -10,7 +10,7 @@ import XCTest
 
 class RecipeObjectServiceTests: XCTestCase {
     
-    func testGivenIncorrectDict_WhenTransformingToRecipeObject_ThenRecipeIsNotNil() {
+    func testGivenCorrectDict_WhenTransformingToRecipeObject_ThenRecipeIsNotNil() {
         let service = RecipeObjectService.shared
         let recipe = service.transformFromDict(FakeRecipeObjectData.correctDict)
         
@@ -27,7 +27,7 @@ class RecipeObjectServiceTests: XCTestCase {
         XCTAssertEqual(recipe?.ingredients, ["1 cup long-grain white rice"])
     }
     
-    func testGivenCorrectDict_WhenTransformingToRecipeObject_ThenRecipeIsNotNil() {
+    func testGivenIncorrectDict_WhenTransformingToRecipeObject_ThenRecipeIsNil() {
         let service = RecipeObjectService.shared
         let recipe = service.transformFromDict(FakeRecipeObjectData.incorrectDict)
         

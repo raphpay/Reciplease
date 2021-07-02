@@ -15,7 +15,7 @@ class FavoritesVC: UIViewController {
     let coreDataStack = CoreDataStack.shared
     
     // MARK: - Properties
-    var recipes: [Recipe] = []
+    var recipes: [RecipeDataModel] = []
     
     
     // MARK: - Override methods

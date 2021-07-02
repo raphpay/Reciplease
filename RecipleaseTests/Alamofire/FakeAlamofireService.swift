@@ -8,7 +8,9 @@
 import Foundation
 import Reciplease
 
-struct FakeAlamofireService : NetworkRequest {
+struct FakeNetworkRequest : NetworkRequest {
+    
+    
     var data: Data?
     var response: HTTPURLResponse?
     var error: Error?
@@ -17,22 +19,32 @@ struct FakeAlamofireService : NetworkRequest {
         return URL(string: "https://www.apple.com")!
     }
     
-    func get<DataType>(with dict: [String : Any], completion: @escaping (DataType?, Error?) -> Void) where DataType : Decodable, DataType : Encodable {
-        guard let response = response, response.statusCode == 200 else {
-            return completion(nil, NetworkRequestError.statusCode(self.response?.statusCode ?? -1))
-        }
-        guard let data = data else {
-            return completion(nil, error)
+//    func get<DataType>(with dict: [String : Any], completion: @escaping (DataType?, Error?) -> Void) where DataType : Decodable, DataType : Encodable {
+//        guard let response = response, response.statusCode == 200 else {
+//            return completion(nil, NetworkRequestError.statusCode(self.response?.statusCode ?? -1))
+//        }
+//        guard let data = data else {
+//            return completion(nil, error)
+//        }
+//
+//        do {
+//            completion(try JSONDecoder().decode(DataType.self, from: data), nil)
+//        } catch {
+//            completion(nil, NetworkRequestError.serializationError(error))
+//        }
+//    }
+    
+    func request(url : URL, completion: (_ result: AFDataResponse<Any>?) -> Void) {
+        guard let response = FakeRecipeData.responseOK else {
+//            completion(nil)
+            return
         }
         
-        do {
-            completion(try JSONDecoder().decode(DataType.self, from: data), nil)
-        } catch {
-            completion(nil, NetworkRequestError.serializationError(error))
-        }
+        // Ici completion de DataResponse
+        
+        
+        
+        // il faut passer data, reponse et error
+//        completion(DataResponse(request: URL, response: fakeResponse, data: Data, result: ))
     }
-    
-//    func getDataFrom(url: URL?, completion: @escaping (Data?, RecipleaseError?) -> Void) {
-//        //
-//    }
 }
