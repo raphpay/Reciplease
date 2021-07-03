@@ -17,7 +17,7 @@ class RecipeDetailsVC: UIViewController {
     let padding                 = CGFloat(16)
     var recipe: RecipeObject?   = nil
     let coreDataStack           = CoreDataStack.shared
-    lazy var recipeService      = RecipeService(managedObjectContext: coreDataStack.viewContext,
+    lazy var recipeService      = RecipeDataModelService(managedObjectContext: coreDataStack.viewContext,
                                                 coreDataStack: coreDataStack)
     
     // MARK: - Views

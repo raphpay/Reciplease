@@ -38,11 +38,11 @@
 		86C17FF82689EC8600FBC905 /* RecipeObjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C17FF72689EC8600FBC905 /* RecipeObjectService.swift */; };
 		86C17FFB2689ECB000FBC905 /* RecipeObjectServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C17FFA2689ECB000FBC905 /* RecipeObjectServiceTests.swift */; };
 		86C17FFD2689ED8800FBC905 /* FakeRecipeObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C17FFC2689ED8800FBC905 /* FakeRecipeObjectData.swift */; };
-		86D4D807268EFADB00351432 /* FakeRecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D4D806268EFADB00351432 /* FakeRecipeData.swift */; };
+		86D4D807268EFADB00351432 /* FakeAlamofireData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D4D806268EFADB00351432 /* FakeAlamofireData.swift */; };
 		86E48F2A268720160013ACF6 /* AlamofireServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */; };
 		86E48F2C268721A00013ACF6 /* AlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E48F2B268721A00013ACF6 /* AlamofireService.swift */; };
 		86E48F302687226C0013ACF6 /* FakeAlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */; };
-		86EB44E82661651F006C0BE2 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EB44E72661651F006C0BE2 /* RecipeService.swift */; };
+		86EB44E82661651F006C0BE2 /* RecipeDataModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */; };
 		86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7B265A7FC2004A8A03 /* Button.swift */; };
 		86EDDC7E265A82B3004A8A03 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* Label.swift */; };
 		86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */; };
@@ -95,13 +95,13 @@
 		86C17FF72689EC8600FBC905 /* RecipeObjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeObjectService.swift; sourceTree = "<group>"; };
 		86C17FFA2689ECB000FBC905 /* RecipeObjectServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeObjectServiceTests.swift; sourceTree = "<group>"; };
 		86C17FFC2689ED8800FBC905 /* FakeRecipeObjectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRecipeObjectData.swift; sourceTree = "<group>"; };
-		86D4D806268EFADB00351432 /* FakeRecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRecipeData.swift; sourceTree = "<group>"; };
+		86D4D806268EFADB00351432 /* FakeAlamofireData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAlamofireData.swift; sourceTree = "<group>"; };
 		86DE493E26751060005EF8C2 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DE494226751060005EF8C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireServiceTests.swift; sourceTree = "<group>"; };
 		86E48F2B268721A00013ACF6 /* AlamofireService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireService.swift; sourceTree = "<group>"; };
 		86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAlamofireService.swift; sourceTree = "<group>"; };
-		86EB44E72661651F006C0BE2 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
+		86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataModelService.swift; sourceTree = "<group>"; };
 		86EDDC7B265A7FC2004A8A03 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		86EDDC7D265A82B3004A8A03 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTextField.swift; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 				8665844A26849F0300A97EC9 /* FakeRecipe.json */,
 				86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */,
 				86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */,
-				86D4D806268EFADB00351432 /* FakeRecipeData.swift */,
+				86D4D806268EFADB00351432 /* FakeAlamofireData.swift */,
 			);
 			path = Alamofire;
 			sourceTree = "<group>";
@@ -343,7 +343,7 @@
 			children = (
 				86E48F2B268721A00013ACF6 /* AlamofireService.swift */,
 				8663149D268652CC00862376 /* CoreDataStack.swift */,
-				86EB44E72661651F006C0BE2 /* RecipeService.swift */,
+				86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */,
 				86C17FF72689EC8600FBC905 /* RecipeObjectService.swift */,
 			);
 			path = Services;
@@ -533,7 +533,7 @@
 				86A7974F266A7B9700B1E9BB /* UIViewController+Ext.swift in Sources */,
 				86596EAD265F97C3005A272F /* RecipeDetailsImageView.swift in Sources */,
 				86C17FF82689EC8600FBC905 /* RecipeObjectService.swift in Sources */,
-				86EB44E82661651F006C0BE2 /* RecipeService.swift in Sources */,
+				86EB44E82661651F006C0BE2 /* RecipeDataModelService.swift in Sources */,
 				86A79751266A7BA700B1E9BB /* AlertVC.swift in Sources */,
 				8629C81C26592783006669A1 /* SearchVC.swift in Sources */,
 				8651C5A6265ABF9D008EE7FE /* DetailsInfoView.swift in Sources */,
@@ -559,7 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86D4D807268EFADB00351432 /* FakeRecipeData.swift in Sources */,
+				86D4D807268EFADB00351432 /* FakeAlamofireData.swift in Sources */,
 				860A8E062686599400D624E1 /* FakeRecipeData.swift in Sources */,
 				86E48F302687226C0013ACF6 /* FakeAlamofireService.swift in Sources */,
 				860A8E002686557E00D624E1 /* FakeCoreDataStack.swift in Sources */,

@@ -10,49 +10,85 @@ import XCTest
 @testable import Reciplease
 
 class AlamofireServiceTests: XCTestCase {
-    var alamofireService: AlamofireService!
     
-    override func setUp() {
-        super.setUp()
-        alamofireService = AlamofireService()
+    let fakeURL = URL(string: FakeAlamofireData.apiURLString)
+    
+    // MARK: - Create URL
+    func testGivenIngredientAreRiceAndChicken_WhenCreatingURL_ThenURLIsNotNil() {
+        let alamofireService = AlamofireNetworkRequest.shared
+        let url = alamofireService.createURL(with: FakeAlamofireData.ingredients)
+        
+        XCTAssertNotNil(url)
+        XCTAssertEqual(url?.absoluteString, FakeAlamofireData.apiURLString)
     }
     
-    override func tearDown() {
-        super.tearDown()
-        alamofireService = nil
+    func testGivenIngredientsAreEmpty_WhenCreatingURL_ThenURLIsNil() {
+        let alamofireService = AlamofireNetworkRequest.shared
+        let url = alamofireService.createURL(with: [])
+        XCTAssertNil(url)
     }
     
-    // MARK: - Get data
-//    func testGivenGettingData_WhenURLIsOK_ThenDataIsNotNilAndErrorIsNil(){
-//        alamofireService.getDataFrom(url: FakeAlamofireService.url) { _data, _error in
-//            XCTAssertNotNil(_data)
-//            XCTAssertNil(_error)
-//        }
-//    }
-//
-//    func testGivenGettingData_WhenURLIsNotOk_ThenDataIsNilAndErrorIsNotNil() {
-//        alamofireService.getDataFrom(url: URL(string: "")) { _data, _error in
-//            XCTAssertNil(_data)
-//            XCTAssertNotNil(_error)
-//        }
-//    }
     
-    func testGivenCallbackFailed_WhenNoDataAndIncorrectResponse_ThenErrorIsNotNil(){
-        // Given
-//        let fakeSession = TranslateURLSessionFake(data: nil, response: nil, error: FakeTranslationResponseData.error)
-//        let translationService = TranslationService(session: fakeSession)
-//
-//        // When
-//        let expectation = XCTestExpectation(description: "Error")
-//        translationService.getTranslation(baseText: FakeTranslationResponseData.baseText, targetLanguage: .french) { (success, text) in
-//            // Then
-//            XCTAssertFalse(success)
-//            XCTAssertNil(text)
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: 0.01)
+    // MARK: - Get response
+    func testGivenGettingDictionnary_WhenDataAndResponseAreCorrect_ThenResultIsNotNil() {
+        let fakeNetworkService = FakeNetworkRequest(data: FakeAlamofireData.correctData,
+                                                  response: FakeAlamofireData.responseOK, error: nil)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+            XCTAssertNotNil(_dict)
+            XCTAssertNil(_error)
+        }
     }
     
-    func testGivenCallbackSucceed_WhenCorrectDataAndResponse_ThenRecipesAreNotNil(){
+    func testGivenGettingDictionnary_WhenDataIsIncorrect_ThenResultIsNil() {
+        let fakeNetworkService = FakeNetworkRequest(data: FakeAlamofireData.incorrectData,
+                                                    response: FakeAlamofireData.responseOK, error: nil)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+            XCTAssertNil(_dict)
+            XCTAssertNotNil(_error)
+        }
+    }
+    
+    func testGivenGettingDictionnary_WhenError_ThenResultIsNil() {
+        let fakeNetworkService = FakeNetworkRequest(data: FakeAlamofireData.correctData, response: FakeAlamofireData.responseOK, error: FakeAlamofireData.error)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+          XCTAssertNil(_dict)
+          XCTAssertNotNil(_error)
+        }
+    }
+    
+    func testGivenGettingDictionnary_WhenNoData_ThenResultIsNil() {
+        let fakeNetworkService = FakeNetworkRequest(data: nil, response: FakeAlamofireData.responseOK, error: nil)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+          XCTAssertNil(_dict)
+          XCTAssertNotNil(_error)
+        }
+    }
+    
+    func testGivenGettingDictionnary_WhenIncorrectResponse_ThenResultIsNil() {
+        let fakeNetworkService = FakeNetworkRequest(data: FakeAlamofireData.correctData, response: FakeAlamofireData.responseNotOK, error: nil)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+          XCTAssertNil(_dict)
+          XCTAssertNotNil(_error)
+        }
+    }
+    
+    // MARK: - Get Recipe Objetcs
+    func testGivenGettingRecipesObject_WhenCorrectDictionnary_ThenRecipesAreNotNil() {
+        let alamofireService = AlamofireNetworkRequest.shared
+        let fakeNetworkService = FakeNetworkRequest(data: FakeAlamofireData.correctData, response: FakeAlamofireData.responseOK, error: nil)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+            let recipes = alamofireService.getRecipeObjects(from: _dict)
+            XCTAssertNotNil(recipes)
+            XCTAssertEqual(recipes?.count, 2)
+        }
+    }
+    
+    func testGivenGettingRecipeObjects_WhenIncorrectDictionnary_ThenRecipesAreNil() {
+        let alamofireService = AlamofireNetworkRequest.shared
+        let fakeNetworkService = FakeNetworkRequest(data: FakeAlamofireData.incorrectData, response: FakeAlamofireData.responseOK, error: nil)
+        fakeNetworkService.getResponse(from: fakeURL) { _dict, _error in
+            let recipes = alamofireService.getRecipeObjects(from: _dict)
+            XCTAssertNil(recipes)
+        }
     }
 }

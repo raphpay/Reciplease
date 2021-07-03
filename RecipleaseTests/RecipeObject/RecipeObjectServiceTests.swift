@@ -43,7 +43,7 @@ class RecipeObjectServiceTests: XCTestCase {
     
     func testGivenCorrectRecipeInCoreData_WhenTransformingToRecipeObject_ThenObjectIsNotNil() {
         let coreDataStack   = FakeCoreDataStack()
-        let recipeService   = RecipeService(managedObjectContext: coreDataStack.viewContext, coreDataStack: coreDataStack)
+        let recipeService   = RecipeDataModelService(managedObjectContext: coreDataStack.viewContext, coreDataStack: coreDataStack)
         let service         = RecipeObjectService.shared
          
         let object = RecipeObject(id: UUID(), label: "Rice", cuisineType: "Chinese", ingredients: ["Ing1"], calories: 3000, cookTime: 20, url: FakeRecipeData.url, imageURL: FakeRecipeData.imageURL)

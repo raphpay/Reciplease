@@ -8,43 +8,44 @@
 import Foundation
 import Reciplease
 
-struct FakeNetworkRequest : NetworkRequest {
-    
+
+class FakeNetworkRequest : NetworkRequest {
     
     var data: Data?
     var response: HTTPURLResponse?
     var error: Error?
     
-    static var url: URL {
-        return URL(string: "https://www.apple.com")!
+    
+    init(data: Data?, response: HTTPURLResponse?, error: Error?) {
+        self.data       = data
+        self.response   = response
+        self.error      = error
     }
     
-//    func get<DataType>(with dict: [String : Any], completion: @escaping (DataType?, Error?) -> Void) where DataType : Decodable, DataType : Encodable {
-//        guard let response = response, response.statusCode == 200 else {
-//            return completion(nil, NetworkRequestError.statusCode(self.response?.statusCode ?? -1))
-//        }
-//        guard let data = data else {
-//            return completion(nil, error)
-//        }
-//
-//        do {
-//            completion(try JSONDecoder().decode(DataType.self, from: data), nil)
-//        } catch {
-//            completion(nil, NetworkRequestError.serializationError(error))
-//        }
-//    }
     
-    func request(url : URL, completion: (_ result: AFDataResponse<Any>?) -> Void) {
-        guard let response = FakeRecipeData.responseOK else {
-//            completion(nil)
+    
+    func getResponse(from url: URL?, completion: @escaping ([String : Any]?, NetworkRequestError?) -> Void) {
+        guard error == nil else {
+            completion(nil, .serializationError(error!))
             return
         }
         
-        // Ici completion de DataResponse
+        guard let data = data else {
+            completion(nil, .incorrectData)
+            return
+        }
         
+        guard let response = response,
+              response.statusCode == 200 else {
+            completion(nil, .incorrectResponse)
+            return
+        }
         
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {
+            completion(nil, .incorrectData)
+            return
+        }
         
-        // il faut passer data, reponse et error
-//        completion(DataResponse(request: URL, response: fakeResponse, data: Data, result: ))
+        completion(json, nil)
     }
 }

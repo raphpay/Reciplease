@@ -13,7 +13,8 @@ class SearchVC: UIViewController {
     // MARK: - Properties
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-    var ingredientsInFridge: [String] = []
+    var ingredientsInFridge: [String] = ["Rice"]
+    let service = AlamofireNetworkRequest.shared
     
     
     // MARK: - Views
@@ -86,6 +87,28 @@ class SearchVC: UIViewController {
         configureTextField()
         setupViews()
         connectButtons()
+        
+        guard let url = service.createURL(with:ingredientsInFridge) else { return }
+        
+        service.getResponse(from: url) { _dict, _error in
+            guard _error == nil else {
+                print("error")
+                return
+            }
+            
+            guard let dict = _dict else {
+                print("no dict")
+                return
+            }
+            
+            guard let recipes = self.service.getRecipeObjects(from: dict) else {
+                print("no recipes ")
+                return
+            }
+            for recipe in recipes {
+                print(recipe.label)
+            }
+        }
     }
     
     

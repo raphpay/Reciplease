@@ -28,7 +28,7 @@ class FavoritesVC: UIViewController {
         super.viewWillAppear(animated)
         recipes.removeAll()
         
-        let favorites = RecipeService(managedObjectContext: coreDataStack.viewContext,
+        let favorites = RecipeDataModelService(managedObjectContext: coreDataStack.viewContext,
                                            coreDataStack: coreDataStack).getRecipes()
         
         if let recipes = favorites,

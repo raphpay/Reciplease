@@ -1,5 +1,5 @@
 //
-//  RecipeService.swift
+//  RecipeDataModelService.swift
 //  Reciplease
 //
 //  Created by Raphaël Payet on 28/05/2021.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class RecipeService {
+class RecipeDataModelService {
     let managedObjectContext: NSManagedObjectContext
     let coreDataStack: CoreDataStack
     
@@ -18,7 +18,7 @@ class RecipeService {
     } 
 }
 
-extension RecipeService {
+extension RecipeDataModelService {
     public func addRecipeToFavorite(_ recipe: RecipeObject) -> RecipeDataModel {
         let dataModel = RecipeDataModel(context: managedObjectContext)
         

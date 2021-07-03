@@ -9,14 +9,14 @@ import XCTest
 @testable import Reciplease
 
 class CoreDataTests: XCTestCase {
-    var recipeService: RecipeService!
+    var recipeService: RecipeDataModelService!
     var coreDataStack: CoreDataStack!
     let object = RecipeObject(id: UUID(), label: "Rice", cuisineType: "Chinese", ingredients: ["Ing1"], calories: 3000, cookTime: 20, url: FakeRecipeData.url, imageURL: FakeRecipeData.imageURL)
     
     override func setUp() {
         super.setUp()
         coreDataStack = FakeCoreDataStack()
-        recipeService = RecipeService(managedObjectContext: coreDataStack.viewContext,
+        recipeService = RecipeDataModelService(managedObjectContext: coreDataStack.viewContext,
                                       coreDataStack: coreDataStack)
     }
     

@@ -1,51 +1,47 @@
 {
-    "q": "Rice,",
-    "to": 1,
-    "hits": [
-        {
-            "recipe": {
-                "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_b1957a6a4025b25f6da6aef1fad452d4",
-                "label": "Essentials: Rice",
-                "image": "https://www.edamam.com/web-img/b71/b716942f16e3e9490829f7da8dba509e.jpg",
-                "source": "Serious Eats",
-                "url": "http://www.seriouseats.com/recipes/2008/04/essentials-how-to-cook-rice.html",
-                "shareAs": "http://www.edamam.com/recipe/essentials-rice-b1957a6a4025b25f6da6aef1fad452d4/rice%2C",
-                "ingredients": [
-                    {
-                        "text": "1 cup long-grain white rice",
-                        "weight": 195,
-                        "foodCategory": "grains",
-                        "foodId": "food_bpumdjzb5rtqaeabb0kbgbcgr4t9",
-                        "image": null
-                    },
-                    {
-                        "text": "1 3/4 cup water",
-                        "weight": 414.75,
-                        "foodCategory": "water",
-                        "foodId": "food_a99vzubbk1ayrsad318rvbzr3dh0",
-                        "image": "https://www.edamam.com/food-img/5dd/5dd9d1361847b2ca53c4b19a8f92627e.jpg"
-                    },
-                    {
-                        "text": "Pinch of salt",
-                        "weight": 0.380208333815447,
-                        "foodCategory": "Condiments and sauces",
-                        "foodId": "food_btxz81db72hwbra2pncvebzzzum9",
-                        "image": "https://www.edamam.com/food-img/694/6943ea510918c6025795e8dc6e6eaaeb.jpg"
-                    },
-                    {
-                        "text": "Glug of olive oil",
-                        "weight": 8.29777083333989,
-                        "foodCategory": "Oils",
-                        "foodId": "food_b1d1icuad3iktrbqby0hiagafaz7",
-                        "image": null
-                    }
-                ],
-                "calories": 775.3522941667246,
-                "totalTime": 0,
-                "cuisineType": [
-                    "indian"
-                ]
-            }
-        }
-    ]
+  "q": "Rice,",
+  "to": 1,
+  "hits": [
+    {
+      "recipe": {
+        "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_b1957a6a4025b25f6da6aef1fad452d4",
+        "label": "Essentials: Rice",
+        "image": "https://www.edamam.com/web-img/b71/b716942f16e3e9490829f7da8dba509e.jpg",
+        "source": "Serious Eats",
+        "url": "http://www.seriouseats.com/recipes/2008/04/essentials-how-to-cook-rice.html",
+        "shareAs": "http://www.edamam.com/recipe/essentials-rice-b1957a6a4025b25f6da6aef1fad452d4/rice%2C",
+        "ingredientLines": [
+          "1 cup long-grain white rice",
+          "1 3/4 cup water",
+          "Pinch of salt",
+          "Glug of olive oil"
+        ],
+        "calories": 775.3522941667246,
+        "totalTime": 0,
+        "cuisineType": [
+          "indian"
+        ]
+      }
+    },
+    {
+      "recipe": {
+        "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_b1957a6a4025b25f6da6aef1fad452d4",
+        "label": "Rice and chicken",
+        "image": "https://www.edamam.com/web-img/b71/b716942f16e3e9490829f7da8dba509e.jpg",
+        "source": "Serious Eats",
+        "url": "http://www.seriouseats.com/recipes/2008/04/essentials-how-to-cook-rice.html",
+        "shareAs": "http://www.edamam.com/recipe/essentials-rice-b1957a6a4025b25f6da6aef1fad452d4/rice%2C",
+        "ingredientLines": [
+          "1 cup long-grain white rice",
+          "1 3/4 cup water",
+          "Pinch of salt"
+        ],
+        "calories": 775.3522941667246,
+        "totalTime": 0,
+        "cuisineType": [
+          "indian"
+        ]
+      }
+    }
+  ]
 }
