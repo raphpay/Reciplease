@@ -13,7 +13,6 @@ class RecipeObjectService {
     
     func transformFromDict(_ dict :[String: Any]) -> RecipeObject? {
         guard let label = dict["label"] as? String,
-              let cuisines = dict["cuisineType"] as? [String],
               let ingredients = dict["ingredientLines"] as? [String],
               let calories = dict["calories"] as? Double,
               let cookTime = dict["totalTime"] as? Double,
@@ -24,7 +23,12 @@ class RecipeObjectService {
             return nil
         }
         
-        let cuisineType = cuisines[0]
+        var cuisineType = ""
+        if let cuisines = dict["cuisineType"] as? [String] {
+            cuisineType = cuisines[0]
+        }
+        
+
         let recipeObject = RecipeObject(id: UUID(), label: label, cuisineType: cuisineType, ingredients: ingredients, calories: calories, cookTime: cookTime, url: url, imageURL: imageURL)
         return recipeObject
     }

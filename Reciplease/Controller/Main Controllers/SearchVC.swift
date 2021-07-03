@@ -13,7 +13,7 @@ class SearchVC: UIViewController {
     // MARK: - Properties
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-    var ingredientsInFridge: [String] = ["Rice"]
+    var ingredientsInFridge: [String] = []
     let service = AlamofireNetworkRequest.shared
     
     
@@ -64,8 +64,34 @@ class SearchVC: UIViewController {
         searchButton.isEnabled = false
         showLoadingView()
         
-        #warning("Actions here")
-        // TODO: Add the search logic with Alamofire
+        guard let url = service.createURL(with: ingredientsInFridge) else {
+            self.presentAlert(title: RecipleaseError.title.rawValue , message: RecipleaseError.noIngredients.rawValue)
+            return
+        }
+        
+        service.getResponse(from: url) { _response, _error in
+            self.searchButton.isEnabled = true
+            self.dismissLoadingView()
+            guard _error == nil else {
+                self.presentAlert(title: RecipleaseError.title.rawValue , message: RecipleaseError.invalidResponse.rawValue)
+                return
+            }
+            
+            guard let dict = _response else {
+                self.presentAlert(title: RecipleaseError.title.rawValue , message: RecipleaseError.invalidData.rawValue)
+                return
+            }
+            
+            
+            guard let recipes = self.service.getRecipeObjects(from: dict) else {
+                self.presentAlert(title: RecipleaseError.title.rawValue , message: RecipleaseError.noRecipes.rawValue)
+                return
+            }
+            
+            let tableVC = TableViewController()
+            tableVC.recipes = recipes
+            self.navigationController?.pushViewController(tableVC, animated: true)
+        }
     }
     
     
@@ -87,28 +113,6 @@ class SearchVC: UIViewController {
         configureTextField()
         setupViews()
         connectButtons()
-        
-        guard let url = service.createURL(with:ingredientsInFridge) else { return }
-        
-        service.getResponse(from: url) { _dict, _error in
-            guard _error == nil else {
-                print("error")
-                return
-            }
-            
-            guard let dict = _dict else {
-                print("no dict")
-                return
-            }
-            
-            guard let recipes = self.service.getRecipeObjects(from: dict) else {
-                print("no recipes ")
-                return
-            }
-            for recipe in recipes {
-                print(recipe.label)
-            }
-        }
     }
     
     

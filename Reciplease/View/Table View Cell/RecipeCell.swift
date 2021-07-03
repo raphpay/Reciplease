@@ -25,7 +25,7 @@ class RecipeCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = Images.pizza
+        imageView.backgroundColor = .gray
         return imageView
     }()
     
@@ -33,6 +33,12 @@ class RecipeCell: UITableViewCell {
     let cellDescription = Label(text: "Mozzarella, Basilic, Tomato", fontSize: 16)
     
     let infoView = InfoView()
+    
+    let activityIndicator : UIActivityIndicatorView = {
+        let ac = UIActivityIndicatorView()
+        ac.translatesAutoresizingMaskIntoConstraints = false
+        return ac
+    }()
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -59,6 +65,7 @@ class RecipeCell: UITableViewCell {
         containerView.addSubview(recipeImage)
         containerView.addSubview(cellTitle)
         containerView.addSubview(cellDescription)
+        containerView.addSubview(activityIndicator)
         recipeImage.addSubview(infoView)
         
         recipeImage.edgesToSuperview(excluding: .bottom)
@@ -71,13 +78,25 @@ class RecipeCell: UITableViewCell {
         
         infoView.bottomToSuperview(offset: -padding)
         infoView.leftToSuperview(offset: padding)
+        
+        activityIndicator.centerInSuperview()
+        activityIndicator.startAnimating()
     }
     
     
     func set(recipe: RecipeObject) {
         guard let label = recipe.label,
               let cuisineType = recipe.cuisineType,
-              let _ = recipe.imageURL else { return }
+              let imageURL = recipe.imageURL else { return }
+        
+        AlamofireNetworkRequest.shared.fetchImage(from: imageURL) { _data, _error in
+            self.activityIndicator.stopAnimating()
+            guard _error == nil else { return }
+            guard let data = _data else { return }
+            DispatchQueue.main.async {
+                self.recipeImage.image = UIImage(data: data)
+            }
+        }
         
         cellTitle.text = label
         cellDescription.text = cuisineType

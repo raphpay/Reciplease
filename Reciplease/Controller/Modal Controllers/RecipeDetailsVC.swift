@@ -42,6 +42,7 @@ class RecipeDetailsVC: UIViewController {
     lazy var starButton: UIButton = {
         let b = UIButton(type: .system)
         b.translatesAutoresizingMaskIntoConstraints = false
+        b.tintColor = .yellow
         b.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
         return b
     }()
@@ -58,13 +59,26 @@ class RecipeDetailsVC: UIViewController {
         if recipeService.isInFavorites(recipe: recipe) {
             recipeService.removeRecipeFromFavorites(recipe)
             setStarImage(favorite: false)
+            self.showFavoritesAlert(isFavorite: false)
         } else {
             let _ = recipeService.addRecipeToFavorite(recipe)
             setStarImage(favorite: true)
+            self.showFavoritesAlert(isFavorite: true)
         }
     }
     
-    @objc func directionButtonTapped() {}
+    @objc func directionButtonTapped() {
+        guard let recipe = recipe,
+              let url = recipe.url else {
+            self.presentAlert(title: RecipleaseError.title.rawValue, message: RecipleaseError.invalidURL.rawValue)
+            return
+        }
+        
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.delegate = self
+        
+        present(safariVC, animated: true)
+    }
     
 
     // MARK: - Override methods
@@ -140,5 +154,13 @@ class RecipeDetailsVC: UIViewController {
     
     private func setStarImage(favorite: Bool) {
         starButton.setImage(favorite ? Icon.favoriteStar : Icon.notFavoriteStar, for: .normal)
+    }
+}
+
+
+
+extension RecipeDetailsVC: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
 }

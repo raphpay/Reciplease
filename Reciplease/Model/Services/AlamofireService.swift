@@ -32,7 +32,6 @@ extension NetworkRequest {
                 completion(nil, .incorrectResponse)
                 return
             }
-            print(value)
             completion(value, nil)
         }
     }
@@ -76,23 +75,37 @@ class AlamofireNetworkRequest: NetworkRequest {
     func getRecipeObjects(from response: [String: Any]?) -> [RecipeObject]? {
         guard let response = response,
               let hits = response["hits"] as? [AnyObject],
-                          !hits.isEmpty else {
-                        return nil
-                    }
+                          !hits.isEmpty else { return nil }
                     
         var totalRecipes: [RecipeObject] = []
         
         for hit in hits {
-            guard let dict = hit["recipe"] as? [String: Any],
-                  let recipe = RecipeObjectService.shared.transformFromDict(dict)
-            else {
-                return nil
+            
+            guard let dict = hit["recipe"] as? [String: Any] else { return nil }
+            
+            if let recipe = RecipeObjectService.shared.transformFromDict(dict) {
+                totalRecipes.append(recipe)
             }
-
-            totalRecipes.append(recipe)
         }
         
         return totalRecipes
     }
     
+    func fetchImage(from url: URL?, completion: @escaping (_ data: Data?, _ error : NetworkRequestError?) -> Void) {
+        guard let url = url else {
+            completion(nil, .invalidURL)
+            return
+        }
+        
+        AF.request(url).validate().responseData { response in
+            DispatchQueue.main.async {
+                guard let data = response.value else {
+                    completion(nil, .incorrectResponse)
+                    return
+                }
+                
+                completion(data, nil)
+            }
+        }
+    }
 }
