@@ -133,7 +133,7 @@ class SearchVC: UIViewController {
         scrollView.addSubview(containerView)
         
         searchButton.height(60)
-        searchButton.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding) + .bottom(10), usingSafeArea: true)
+        searchButton.edgesToSuperview(excluding: .top, insets: .left(padding) + .right(padding) + .bottom(padding), usingSafeArea: true)
         
         setupContainer(containerView)
     }
