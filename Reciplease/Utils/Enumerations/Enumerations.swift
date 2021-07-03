@@ -14,6 +14,8 @@ enum Images {
 
 enum Icon {
     static let star                 = UIImage(named: "icon-star")!
+    static let favoriteStar         = UIImage(named: "icon-fav-star")!
+    static let notFavoriteStar      = UIImage(named: "icon-not-fav-star")!
     static let search               = UIImage(named: "icon-magnifyingglass")!
     static let plus                 = UIImage(named: "plus")!
     static let searchPlaceholder    = UIImage(named: "icon-magnifyingglas-placeholder")!

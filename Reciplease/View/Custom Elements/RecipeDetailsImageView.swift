@@ -19,6 +19,12 @@ class RecipeDetailsImageView: UIView {
         return imageView
     }()
     
+    let activityIndicator : UIActivityIndicatorView = {
+        let ac = UIActivityIndicatorView()
+        ac.translatesAutoresizingMaskIntoConstraints = false
+        return ac
+    }()
+    
     let recipeTitle = Label(text: "", alignment: .center, fontSize: 30)
     
     let shadowView: UIView = {
@@ -39,42 +45,44 @@ class RecipeDetailsImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(recipe: Recipe?) {
+    init(recipe: RecipeObject?) {
         super.init(frame: .zero)
         configure()
-        if let recipe = recipe {
-            recipeTitle.text = recipe.label
-            infoView.set(recipe: recipe)
-            guard let imageURL = recipe.imageURL else { return }
-            RecipeService.shared.fetchImageData(from: imageURL) { _data, success, _error in
-                guard success,
-                      _error == nil,
-                      let data = _data else {
-                    self.recipeImage.backgroundColor = CustomColor.gray
-                    self.recipeImage.image = nil
-                    return
-                }
-                self.recipeImage.image = UIImage(data: data)
-            }
-        } else {
-            recipeTitle.text = Recipe.fakeRecipe.label
-            infoView.set(recipe: Recipe.fakeRecipe)
-        }
+        set(recipe: recipe)
     }
     
     private func configure() {
         addSubview(recipeImage)
+        addSubview(activityIndicator)
         addSubview(shadowView)
         addSubview(recipeTitle)
         addSubview(infoView)
         
         recipeImage.edgesToSuperview()
         
+        activityIndicator.centerInSuperview()
+        activityIndicator.startAnimating()
+        
         recipeTitle.edgesToSuperview(excluding: .top)
         shadowView.edges(to: recipeTitle)
         
         infoView.topToSuperview(offset: 10)
         infoView.rightToSuperview(offset: -10)
+    }
+    
+    private func set(recipe: RecipeObject?) {
+        if let recipe = recipe {
+            recipeTitle.text = recipe.label
+            infoView.set(recipe: recipe)
+            guard let _ = recipe.imageURL else { return }
+            #warning("Actions here")
+            // TODO: Fetch image
+            // TODO: Remove gray background and activity indicator
+            // TODO: Place real image
+        } else {
+            recipeTitle.text = RecipeObject.mockRecipe.label
+            infoView.set(recipe: RecipeObject.mockRecipe)
+        }
     }
     
 }

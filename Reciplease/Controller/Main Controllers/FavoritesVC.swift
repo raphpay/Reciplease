@@ -9,12 +9,15 @@ import UIKit
 
 class FavoritesVC: UIViewController {
     
-//    private var shouldShowEmptyState = false
+    // MARK: - Objects
     let tableVC     = TableViewController()
     let emptyVC     = EmptyStateVC()
+    let coreDataStack = CoreDataStack.shared
     
-    var recipes: [Recipe] = []
-
+    // MARK: - Properties
+    var recipes: [RecipeDataModel] = []
+    
+    
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,21 +27,17 @@ class FavoritesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recipes.removeAll()
-        let favorites = RecipeDataModel.all
         
-        if favorites.isEmpty {
-            addChildVC(vc: emptyVC)
+        let favorites = RecipeDataModelService(managedObjectContext: coreDataStack.viewContext,
+                                           coreDataStack: coreDataStack).getRecipes()
+        
+        if let recipes = favorites,
+           !recipes.isEmpty {
+            #warning("Actions here")
+            // TODO: Add table vc
         } else {
-            for dataModel in favorites {
-                guard let recipe = dataModel.transformToObject() else { return }
-                recipes.append(recipe)
-            }
-            tableVC.recipes = recipes
-            tableVC.tableView.reloadData()
-            addChildVC(vc: tableVC)
+            addChildVC(emptyVC)
         }
-    
-
     }
     
     // MARK: - Private Methods
@@ -49,7 +48,7 @@ class FavoritesVC: UIViewController {
         title = "Favorites"
     }
     
-    private func addChildVC(vc: UIViewController) {
+    private func addChildVC(_ vc: UIViewController) {
         tableVC.willMove(toParent: nil)
         tableVC.view.removeFromSuperview()
         tableVC.removeFromParent()

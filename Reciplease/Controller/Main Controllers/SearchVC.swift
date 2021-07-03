@@ -9,12 +9,13 @@ import UIKit
 import TinyConstraints
 
 class SearchVC: UIViewController {
-    // TODO: Refactor the views inside a big view: maybe use protocols ?
+    
     // MARK: - Properties
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-    var ingredientsInFridge: [String] = []
-    var service = RecipeService.shared
+    var ingredientsInFridge: [String] = ["Rice"]
+    let service = AlamofireNetworkRequest.shared
+    
     
     // MARK: - Views
     lazy var scrollView: UIScrollView = {
@@ -63,24 +64,8 @@ class SearchVC: UIViewController {
         searchButton.isEnabled = false
         showLoadingView()
         
-        guard let apiURL = RecipeService.shared.createAPIURL(with: ingredientsInFridge) else { return }
-        let service = RecipeService(url: apiURL)
-        
-        service.getRecipes { _recipes,_error in
-            self.searchButton.isEnabled = true
-            
-            self.dismissLoadingView()
-            
-            guard _error == nil,
-                  let recipes = _recipes else {
-                self.presentAlert(title: RecipleaseError.title.rawValue, message: _error!.rawValue)
-                return
-            }
-            
-            let tableVC = TableViewController()
-            tableVC.recipes = recipes
-            self.navigationController?.pushViewController(tableVC, animated: true)
-        }
+        #warning("Actions here")
+        // TODO: Add the search logic with Alamofire
     }
     
     
@@ -102,7 +87,28 @@ class SearchVC: UIViewController {
         configureTextField()
         setupViews()
         connectButtons()
-        view.backgroundColor = UIColor(named: "Background")
+        
+        guard let url = service.createURL(with:ingredientsInFridge) else { return }
+        
+        service.getResponse(from: url) { _dict, _error in
+            guard _error == nil else {
+                print("error")
+                return
+            }
+            
+            guard let dict = _dict else {
+                print("no dict")
+                return
+            }
+            
+            guard let recipes = self.service.getRecipeObjects(from: dict) else {
+                print("no recipes ")
+                return
+            }
+            for recipe in recipes {
+                print(recipe.label)
+            }
+        }
     }
     
     
