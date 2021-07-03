@@ -91,4 +91,19 @@ class AlamofireNetworkRequest: NetworkRequest {
         return totalRecipes
     }
     
+    func fetchImage(from url: URL?, completion: @escaping (_ data: Data?, _ error : NetworkRequestError?) -> Void) {
+        guard let url = url else {
+            completion(nil, .invalidURL)
+            return
+        }
+        
+        AF.request(url).validate().responseData { response in
+            guard let data = response.value else {
+                completion(nil, .incorrectResponse)
+                return
+            }
+            
+            completion(data, nil)
+        }
+    }
 }

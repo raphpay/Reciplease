@@ -89,10 +89,14 @@ class RecipeCell: UITableViewCell {
               let cuisineType = recipe.cuisineType,
               let imageURL = recipe.imageURL else { return }
         
-        #warning("Actions here")
-        // TODO: Fetch image
-        // TODO: Remove gray background
-        // TODO: Remove activity indicator
+        AlamofireNetworkRequest.shared.fetchImage(from: imageURL) { _data, _error in
+            self.activityIndicator.stopAnimating()
+            guard _error == nil else { return }
+            guard let data = _data else { return }
+            DispatchQueue.main.async {
+                self.recipeImage.image = UIImage(data: data)
+            }
+        }
         
         cellTitle.text = label
         cellDescription.text = cuisineType
