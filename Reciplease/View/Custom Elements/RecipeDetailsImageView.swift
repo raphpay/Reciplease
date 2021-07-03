@@ -74,11 +74,15 @@ class RecipeDetailsImageView: UIView {
         if let recipe = recipe {
             recipeTitle.text = recipe.label
             infoView.set(recipe: recipe)
-            guard let _ = recipe.imageURL else { return }
-            #warning("Actions here")
-            // TODO: Fetch image
-            // TODO: Remove gray background and activity indicator
-            // TODO: Place real image
+            guard let imageURL = recipe.imageURL else { return }
+            AlamofireNetworkRequest.shared.fetchImage(from: imageURL) { _data, _error in
+                self.activityIndicator.stopAnimating()
+                guard _error == nil else { return }
+                guard let data = _data else { return }
+                DispatchQueue.main.async {
+                    self.recipeImage.image = UIImage(data: data)
+                }
+            }
         } else {
             recipeTitle.text = RecipeObject.mockRecipe.label
             infoView.set(recipe: RecipeObject.mockRecipe)

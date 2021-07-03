@@ -98,12 +98,14 @@ class AlamofireNetworkRequest: NetworkRequest {
         }
         
         AF.request(url).validate().responseData { response in
-            guard let data = response.value else {
-                completion(nil, .incorrectResponse)
-                return
+            DispatchQueue.main.async {
+                guard let data = response.value else {
+                    completion(nil, .incorrectResponse)
+                    return
+                }
+                
+                completion(data, nil)
             }
-            
-            completion(data, nil)
         }
     }
 }
