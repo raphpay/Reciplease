@@ -68,7 +68,16 @@ class RecipeDetailsVC: UIViewController {
     
     @objc func directionButtonTapped() {
         #warning("Actions here")
-        // TODO: Present safari vc
+        guard let recipe = recipe,
+              let url = recipe.url else {
+            self.presentAlert(title: RecipleaseError.title.rawValue, message: RecipleaseError.invalidURL.rawValue)
+            return
+        }
+        
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.delegate = self
+        
+        present(safariVC, animated: true)
     }
     
 
@@ -145,5 +154,11 @@ class RecipeDetailsVC: UIViewController {
     
     private func setStarImage(favorite: Bool) {
         starButton.setImage(favorite ? Icon.favoriteStar : Icon.notFavoriteStar, for: .normal)
+    }
+}
+
+extension RecipeDetailsVC: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
 }
