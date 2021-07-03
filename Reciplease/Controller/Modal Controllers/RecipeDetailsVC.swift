@@ -58,13 +58,18 @@ class RecipeDetailsVC: UIViewController {
         if recipeService.isInFavorites(recipe: recipe) {
             recipeService.removeRecipeFromFavorites(recipe)
             setStarImage(favorite: false)
+            self.showFavoritesAlert(isFavorite: false)
         } else {
             let _ = recipeService.addRecipeToFavorite(recipe)
             setStarImage(favorite: true)
+            self.showFavoritesAlert(isFavorite: true)
         }
     }
     
-    @objc func directionButtonTapped() {}
+    @objc func directionButtonTapped() {
+        #warning("Actions here")
+        // TODO: Present safari vc
+    }
     
 
     // MARK: - Override methods

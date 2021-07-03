@@ -33,8 +33,15 @@ class FavoritesVC: UIViewController {
         
         if let recipes = favorites,
            !recipes.isEmpty {
-            #warning("Actions here")
-            // TODO: Add table vc
+            var recipeObjects = [RecipeObject]()
+            for recipe in recipes {
+                if let recipe = RecipeObjectService.shared.transformFromCoreData(recipe: recipe) {
+                    recipeObjects.append(recipe)
+                }
+            }
+            
+            tableVC.recipes = recipeObjects
+            addChildVC(tableVC)
         } else {
             addChildVC(emptyVC)
         }
