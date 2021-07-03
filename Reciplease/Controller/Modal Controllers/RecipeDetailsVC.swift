@@ -42,6 +42,7 @@ class RecipeDetailsVC: UIViewController {
     lazy var starButton: UIButton = {
         let b = UIButton(type: .system)
         b.translatesAutoresizingMaskIntoConstraints = false
+        b.tintColor = .yellow
         b.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
         return b
     }()
@@ -67,7 +68,6 @@ class RecipeDetailsVC: UIViewController {
     }
     
     @objc func directionButtonTapped() {
-        #warning("Actions here")
         guard let recipe = recipe,
               let url = recipe.url else {
             self.presentAlert(title: RecipleaseError.title.rawValue, message: RecipleaseError.invalidURL.rawValue)
@@ -156,6 +156,8 @@ class RecipeDetailsVC: UIViewController {
         starButton.setImage(favorite ? Icon.favoriteStar : Icon.notFavoriteStar, for: .normal)
     }
 }
+
+
 
 extension RecipeDetailsVC: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
