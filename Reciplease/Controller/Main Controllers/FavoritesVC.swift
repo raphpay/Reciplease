@@ -41,6 +41,7 @@ class FavoritesVC: UIViewController {
             }
             
             tableVC.recipes = recipeObjects
+            tableVC.tableView.reloadData()
             addChildVC(tableVC)
         } else {
             addChildVC(emptyVC)
