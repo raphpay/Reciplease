@@ -65,6 +65,8 @@ class SearchVC: UIViewController {
         showLoadingView()
         
         guard let url = service.createURL(with: ingredientsInFridge) else {
+            searchButton.isEnabled = true
+            dismissLoadingView()
             self.presentAlert(title: RecipleaseError.title.rawValue , message: RecipleaseError.noIngredients.rawValue)
             return
         }

@@ -59,11 +59,12 @@ class AlamofireNetworkRequest: NetworkRequest {
         
         var ingredientString = ""
         for ingredient in ingredients {
-            ingredientString += "\(ingredient),"
+            ingredientString += "\(ingredient.removingWhitespaces()),"
         }
         
         let urlString = "\(baseURL)&app_id=\(APP_ID)&app_key=\(APP_KEY)&to=\(maxRecipes)&q=\(ingredientString)"
         guard let url = URL(string: urlString) else {
+            print("no url")
             return nil
         }
         

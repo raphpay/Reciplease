@@ -42,6 +42,7 @@
 		86E48F2A268720160013ACF6 /* AlamofireServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */; };
 		86E48F2C268721A00013ACF6 /* AlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E48F2B268721A00013ACF6 /* AlamofireService.swift */; };
 		86E48F302687226C0013ACF6 /* FakeAlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */; };
+		86E84D152691B53F00FCE159 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E84D142691B53F00FCE159 /* String+Ext.swift */; };
 		86EB44E82661651F006C0BE2 /* RecipeDataModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */; };
 		86EDDC7C265A7FC2004A8A03 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7B265A7FC2004A8A03 /* Button.swift */; };
 		86EDDC7E265A82B3004A8A03 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* Label.swift */; };
@@ -101,6 +102,7 @@
 		86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireServiceTests.swift; sourceTree = "<group>"; };
 		86E48F2B268721A00013ACF6 /* AlamofireService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireService.swift; sourceTree = "<group>"; };
 		86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAlamofireService.swift; sourceTree = "<group>"; };
+		86E84D142691B53F00FCE159 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataModelService.swift; sourceTree = "<group>"; };
 		86EDDC7B265A7FC2004A8A03 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		86EDDC7D265A82B3004A8A03 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				86A7974E266A7B9700B1E9BB /* UIViewController+Ext.swift */,
 				86A79750266A7BA700B1E9BB /* AlertVC.swift */,
 				86A79752266A7FC300B1E9BB /* Double+Ext.swift */,
+				86E84D142691B53F00FCE159 /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				86A79753266A7FC300B1E9BB /* Double+Ext.swift in Sources */,
 				8651C598265A9D04008EE7FE /* RecipeCell.swift in Sources */,
 				86FEE1AA267275F600B67438 /* Error.swift in Sources */,
+				86E84D152691B53F00FCE159 /* String+Ext.swift in Sources */,
 				86A7974F266A7B9700B1E9BB /* UIViewController+Ext.swift in Sources */,
 				86596EAD265F97C3005A272F /* RecipeDetailsImageView.swift in Sources */,
 				86C17FF82689EC8600FBC905 /* RecipeObjectService.swift in Sources */,
