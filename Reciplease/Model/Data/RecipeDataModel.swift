@@ -12,7 +12,7 @@ class RecipeDataModel: NSManagedObject {}
 
 extension RecipeDataModel {}
 
-class RecipeObject {
+public class RecipeObject {
     var id = UUID()
     var label: String?
     var cuisineType: String?

@@ -17,6 +17,9 @@
 		8629C82726592787006669A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8629C82526592787006669A1 /* LaunchScreen.storyboard */; };
 		8629C83326596D5A006669A1 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83226596D5A006669A1 /* Enumerations.swift */; };
 		8629C83626598172006669A1 /* EmptyStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C83526598172006669A1 /* EmptyStateVC.swift */; };
+		8639CBA3269CA3FE007D89F3 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8639CBA2269CA3FE007D89F3 /* NetworkRequest.swift */; };
+		8639CBA5269CA44E007D89F3 /* NetworkRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8639CBA4269CA44E007D89F3 /* NetworkRequestService.swift */; };
+		8639CBA7269CB3DA007D89F3 /* rice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8639CBA6269CB3DA007D89F3 /* rice.jpg */; };
 		8651C596265A8EB7008EE7FE /* BackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C595265A8EB7008EE7FE /* BackgroundImage.swift */; };
 		8651C598265A9D04008EE7FE /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C597265A9D04008EE7FE /* RecipeCell.swift */; };
 		8651C5A0265A9F4C008EE7FE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8651C59F265A9F4C008EE7FE /* TabBarController.swift */; };
@@ -75,6 +78,9 @@
 		8629C82826592787006669A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8629C83226596D5A006669A1 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		8629C83526598172006669A1 /* EmptyStateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateVC.swift; sourceTree = "<group>"; };
+		8639CBA2269CA3FE007D89F3 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		8639CBA4269CA44E007D89F3 /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
+		8639CBA6269CB3DA007D89F3 /* rice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rice.jpg; sourceTree = "<group>"; };
 		8651C595265A8EB7008EE7FE /* BackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImage.swift; sourceTree = "<group>"; };
 		8651C597265A9D04008EE7FE /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		8651C59F265A9F4C008EE7FE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -334,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				8665844A26849F0300A97EC9 /* FakeRecipe.json */,
+				8639CBA6269CB3DA007D89F3 /* rice.jpg */,
 				86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */,
 				86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */,
 				86D4D806268EFADB00351432 /* FakeAlamofireData.swift */,
@@ -348,6 +355,8 @@
 				8663149D268652CC00862376 /* CoreDataStack.swift */,
 				86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */,
 				86C17FF72689EC8600FBC905 /* RecipeObjectService.swift */,
+				8639CBA2269CA3FE007D89F3 /* NetworkRequest.swift */,
+				8639CBA4269CA44E007D89F3 /* NetworkRequestService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -472,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8639CBA7269CB3DA007D89F3 /* rice.jpg in Resources */,
 				8665844B26849F0300A97EC9 /* FakeRecipe.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,11 +539,16 @@
 				8629C83626598172006669A1 /* EmptyStateVC.swift in Sources */,
 				8651C5A0265A9F4C008EE7FE /* TabBarController.swift in Sources */,
 				86F1378E2673557E00C5B345 /* Reciplease.xcdatamodeld in Sources */,
+				8639CBA3269CA3FE007D89F3 /* NetworkRequest.swift in Sources */,
 				8651C5A2265AA1BA008EE7FE /* TableViewController.swift in Sources */,
 				86A79753266A7FC300B1E9BB /* Double+Ext.swift in Sources */,
 				8651C598265A9D04008EE7FE /* RecipeCell.swift in Sources */,
 				86FEE1AA267275F600B67438 /* Error.swift in Sources */,
+<<<<<<< HEAD
 				86E84D152691B53F00FCE159 /* String+Ext.swift in Sources */,
+=======
+				8639CBA5269CA44E007D89F3 /* NetworkRequestService.swift in Sources */,
+>>>>>>> development
 				86A7974F266A7B9700B1E9BB /* UIViewController+Ext.swift in Sources */,
 				86596EAD265F97C3005A272F /* RecipeDetailsImageView.swift in Sources */,
 				86C17FF82689EC8600FBC905 /* RecipeObjectService.swift in Sources */,

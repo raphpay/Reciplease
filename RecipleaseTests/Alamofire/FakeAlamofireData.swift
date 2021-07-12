@@ -9,9 +9,18 @@ import Foundation
 
 class FakeAlamofireData {
     // Data from bundle
+    
+    
     static var correctData: Data  {
         let bundle = Bundle(for: FakeAlamofireData.self)
         let url = bundle.url(forResource: "FakeRecipe", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        return data
+    }
+    
+    static var correctImageData: Data {
+        let bundle = Bundle(for: FakeAlamofireData.self)
+        let url = bundle.url(forResource: "rice", withExtension: "jpg")!
         let data = try! Data(contentsOf: url)
         return data
     }
