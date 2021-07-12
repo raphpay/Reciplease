@@ -14,7 +14,7 @@ class SearchVC: UIViewController {
     let padding = CGFloat(16)
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     var ingredientsInFridge: [String] = []
-    let service = AlamofireNetworkRequest.shared
+    let service = AlamofireService.shared
     
     
     // MARK: - Views

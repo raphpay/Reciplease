@@ -8,39 +8,10 @@
 import Foundation
 import Alamofire
 
-public enum NetworkRequestError: Error {
-    case invalidURL
-    case incorrectData
-    case incorrectResponse
-    case serializationError(Error)
-}
-
-public protocol NetworkRequest {
-//    func get(from url: URL?, completion: @escaping ((Result<[String: Any], NetworkRequestError>?) -> Void) )
-    func getResponse(from url: URL?, completion: @escaping (_ dictionnary: [String: Any]?, _ error : NetworkRequestError?) -> Void)
-}
-
-extension NetworkRequest {
-    func getResponse(from url: URL?, completion: @escaping ([String: Any]?, NetworkRequestError?) -> Void) {
-        guard let url = url else {
-            completion(nil, .invalidURL)
-            return
-        }
-        
-        AF.request(url).validate().responseJSON { response in
-            guard let value = response.value as? [String: Any] else {
-                completion(nil, .incorrectResponse)
-                return
-            }
-            completion(value, nil)
-        }
-    }
-}
-
-class AlamofireNetworkRequest: NetworkRequest {
+class AlamofireService: NetworkRequest {
     
     
-    static let shared = AlamofireNetworkRequest()
+    static let shared = AlamofireService()
     private init() {}
     
     private let baseURL         = "https://api.edamam.com/search?"

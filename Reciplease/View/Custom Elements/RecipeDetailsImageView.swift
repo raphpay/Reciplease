@@ -75,12 +75,21 @@ class RecipeDetailsImageView: UIView {
             recipeTitle.text = recipe.label
             infoView.set(recipe: recipe)
             guard let imageURL = recipe.imageURL else { return }
-            AlamofireNetworkRequest.shared.fetchImage(from: imageURL) { _data, _error in
+//            AlamofireService.shared.fetchImage(from: imageURL) { _data, _error in
+//                self.activityIndicator.stopAnimating()
+//                guard _error == nil else { return }
+//                guard let data = _data else { return }
+//                DispatchQueue.main.async {
+//                    self.recipeImage.image = UIImage(data: data)
+//                }
+//            }
+            
+            NetworkRequestService.shared.session.fetchImage(from: imageURL) { _image, _error in
                 self.activityIndicator.stopAnimating()
                 guard _error == nil else { return }
-                guard let data = _data else { return }
+                guard let image = _image else { return }
                 DispatchQueue.main.async {
-                    self.recipeImage.image = UIImage(data: data)
+                    self.recipeImage.image = image
                 }
             }
         } else {

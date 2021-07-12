@@ -48,6 +48,9 @@
 		86EDDC7E265A82B3004A8A03 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7D265A82B3004A8A03 /* Label.swift */; };
 		86EDDC80265A8475004A8A03 /* IngredientsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */; };
 		86EDDC86265A8A89004A8A03 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EDDC85265A8A89004A8A03 /* TextView.swift */; };
+		86EEBB38269CB8CE00571C67 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EEBB37269CB8CE00571C67 /* NetworkRequest.swift */; };
+		86EEBB3A269CB93200571C67 /* NetworkRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EEBB39269CB93200571C67 /* NetworkRequestService.swift */; };
+		86EEBB3C269CBC2800571C67 /* rice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86EEBB3B269CBC2800571C67 /* rice.jpg */; };
 		86F1378E2673557E00C5B345 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86F1378C2673557E00C5B345 /* Reciplease.xcdatamodeld */; };
 		86FEE1AA267275F600B67438 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FEE1A9267275F600B67438 /* Error.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +111,9 @@
 		86EDDC7D265A82B3004A8A03 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		86EDDC7F265A8475004A8A03 /* IngredientsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTextField.swift; sourceTree = "<group>"; };
 		86EDDC85265A8A89004A8A03 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		86EEBB37269CB8CE00571C67 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		86EEBB39269CB93200571C67 /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
+		86EEBB3B269CBC2800571C67 /* rice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rice.jpg; sourceTree = "<group>"; };
 		86F1378D2673557E00C5B345 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		86FEE1A9267275F600B67438 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		BD6C7576B4722DAC99554100 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
@@ -334,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				8665844A26849F0300A97EC9 /* FakeRecipe.json */,
+				86EEBB3B269CBC2800571C67 /* rice.jpg */,
 				86E48F29268720160013ACF6 /* AlamofireServiceTests.swift */,
 				86E48F2F2687226C0013ACF6 /* FakeAlamofireService.swift */,
 				86D4D806268EFADB00351432 /* FakeAlamofireData.swift */,
@@ -348,6 +355,8 @@
 				8663149D268652CC00862376 /* CoreDataStack.swift */,
 				86EB44E72661651F006C0BE2 /* RecipeDataModelService.swift */,
 				86C17FF72689EC8600FBC905 /* RecipeObjectService.swift */,
+				86EEBB37269CB8CE00571C67 /* NetworkRequest.swift */,
+				86EEBB39269CB93200571C67 /* NetworkRequestService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -472,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86EEBB3C269CBC2800571C67 /* rice.jpg in Resources */,
 				8665844B26849F0300A97EC9 /* FakeRecipe.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,7 +537,9 @@
 			files = (
 				86A48E70265FE91900D584FA /* SearchVC+Ext.swift in Sources */,
 				8629C83626598172006669A1 /* EmptyStateVC.swift in Sources */,
+				86EEBB38269CB8CE00571C67 /* NetworkRequest.swift in Sources */,
 				8651C5A0265A9F4C008EE7FE /* TabBarController.swift in Sources */,
+				86EEBB3A269CB93200571C67 /* NetworkRequestService.swift in Sources */,
 				86F1378E2673557E00C5B345 /* Reciplease.xcdatamodeld in Sources */,
 				8651C5A2265AA1BA008EE7FE /* TableViewController.swift in Sources */,
 				86A79753266A7FC300B1E9BB /* Double+Ext.swift in Sources */,
